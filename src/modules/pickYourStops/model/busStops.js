@@ -1,10 +1,10 @@
-//zaciągnąć dane z API - nazwy przystanków
+//zaciąganie danych z API - nazwy przystanków
 
 (function() {
     pickYourStops = pickYourStops || {};
     pickYourStops.model = pickYourStops.model || {};
     pickYourStops.model.busStops = {
-        fetch: function() {}
+        fetch: function(busStop) {}
     };
 
 
