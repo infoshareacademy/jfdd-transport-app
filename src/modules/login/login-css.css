@@ -8,7 +8,6 @@ body {
     width: 250px;
     left:50%;
     margin-left: -125px;
-
 }
 
 .popup {
@@ -29,6 +28,12 @@ body {
     box-shadow: 4px -2px 23px 0px rgba(0,0,0,0.75);
 }
 
+.popup:hover {
+    -webkit-box-shadow: 4px -2px 14px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px -2px 14px 0px rgba(0,0,0,0.75);
+    box-shadow: 4px -2px 14px 0px rgba(0,0,0,0.75);
+}
+
 .popup>span {
     position: absolute;
     top:2px;
@@ -38,10 +43,9 @@ body {
     line-height: 25px;
     font-size: 25px;
     cursor: pointer;
-    text-shadow: 1px 2px 3px #666;
+    text-shadow: 2px 3px 4px #666;
 }
 
 .popup>span:hover {
     text-shadow: 1px 1px 1px #666;
-    /*color: red;*/
 }
