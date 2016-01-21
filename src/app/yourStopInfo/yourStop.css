@@ -21,6 +21,10 @@
     line-height: 40px;
 }
 
+.fetchingStatus {
+    font-size: 15px;
+}
+
  div.stop1, div.stop2, div.stop3  {
     padding: 10px;
     border: 1px solid lightgray;
