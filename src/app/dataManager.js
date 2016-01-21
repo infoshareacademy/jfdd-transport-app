@@ -1,4 +1,4 @@
-var dataManager = (function () {
+ns('src.app.dataManager', function () {
     dataManager = {
         fetch: function (url, callbacks) {
             $.ajax({
@@ -13,4 +13,4 @@ var dataManager = (function () {
     };
 
     return dataManager;
-}());
+})();

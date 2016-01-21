@@ -1,11 +1,10 @@
-(function () {
-    window.pickYourStops = window.pickYourStops || {};
+ns('src.app.pickYourStops.main', function () {
+    pickYourStops = pickYourStops || {};
 
-    window.pickYourStops.main = {
+    pickYourStops.main = {
         init: function () {
-            //var data = pickYourStops.persist.loadFromFile();
-            //pickYourStops.view.update(data);
-            window.pickYourStops.model.user.init();
+            var data = pickYourStops.persist.loadFromFile();
+            pickYourStops.view.update(data);
         }
 
 
@@ -13,5 +12,5 @@
 
 
     }
-}());
+})();
 
