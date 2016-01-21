@@ -1,5 +1,5 @@
 ns('app.dataManager', function () {
-    dataManager = {
+    return {
         fetch: function (url, callbacks) {
             $.ajax({
                 url: url,
@@ -11,6 +11,4 @@ ns('app.dataManager', function () {
             });
         }
     };
-
-    return dataManager;
 });
