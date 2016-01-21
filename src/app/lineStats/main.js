@@ -1,10 +1,7 @@
 ns('app.lineStats.main', function () {
     return {
         init : function () {
-            $('<p>Dupa</p>').appendTo('#js-lineStats');
-
             $('#js-lineStats').click(function () {
-
                 $.ajax({
                     type: "GET",
                     dataType: "jsonp",
@@ -18,10 +15,8 @@ ns('app.lineStats.main', function () {
                             }).text(row.name))
                         });
                         $('#js-lineStats').prepend($select);
-
                     }
                 });
-
             });
         }
     };
