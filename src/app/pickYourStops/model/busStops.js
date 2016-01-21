@@ -1,6 +1,6 @@
 //zaciąganie danych z API - nazwy przystanków
 
-ns('app.pickYourStops.model.busStop', function () {
+ns('app.pickYourStops.model.busStops', function () {
     pickYourStops = pickYourStops || {};
     pickYourStops.model = pickYourStops.model || {};
     /*pickYourStops.model.busStops = {
