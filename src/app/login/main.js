@@ -18,6 +18,7 @@ ns('app.login.main', function () {
             var $name= googleUser.getBasicProfile().getName();
             $('html').append("Witaj " + $name);
             $('.popup').hide();
+            app.pickYourStops.model.busStops.getBusStops();
         };
 
         var onFailure = function(error) {

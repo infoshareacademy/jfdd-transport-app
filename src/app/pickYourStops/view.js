@@ -3,15 +3,16 @@ ns('app.pickYourStops.view', function () {
     return {
         init: function (busStops) {
             $('#js-pickYourStops')
-                .append($('<select>')
+                .append($('<input list="stops">').append($('<datalist id="stops">')
                     .append(
                         busStops.map(
                             function (busStop) {
-                                return $('<option>').text(busStop.name);
+                                return $('<option>').attr('value', busStop.name);
                             }
                         )
-                    )
-                );
+                    ))
+                )
+                .append($('<button>').text("Wybierz"));
         }
     }
 
