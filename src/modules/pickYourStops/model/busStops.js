@@ -10,7 +10,7 @@ var pickYourStops = (function () {
     pickYourStops.model.busStops = [];
 
     pickYourStops.getBusStops = function (callback) {
-        dataManager.fetch('src/modules/pickyourstops/mock_busStops.json', [function (data) {
+        dataManager.fetch('src/modules/pickYourStops/mock_busStops.json', [function (data) {
             data.forEach(function (busStop) {
                 pickYourStops.model.busStops.push(busStop);
             });
