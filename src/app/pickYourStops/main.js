@@ -1,4 +1,4 @@
-(function () {
+ns('src.app.pickYourStops.main', function () {
     pickYourStops = pickYourStops || {};
 
     pickYourStops.main = {
@@ -12,5 +12,5 @@
 
 
     }
-}());
+})();
 
