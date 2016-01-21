@@ -1,6 +1,6 @@
 //zaciąganie danych z API - nazwy przystanków
 
-var pickYourStops = (function () {
+ns('app.pickYourStops.model.busStop', function () {
     pickYourStops = pickYourStops || {};
     pickYourStops.model = pickYourStops.model || {};
     /*pickYourStops.model.busStops = {
@@ -20,4 +20,4 @@ var pickYourStops = (function () {
     };
 
     return pickYourStops;
-}());
+});
