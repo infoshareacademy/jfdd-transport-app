@@ -9,7 +9,7 @@ ns('app.login.main', function () {
 
         var $close = $('<span>x</span>');
         $close.appendTo(popup);
-        $close.click(function(){window.location.href = 'http://localhost:63342/jfdd-transport/index.html';});
+        $close.click(function(){window.location.href = 'http://test.transport.jfdd.infoshareaca.nazwa.pl/';});
 
     }
 
@@ -19,6 +19,8 @@ ns('app.login.main', function () {
             $('html').append("Witaj, " + $name +"!");
             $('.popup').hide();
             app.pickYourStops.model.busStops.getBusStops();
+            app.yourStopInfo.main.init();
+
         };
 
         var onFailure = function(error) {

@@ -1,4 +1,4 @@
-ns('app.yourStopInfo.js-yourStopInfo', function () {
+ns('app.yourStopInfo.main', function () {
 
    function showDiv (){
     var $jsyourStopInfo = $('#js-yourStopInfo');
