@@ -1,4 +1,23 @@
-div {
-    border: 1px solid darkgray;
-    background-color: lightgrey;
+#js-yourStopInfo {
+    width: 60%;
+    margin-left: 20px;
+    padding: 10px;
+    /*border: 1px solid darkgray;*/
+    background-color: white;
+    -webkit-box-shadow: 0px 3px 16px -4px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 3px 16px -4px rgba(0,0,0,1);
+    box-shadow: 0px 3px 16px -4px rgba(0,0,0,1);
+}
+
+#js-yourStopInfo h1{
+    font-size: 30px;
+    padding: 5px;
+    line-height: 60px;
+}
+
+ div.stop1, div.stop2, div.stop3  {
+    padding: 10px;
+    border: 1px solid lightgray;
+     margin-top: 5px;
+     margin-bottom: 5px;
 }
