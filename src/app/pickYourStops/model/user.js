@@ -19,12 +19,9 @@ ns('app.pickYourStops.model.user', function() {
     return {
 
       init: function (username) {
-          console.log('Function from user was initiated');//TODO remove after testing
           if(usernameInStorage()) {
               console.log(displayUserStops(usernameInStorage(username)));
-              //app.pickYourStops.view.updateDisplayedStops(); //TODO in FDT-74
           } else {
-              //app.pickYourStops.model.busStops.getUserStops(); //TODO in FDT-74
               updateStorage(username, getStops());
           }
       }
