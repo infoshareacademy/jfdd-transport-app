@@ -9,7 +9,9 @@ ns('app.yourStopInfo.main', function () {
         $jsyourStopInfo.append('<div class="stop3"><h3>Przystanek 3</h3></div>');
     }
 
-    $('#js-yourStopInfo').click(function () {
+    var dataFromJson = [];
+
+    function getJsonData() {
         $.ajax({
             type: "GET",
             dataType: 'jsonp',
@@ -18,28 +20,22 @@ ns('app.yourStopInfo.main', function () {
             success: function (data) {
                 console.log(data);
                 var $kontener = $('.stop1');
-                data.forEach(function (post) {
-                    $kontener.prepend($('<p>', {
-                        value: post.name
-                    }).text(post.name))
+                data.forEach(function (val) {
+                    $kontener.append($('<p>', {
+                        value: val.title
+                    }).text(val.title))
                 });
-                $('#js-yourStopInfo').prepend($kontener);
             }
-
         });
 
-    });
-
-
-
+    }
 
 
 
 return {
     init: function() {
         showDiv();
-        //getJasonData();
-
+        getJsonData();
     }
 }
 
