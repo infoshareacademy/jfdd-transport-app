@@ -16,7 +16,7 @@ ns('app.login.main', function () {
     function initializeSocialButton () {
         var onSuccess = function(googleUser) {
             var $name= googleUser.getBasicProfile().getName();
-            $('html').append("Witaj, " + $name +"!");
+            $('body').prepend("Witaj, " + $name +"!");
             $('.popup').hide();
             app.pickYourStops.model.busStops.getBusStops();
             app.yourStopInfo.main.init();

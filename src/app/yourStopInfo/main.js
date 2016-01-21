@@ -47,16 +47,16 @@ ns('app.yourStopInfo.main', function () {
 
     }
 
-function fillIn () {
-    var $kontener3 = $('.stop3');
-    $kontener3.append(result1);
-}
+//function fillIn () {
+//    var $kontener3 = $('.stop3');
+//    $kontener3.append(result1);
+//}
 
 return {
     init: function() {
         showDiv();
         getJsonData();
-        fillIn();
+        //fillIn();
     }
 }
 
