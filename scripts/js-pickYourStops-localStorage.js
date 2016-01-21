@@ -21,9 +21,11 @@ $(function () {
         if (window.localStorage) {
             console.log('Local Storage supported');
 
-            for (var key in localStorage) {
-                value = localStorage.getItem[key];
-                result.push(value);
+            for (key in localStorage) {
+                if (localStorage.hasOwnProperty(key)) {
+                    value = localStorage.getItem[key];
+                    result.push(value);
+                }
             }
         } else {
             console.log('Local Storage is not supported');
