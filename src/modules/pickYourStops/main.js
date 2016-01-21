@@ -1,10 +1,11 @@
 (function () {
-    pickYourStops = pickYourStops || {};
+    window.pickYourStops = window.pickYourStops || {};
 
-    pickYourStops.main = {
+    window.pickYourStops.main = {
         init: function () {
-            var data = pickYourStops.persist.loadFromFile();
-            pickYourStops.view.update(data);
+            //var data = pickYourStops.persist.loadFromFile();
+            //pickYourStops.view.update(data);
+            window.pickYourStops.model.user.init();
         }
 
 

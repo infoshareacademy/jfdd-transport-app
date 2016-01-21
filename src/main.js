@@ -1,7 +1,7 @@
 $(function () {
-    pickYourStops.main.init();
+    window.pickYourStops.main.init();
 
-    dataManager.fetch('http://costa.sadf/data.json', [pickYourStops.main.processData, login.main.processData]);
+    //dataManager.fetch('http://costa.sadf/data.json', [pickYourStops.main.processData, login.main.processData]);
 });
 
 

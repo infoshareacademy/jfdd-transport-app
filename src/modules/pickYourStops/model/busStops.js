@@ -1,9 +1,9 @@
 //zaciągnąć dane z API - nazwy przystanków
 
 (function() {
-    pickYourStops = pickYourStops || {};
-    pickYourStops.model = pickYourStops.model || {};
-    pickYourStops.model.busStops = {
+    window.pickYourStops = window.pickYourStops || {};
+    window.pickYourStops.model = window.pickYourStops.model || {};
+    window.pickYourStops.model.busStops = {
         fetch: function() {}
     };
 
