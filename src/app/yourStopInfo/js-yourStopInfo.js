@@ -1,4 +1,4 @@
-ns('app.login.main', function () {
+ns('app.yourStopInfo.js-yourStopInfo', function () {
 
    function showDiv (){
     var $jsyourStopInfo = $('#js-yourStopInfo');
@@ -9,6 +9,11 @@ ns('app.login.main', function () {
     $jsyourStopInfo.append('<h3 class="stop3">Przystanek 3</h3>');
    }
 
+return {
+    init: function() {
+        showDiv();
 
+    }
+}
 
 });
