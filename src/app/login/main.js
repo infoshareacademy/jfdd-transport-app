@@ -15,8 +15,9 @@ ns('app.login.main', function () {
 
     function initializeSocialButton () {
         var onSuccess = function(googleUser) {
-            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-            //$('.popup').hide();
+            var $name= googleUser.getBasicProfile().getName();
+            $('html').append("Witaj " + $name);
+            $('.popup').hide();
         };
 
         var onFailure = function(error) {
