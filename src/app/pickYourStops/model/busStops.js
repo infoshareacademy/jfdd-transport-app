@@ -2,14 +2,10 @@
 
 ns('app.pickYourStops.model.busStops', function () {
     return {
-        getBusStops: function (callback) {
-            dataManager.fetch('src/modules/pickYourStops/mock_busStops.json', [function (data) {
-                data.forEach(function (busStop) {
-                    pickYourStops.model.busStops.push(busStop);
-                });
-
-                callback(pickYourStops.model.busStops);
-            }])
+        getBusStops: function () {
+            app.dataManager.fetch('data/mock_busStops.json', [
+                app.pickYourStops.view.init
+            ])
         }
     };
 
