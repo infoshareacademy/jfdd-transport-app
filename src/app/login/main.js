@@ -1,6 +1,16 @@
 ns('app.login.main', function () {
 
     function createPopup() {
+        var popup = document.createElement('div');
+        popup.className = 'popup';
+        document.body.appendChild(popup);
+        $('<p>Zaloguj się przez:</p>').appendTo(popup);
+        $("#my-signin2").appendTo(popup);
+
+        var $close = $('<span>x</span>');
+        $close.appendTo(popup);
+        $close.click(function(){window.location.href = 'http://localhost:63342/jfdd-transport/index.html';});
+
     }
 
     function initializeSocialButton () {
@@ -28,26 +38,8 @@ ns('app.login.main', function () {
 
     return {
         init: function () {
-
-            var popup = document.createElement('div');
-
-            popup.className = 'popup';
-            document.body.appendChild(popup);
-            $('<p>Zaloguj się przez:</p>').appendTo(popup);
-
-            var $close = $('<span>x</span>');
-            $close.appendTo(popup);
-
-            function quit() {
-                window.location.href = 'http://localhost:63342/jfdd-transport/index.html';
-            }
-
-            $close.click(quit);
-
             initializeSocialButton();
-
-            $("#my-signin2").appendTo(popup);
-
+            createPopup();
         }
     };
 });
