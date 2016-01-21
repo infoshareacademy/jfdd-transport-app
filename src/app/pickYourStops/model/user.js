@@ -5,7 +5,7 @@ ns('app.pickYourStops.model.user', function() {
     };
 
     var displayUserStops = function(username){
-        return localStorage.getItem[username];
+        return JSON.parse(localStorage.getItem[username]);
     };
 
     var updateStorage = function(username, stops) {
