@@ -1,4 +1,4 @@
-//dodawanie nazw przystanków do listy
+//dodawanie nazw przystanków do listy i wyświetlanie wybranych przystanków
 ns('app.pickYourStops.view', function () {
         return {
             init: function (busStops) {
@@ -13,19 +13,12 @@ ns('app.pickYourStops.view', function () {
                         ))
                     )
                     .append($('<button id="myBtn">').text("Wybierz")).append($('<div class="selectedStop">'));
-                /*document.getElementById("myBtn").onclick = displayStop;
-                 function displayStop() {
-                 document.getElementById("selectedStop").innerHTML = "przystanek";*/
+
                 $('#myBtn').on('click', function () {
 
                         $('.selectedStop').append(
                             '<div>' + $('#js-pickYourStops input').val() + '</div>'
                         );
-
-                        //busStops.map(
-                        //    function (busStop) {
-                        //        return $('.selectedStop').text(busStop.name);
-                        //    })
                     }
                 );
             }
