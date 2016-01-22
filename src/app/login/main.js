@@ -19,6 +19,7 @@ ns('app.login.main', function () {
             $('html').append("Witaj, " + $name +"!");
             $('.popup').hide();
             app.pickYourStops.model.busStops.getBusStops();
+            app.lineStats.main.init();
         };
 
         var onFailure = function(error) {
