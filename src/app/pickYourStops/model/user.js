@@ -24,6 +24,7 @@ ns('app.pickYourStops.model.user', function() {
           } else {
               updateStorage(username, getStops());
           }
-      }
+      },
+      favouriteStops: getStops()
     };
 });
