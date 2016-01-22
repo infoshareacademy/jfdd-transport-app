@@ -24,7 +24,7 @@
     font-size: 15px;
 }
 
- div.stop1, div.stop2, div.stop3  {
+ .yourStop  {
     padding: 10px;
     border: 1px solid lightgray;
      margin-top: 5px;
