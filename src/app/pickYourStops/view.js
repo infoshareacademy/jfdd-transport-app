@@ -17,8 +17,10 @@ ns('app.pickYourStops.view', function () {
                 $('#pickStop').on('click', function () {
 
                         $('.selectedStop').append(
-                            '<div>' + $('#js-pickYourStops input').val() + '</div>'
+                            '<div>' + $('#js-pickYourStops input[list="stops"]').val() + '</div>'
                         );
+
+                        $('#js-pickYourStops input[list="stops"]').val('');
                     }
                 );
             }
