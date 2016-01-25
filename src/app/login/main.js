@@ -22,6 +22,7 @@ ns('app.login.main', function () {
             $('.popup').hide();
             app.pickYourStops.model.busStops.getBusStops();
             app.yourStopInfo.main.init();
+            app.yourStopInfo.filters.init();
 
 
         };

@@ -15,12 +15,17 @@
 <script src="../src/app/yourStopInfo/main.js"></script>
 <script src="../src/app/pickYourStops/model/busStops.js"></script>
 <script src="../src/app/pickYourStops/model/user.js"></script>
+<script src="../src/app/pickYourStops/main.js"></script>
+<script src="../src/app/pickYourStops/view.js"></script>
+<script src="../src/app/dataManager.js"></script>
+<script src="../src/app/login/main.js"></script>
+<script src="../src/main.js"></script>
 <script>
 
     QUnit.test("Append array items to div.youStopInfo", function (assert) {
         $('#js-yourStopInfo').empty();
 
-        app.yourStopInfo.main.init ();
+        app.yourStopInfo.main.init();
 
         assert.equal($('#js-yourStopInfo').find('.yourStop').length, 5);
 

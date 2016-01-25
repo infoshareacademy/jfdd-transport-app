@@ -14,6 +14,7 @@ ns('app.yourStopInfo.main', function () {
     return {
         init: function () {
             showDiv();
+            var stopsArray = app.pickYourStops.model.user.favouriteStops();
         }
     }
 
