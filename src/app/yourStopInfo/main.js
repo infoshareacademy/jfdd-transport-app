@@ -4,20 +4,17 @@ ns('app.yourStopInfo.main', function () {
         var $jsyourStopInfo = $('#js-yourStopInfo');
         var stopsArray = app.pickYourStops.model.user.favouriteStops();
 
-
-        stopsArray.forEach(function(yourStop) {
+        stopsArray.forEach(function (yourStop) {
             $jsyourStopInfo.append(
                 '<div class="yourStop"><h3>' + yourStop + '<p class = "fetchingStatus"></p></h3></div>'
             )
         });
-
     }
 
-
-return {
-    init: function() {
-        showDiv();
+    return {
+        init: function () {
+            showDiv();
+        }
     }
-}
 
 });
