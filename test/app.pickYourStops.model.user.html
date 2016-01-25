@@ -13,9 +13,12 @@
 <script src="../src/utils.js"></script>
 <script src="../src/app/pickYourStops/model/user.js"></script>
 <script>
-    QUnit.test("a temporary test", function (assert) {
-        assert.ok($('#js-lineStats'), 'div exists');
-    });
+    var username = 'Agnieszka Mor';
+
+    QUnit.test('Checks if username gets stored in local storage', function(assert) {
+        app.pickYourStops.model.user.init(username);
+        assert.ok(localStorage.key(username), 'username found in local storage');
+    })
 </script>
 </body>
 </html>
