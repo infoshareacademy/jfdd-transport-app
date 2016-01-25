@@ -1,4 +1,5 @@
 ns('app.pickYourStops.model.user', function () {
+    var currentUser = '';
 
     var usernameInStorage = function (username) {
         return localStorage.getItem(username);
@@ -8,10 +9,10 @@ ns('app.pickYourStops.model.user', function () {
         return JSON.parse(localStorage.getItem[username]);
     };
 
-    var updateStorage = function (username, stop) {
-        var stopsArray = JSON.parse(localStorage.getItem(username)) || [];
-        stopsArray.push(stop);
-        localStorage.setItem(username, JSON.stringify(stopsArray));
+    var updateStorage = function (busStop) {
+        var stopsArray = JSON.parse(localStorage.getItem(currentUser)) || [];
+        stopsArray.push(busStop);
+        localStorage.setItem(currentUser, JSON.stringify(stopsArray));
     };
 
     var getStops = function () {
@@ -21,10 +22,11 @@ ns('app.pickYourStops.model.user', function () {
     return {
 
         init: function (username) {
+            currentUser = username;
             if (usernameInStorage()) {
                 console.log(displayUserStops(usernameInStorage(username)));
             } else {
-                updateStorage(username, getStops());
+                updateStorage('Migowo');
             }
         },
         favouriteStops: getStops,
