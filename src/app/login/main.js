@@ -9,17 +9,19 @@ ns('app.login.main', function () {
 
         var $close = $('<span>x</span>');
         $close.appendTo(popup);
-        $close.click(function(){window.location.href = 'http://localhost:63342/jfdd-transport/index.html';});
+        $close.click(function(){window.location.href = 'http://test.transport.jfdd.infoshareaca.nazwa.pl/';});
 
     }
 
     function initializeSocialButton () {
         var onSuccess = function(googleUser) {
             var $name= googleUser.getBasicProfile().getName();
+            $('main').removeClass('hide');
             app.pickYourStops.model.user.init($name);
-            $('html').append("Witaj, " + $name +"!");
+            $('body').prepend("Witaj, " + $name +"!");
             $('.popup').hide();
             app.pickYourStops.model.busStops.getBusStops();
+            app.yourStopInfo.main.init();
             app.lineStats.main.init();
         };
 

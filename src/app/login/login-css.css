@@ -4,7 +4,7 @@ body {
 
 #my-signin2 {
     position: absolute;
-    padding-top: 20px;
+    padding-top: 50px;
     width: 250px;
     left:50%;
     margin-left: -125px;
@@ -14,7 +14,7 @@ body {
     position: absolute;
     background-color: white;
     padding: 20px;
-    padding-top: 30px;
+    padding-top: 50px;
     top: 80px;
     left: 50%;
     margin-left:-200px;

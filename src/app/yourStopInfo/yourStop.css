@@ -1,0 +1,36 @@
+#js-yourStopInfo {
+    width: 60%;
+    margin-left: 20px;
+    padding: 10px;
+    background-color: white;
+    -webkit-box-shadow: 0px 3px 16px -4px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 3px 16px -4px rgba(0, 0, 0, 1);
+    box-shadow: 0px 3px 16px -4px rgba(0, 0, 0, 1);
+}
+
+#js-yourStopInfo h1 {
+    font-size: 30px;
+    padding: 5px;
+    line-height: 60px;
+}
+
+#js-yourStopInfo h3 {
+    font-size: 25px;
+    padding: 5px;
+    line-height: 40px;
+}
+
+.fetchingStatus {
+    font-size: 15px;
+}
+
+.yourStop {
+    padding: 10px;
+    border: 1px solid lightgray;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.hide {
+    display:none;
+}

@@ -13,7 +13,7 @@ ns('app.pickYourStops.model.user', function() {
     };
 
     var getStops = function() {
-        return ['Migowo', 'Dworzec Główny', 'Żabi Kruk'];
+        return ['Migowo', 'Dworzec Główny', 'Żabi Kruk', 'Przymorze', 'Suchanino'];
     };
 
     return {
@@ -25,6 +25,6 @@ ns('app.pickYourStops.model.user', function() {
               updateStorage(username, getStops());
           }
       },
-      favouriteStops: getStops()
+      favouriteStops: getStops
     };
 });
