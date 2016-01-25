@@ -16,11 +16,13 @@ ns('app.login.main', function () {
     function initializeSocialButton () {
         var onSuccess = function(googleUser) {
             var $name= googleUser.getBasicProfile().getName();
+            $('main').removeClass('hide');
             app.pickYourStops.model.user.init($name);
             $('body').prepend("Witaj, " + $name +"!");
             $('.popup').hide();
             app.pickYourStops.model.busStops.getBusStops();
             app.yourStopInfo.main.init();
+
 
         };
 
