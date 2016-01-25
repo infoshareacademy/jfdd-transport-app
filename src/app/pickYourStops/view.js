@@ -12,7 +12,7 @@ ns('app.pickYourStops.view', function () {
                             )
                         ))
                     )
-                    .append($('<button id="myBtn">').text("Wybierz")).append($('<div class="selectedStop">'));
+                    .append($('<button id="pickStop">').text("Wybierz")).append($('<div class="selectedStop">'));
 
                 $('#myBtn').on('click', function () {
 
