@@ -1,7 +1,6 @@
 $(function () {
     app.login.main.init();
-    //app.pickYourStops.model.busStops.getBusStops();
-
+    //dataManager.fetch('http://costa.sadf/data.json', [pickYourStops.main.processData, login.main.processData]);
 });
 
 
