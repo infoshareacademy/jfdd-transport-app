@@ -19,7 +19,6 @@
     QUnit.module('Local storage tests', {
         beforeEach: function () {
             localStorage.clear();
-            app.pickYourStops.model.user.init(username);
         },
         afterEach: function () {
             localStorage.clear();
@@ -27,12 +26,26 @@
     });
 
     QUnit.test('Checks if username gets stored in local storage', function (assert) {
+        app.pickYourStops.model.user.init(username);
         assert.ok(localStorage.key(username), 'username found in local storage');
     });
 
     QUnit.test('Gets a list of user\'s favourite stops', function (assert) {
         localStorage.setItem(username, stops);
         assert.deepEqual(app.pickYourStops.model.user.favouriteStops(), stops);
+    });
+
+    QUnit.test('Updates local storage with stops', function (assert) {
+        localStorage.key(username);
+        function update(stop, expected) {
+            var result;
+            app.pickYourStops.model.user.addToFavouriteStops(username, stop);
+            result = JSON.parse(localStorage.getItem(username));
+            assert.deepEqual(result, expected);
+        }
+
+        update('Bażyńskiego', ['Bażyńskiego']);
+        update('Biblioteka Główna UG', ['Bażyńskiego', 'Biblioteka Główna UG']);
     });
 </script>
 </body>
