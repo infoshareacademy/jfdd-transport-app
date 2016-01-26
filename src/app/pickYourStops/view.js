@@ -20,7 +20,7 @@ ns('app.pickYourStops.view', function () {
 
                             $('.selectedStop').append(
                                 $('<div><span>' + inputList.val() + '</span><button type="button" class="removeStopBtn">usuń</button></div>').click(function () {
-                                        console.log($(this).find('span').text());
+                                        app.pickYourStops.model.user.removeFromFavouriteStops($(this).find('span').text());
                                         $(this).remove();
                                     }
                                 )
