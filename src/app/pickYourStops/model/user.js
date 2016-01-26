@@ -15,8 +15,12 @@ ns('app.pickYourStops.model.user', function () {
         return JSON.parse(localStorage.getItem(currentUser)) || [];
     };
 
-    var removeFromStorage = function () {
-        console.log('removed');
+    var removeFromStorage = function (stopName) {
+        var stopsFromStorage = getStops();
+        var filteredStops = stopsFromStorage.filter(function (busstop) {
+            return busstop !== stopName;
+        });
+        localStorage.setItem(currentUser, JSON.stringify(filteredStops));
     };
 
     return {
