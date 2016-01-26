@@ -4,10 +4,10 @@ ns('app.yourStopInfo.filters', function ()  {
     var linesArray;
 
     function fetchRealData() {
-        app.dataManager.fetch('https://isa-api.herokuapp.com/transport/stops.json', [function (stops) {
-           console.log(stops);
-            stopsArray = stops;
-        }]);
+    //    app.dataManager.fetch('https://isa-api.herokuapp.com/transport/stops.json', [function (stops) {
+    //       console.log(stops);
+    //        stopsArray = stops;
+    //    }]);
 
         app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [function (lines) {
             console.log(lines);
@@ -50,13 +50,13 @@ ns('app.yourStopInfo.filters', function ()  {
             inputList.val('');
         });
     }
-    //var stopsArray = app.pickYourStops.model.user.favouriteStops();
 
     function filterOne() {
-        var filteredOutStops = stopsArray.filter(function (stop) {
-            return stop.name.length >= 9;
-        });
+        var favStops = app.pickYourStops.model.user.favouriteStops();
 
+        var filteredOutStops = favStops.filter(function (stop) {
+            return stop.length >= 9;
+        });
         return filteredOutStops;
     }
 
@@ -105,7 +105,8 @@ ns('app.yourStopInfo.filters', function ()  {
             //activateFilter()
         },
         filterOne: filterOne,
-        startFilters: startFilters
+        startFilters: startFilters,
+        filterData: filterData
     }
 
 });

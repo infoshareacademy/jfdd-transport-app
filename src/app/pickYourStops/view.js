@@ -16,7 +16,6 @@ ns('app.pickYourStops.view', function () {
 
                 $('#pickStop').on('click', function () {
 
-
                         var inputList = $('#js-pickYourStops input[list="stops"]');
                         if (inputList.val()) {
 
@@ -32,6 +31,8 @@ ns('app.pickYourStops.view', function () {
                             app.pickYourStops.model.user.addToFavouriteStops(inputList.val());
                             inputList.val('');
                             app.yourStopInfo.main.showDiv(app.pickYourStops.model.user.favouriteStops());
+                            app.yourStopInfo.filters.startFilters();
+                            app.yourStopInfo.filters.filterData();
                         }
                     }
 
