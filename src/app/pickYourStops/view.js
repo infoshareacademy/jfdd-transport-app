@@ -7,7 +7,7 @@ ns('app.pickYourStops.view', function () {
                         .append(
                             busStops.map(
                                 function (busStop) {
-                                    return $('<option>').attr('value', busStop.id);
+                                    return $('<option>').attr('value', busStop.name);
                                 }
                             )
                         ))
@@ -17,22 +17,22 @@ ns('app.pickYourStops.view', function () {
                 $('#pickStop').on('click', function () {
                         var inputList = $('#js-pickYourStops input[list="stops"]');
                         if (inputList.val()) {
-                            // logika zapisywania do local storage
-                            // jak wywolac funkcje modelu user albo busStops?
-                            // np. busStops.saveBusStop();
 
-                            // dodatkowo przycisk z usuwaniem wybranego elementu, rowniez trzeba by wywolac funckje typu removeUsersBusStop() user model z id przystanku
                             $('.selectedStop').append(
-                                '<div><span>' + inputList.val() + '</span><button onclick=" + userModelCostam.removeUsersBusStop(inputList.val()) + ">usuń</button></div>'
+                                '<div><span>' + inputList.val() + '</span><button type="button" class="removeStopBtn" onclick=" + userModel.removeUsersBusStop(inputList.val()) + ">usuń</button></div>'
                             );
 
                             inputList.val('');
                         }
                     }
+
                 );
             }
         }
     }
 );
 
-//
+// logika zapisywania do local storage
+// jak wywolac funkcje modelu user albo busStops?
+// np. busStops.saveBusStop();
+// dodatkowo przycisk z usuwaniem wybranego elementu, rowniez trzeba by wywolac funckje typu removeUsersBusStop() user model z id przystanku
