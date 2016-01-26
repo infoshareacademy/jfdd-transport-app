@@ -19,6 +19,10 @@ ns('app.pickYourStops.model.user', function () {
         return ['Migowo', 'Dworzec Główny', 'Żabi Kruk', 'Przymorze', 'Suchanino'];
     };
 
+    var removeFromStorage = function () {
+        console.log('removed');
+    };
+
     return {
 
         init: function (username) {
@@ -30,6 +34,7 @@ ns('app.pickYourStops.model.user', function () {
             }
         },
         favouriteStops: getStops,
-        addToFavouriteStops: updateStorage
+        addToFavouriteStops: updateStorage,
+        removeFromFavouriteStops: removeFromStorage
     };
 });
