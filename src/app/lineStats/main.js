@@ -5,14 +5,26 @@ ns('app.lineStats.main', function () {
 
     return {
         init: function () {
+            var currentLines = [];
+
             app.lineStats.view.init();
+
             $('#chooseLines').on('click', function () {
-                var lineList = $('#js-lineStats input[list="lines"]');
+                var lineList = $('input[list="lines"]');
                 if (lineList.val()) {
                     $('#selectedLines').append('<div>' + lineList.val() + '</div>');
+
+                    currentLines.push(lineList.val());
                 }
                 lineList.val('');
+
+                if ($('#showStats').length < 1) {
+                    console.log('check if btn exists');
+                    $('#js-lineStats').append($('<button id="showStats" type="button">' + 'Wyświetl statystyki' + '</button>'));
+                }
             });
+
+
         }
     };
 });
