@@ -26,7 +26,8 @@
     });
 
     QUnit.test('Gets a list of user\'s favourite stops', function (assert) {
-        localStorage.setItem(username, stops);
+        localStorage.setItem(username, JSON.stringify(stops));
+        app.pickYourStops.model.user.init(username);
         assert.deepEqual(app.pickYourStops.model.user.favouriteStops(), stops);
     });
 
@@ -40,11 +41,6 @@
 
         update('Bażyńskiego', ['Bażyńskiego']);
         update('Biblioteka Główna UG', ['Bażyńskiego', 'Biblioteka Główna UG']);
-    });
-
-    QUnit.test('Checks if username gets stored in local storage', function (assert) {
-        app.pickYourStops.model.user.init(username);
-        assert.ok(localStorage.key(username), 'username found in local storage');
     });
 
 </script>
