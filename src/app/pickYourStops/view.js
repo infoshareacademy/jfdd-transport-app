@@ -19,7 +19,11 @@ ns('app.pickYourStops.view', function () {
                         if (inputList.val()) {
 
                             $('.selectedStop').append(
-                                '<div><span>' + inputList.val() + '</span><button type="button" class="removeStopBtn" onclick=" + userModel.removeUsersBusStop(inputList.val()) + ">usuń</button></div>'
+                                $('<div><span>' + inputList.val() + '</span><button type="button" class="removeStopBtn">usuń</button></div>').click(function () {
+                                        console.log($(this).find('span').text());
+                                        $(this).remove();
+                                    }
+                                )
                             );
 
                             inputList.val('');
