@@ -1,5 +1,20 @@
 ns('app.yourStopInfo.filters', function ()  {
 
+    var stopsArray;
+    var linesArray;
+
+    function fetchRealData() {
+        app.dataManager.fetch('https://isa-api.herokuapp.com/transport/stops.json', [function (stops) {
+           console.log(stops);
+            stopsArray = stops;
+        }]);
+
+        app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [function (lines) {
+            console.log(lines);
+            linesArray = lines;
+        }]);
+    }
+
     function startFilters() {
 
         function addSelect(filters) {
@@ -27,27 +42,65 @@ ns('app.yourStopInfo.filters', function ()  {
 
             if ($('#js-yourStopInfo input').val() == filtersArray[1]) {
                 //filterOne();
-                app.yourStopInfo.main.filterDivs();
+                //app.yourStopInfo.main.filterDivs();
+                filterTwo();
             } else {
                 console.log ('filtr litera')
             }
             inputList.val('');
         });
     }
-    var stopsArray = app.pickYourStops.model.user.favouriteStops();
+    //var stopsArray = app.pickYourStops.model.user.favouriteStops();
 
     function filterOne() {
-        var filteredOutStops = stopsArray.filter(function (stopName) {
-            return stopName.length >= 9;
+        var filteredOutStops = stopsArray.filter(function (stop) {
+            return stop.name.length >= 9;
         });
 
         return filteredOutStops;
     }
 
+    function filterTwo() {
+        debugger;
+        var stopNames = app.pickYourStops.model.user.favouriteStops();
+        var filteredLines = linesArray.filter(function(line){
+            return line.stops.find(function (stop) {
+                    debugger;
+               return stopNames.indexOf(stop.name) !== -1;
+            }) !== undefined;
+        });
+
+        debugger;
+
+        var accumulator = {};
+
+        stopNames.forEach(function (name) {
+           accumulator[name] = [];
+        });
+
+        filteredLines.forEach(function (line) {
+           line.stops.forEach(function (stop) {
+               debugger;
+               if (accumulator[stop.name] !== undefined) {
+                   accumulator[stop.name].push(line);
+               }
+           });
+        });
+
+        console.log(accumulator);
+
+        //var filteredOutStops = stopsArray.filter(function (stop) {
+        //    return stop.name.length >= 9;
+        //});
+//}
+//
+//        return filteredOutStops;
+    }
     return {
         init: function () {
             startFilters();
             filterData();
+            fetchRealData();
             //filterOne();
             //activateFilter()
         },

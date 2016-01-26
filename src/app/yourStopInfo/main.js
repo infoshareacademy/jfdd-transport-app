@@ -19,7 +19,7 @@ ns('app.yourStopInfo.main', function () {
         app.yourStopInfo.filters.startFilters();
         filteredOutStops.forEach(function (yourStop) {
             $jsyourStopInfo.append(
-                '<div class="yourStop"><h3>' + yourStop + '<p class = "fetchingStatus"></p></h3></div>'
+                '<div class="yourStop"><h3>' + yourStop.name + '<p class = "fetchingStatus"></p></h3></div>'
             )
         });
     }

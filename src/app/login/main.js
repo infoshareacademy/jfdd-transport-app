@@ -23,8 +23,6 @@ ns('app.login.main', function () {
             app.pickYourStops.model.busStops.getBusStops();
             app.yourStopInfo.main.init();
             app.yourStopInfo.filters.init();
-
-
         };
 
         var onFailure = function(error) {
