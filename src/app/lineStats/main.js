@@ -2,10 +2,12 @@
  * Created by agmo on 22.01.16.
  */
 ns('app.lineStats.main', function () {
-    var displayStats = function (stats) {
+    var displayStats = function (lines) {
         console.log('stats fetched');
 
+        lines.filter(function () {
 
+        });
     };
 
     return {
