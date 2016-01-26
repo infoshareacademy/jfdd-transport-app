@@ -43,6 +43,7 @@ ns('app.yourStopInfo.filters', function ()  {
             else if ($('#js-yourStopInfo input').val() == filtersArray[0]){
                 app.yourStopInfo.main.filterTwoDiv();
                 console.log('filtr litera')
+                filterTwo();
             }
         });
         //inputList.val('');
@@ -60,29 +61,50 @@ ns('app.yourStopInfo.filters', function ()  {
     function filterTwo() {
 
         var favStops = app.pickYourStops.model.user.favouriteStops();
+        //filtruje dane o liniach z jsona, wyszukując te, które poruszają się po jednym z ulubionych przystanków
+        //zwraca tablicę z obiektami (z jsona - linie)
         var filteredLines = linesArray.filter(function (line) {
             return line.stops.find(function (stop) {
                     return favStops.indexOf(stop.name) !== -1;
                 }) !== undefined;
         });
-
+        console.log(filteredLines);
 
         var accumulator = {};
-
+        //TO CHECK
         favStops.forEach(function (name) {
             accumulator[name] = [];
         });
 
         filteredLines.forEach(function (line) {
             line.stops.forEach(function (stop) {
-                debugger;
                 if (accumulator[stop.name] !== undefined) {
                     accumulator[stop.name].push(line);
                 }
             });
         });
-
         console.log(accumulator);
+// parse object to array:
+//        var accumulatorArray = $.map(accumulator, function(stop, index) {
+//            return [stop];
+//        });
+        //console.log(accumulatorArray);
+
+        //var filteredOutLines =  accumulatorArray.filter(function (stop) {
+        //    return stop.length >= 3;
+        //});
+        //return filteredOutLines;
+
+
+        //console.log(filteredOutLines);
+        for (var id in accumulator){
+            console.log(id + ': ' + accumulator[id]);
+        }
+
+        //return filteredOutLines;
+        //console.log(filteredOutLines);
+
+
 
         //var filteredOutStops = stopsArray.filter(function (stop) {
         //    return stop.name.length >= 9;
