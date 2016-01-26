@@ -16,7 +16,9 @@ ns('app.pickYourStops.model.user', function () {
     };
 
     var getStops = function () {
-        return ['Migowo', 'Dworzec Główny', 'Żabi Kruk', 'Przymorze', 'Suchanino'];
+        var userStops = JSON.parse(localStorage.getItem(currentUser));
+        console.log(userStops + ' ' + typeof userStops);
+        return userStops;
     };
 
     var removeFromStorage = function () {
