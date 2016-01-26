@@ -25,14 +25,20 @@ ns('app.yourStopInfo.filters', function ()  {
 
             var inputList = $('#js-yourStopInfo input[list=filters]');
 
-            if ($('#js-yourStopInfo input').val() == filtersArray[0]) {
-                console.log ('filtr 1')
+            if ($('#js-yourStopInfo input').val() == filtersArray[1]) {
+                filterOne();
             } else {
-                console.log ('filtr 2')
+                console.log ('filtr litera')
             }
             inputList.val('');
         });
+    }
 
+    function filterOne() {
+        var stopsArray = app.pickYourStops.model.user.favouriteStops();
+        stopsArray.forEach(function(element, index, array){
+           return element.length>=9
+        })
 
     }
 
