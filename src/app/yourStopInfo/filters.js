@@ -22,7 +22,11 @@ ns('app.yourStopInfo.filters', function ()  {
         var filtersArray = ["Przystanki, których nazwa zaczyna się na M","Przystanki, których nazwa jest krótsza niż 5 znaków"];
         $('#myFilter').on('click', function () {
 
-                console.log($('#js-yourStopInfo input').val());
+                //console.log($('#js-yourStopInfo input').val());
+
+            if($('#js-yourStopInfo input').val()==filtersArray[0]){
+                console.log ('filtr 1')
+            }else{console.log ('filtr 2')}
 
             });
 
