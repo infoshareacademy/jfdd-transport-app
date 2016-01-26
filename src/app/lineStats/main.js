@@ -2,6 +2,9 @@
  * Created by agmo on 22.01.16.
  */
 ns('app.lineStats.main', function () {
+    var displayStats = function () {
+        console.log('stats');
+    };
 
     return {
         init: function () {
@@ -19,12 +22,13 @@ ns('app.lineStats.main', function () {
                 lineList.val('');
 
                 if ($('#showStats').length < 1) {
-                    console.log('check if btn exists');
                     $('#js-lineStats').append($('<button id="showStats" type="button">' + 'Wyświetl statystyki' + '</button>'));
                 }
             });
 
-
+            $('#js-lineStats').on('click', '#showStats', function () {
+                displayStats();
+            });
         }
     };
 });
