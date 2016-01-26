@@ -1,4 +1,4 @@
-//dodawanie nazw przystanków do listy i wyświetlanie wybranych przystanków
+//dodawanie nazw przystanków do listy, wyświetlanie oraz usuwanie wybranych przystanków
 ns('app.pickYourStops.view', function () {
         return {
             init: function (busStops) {
@@ -12,19 +12,27 @@ ns('app.pickYourStops.view', function () {
                             )
                         ))
                     )
-                    .append($('<button id="myBtn">').text("Wybierz")).append($('<div class="selectedStop">'));
+                    .append($('<button type="button" id="pickStop">').text("Wybierz")).append($('<div class="selectedStop">'));
 
-                $('#myBtn').on('click', function () {
-                        var favStop = $('#js-pickYourStops input').val();
-                        $('.selectedStop').append(
-                            '<div>' + favStop + '</div>'
-                        );
+                $('#pickStop').on('click', function () {
+                        var inputList = $('#js-pickYourStops input[list="stops"]');
+                        if (inputList.val()) {
 
-                        app.pickYourStops.model.user.addToFavouriteStops(favStop);
+                            $('.selectedStop').append(
+                                $('<div><span>' + inputList.val() + '</span><button type="button" class="removeStopBtn">usuń</button></div>').click(function () {
+                                        app.pickYourStops.model.user.removeFromFavouriteStops($(this).find('span').text());
+                                        $(this).remove();
+                                    }
+                                )
+                            );
+
+                            inputList.val('');
+                            app.pickYourStops.model.user.addToFavouriteStops(inputList);
+                        }
                     }
+
                 );
             }
         }
     }
 );
-
