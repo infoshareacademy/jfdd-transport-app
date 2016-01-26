@@ -3,30 +3,28 @@ ns('app.yourStopInfo.main', function () {
     var $jsyourStopInfo = $('#js-yourStopInfo');
 
 
-    function showDiv() {
-        var stopsArray = app.pickYourStops.model.user.favouriteStops();
-        stopsArray.forEach(function (yourStop) {
+    function showDiv(favStops) {
+        $jsyourStopInfo.empty();
+
+        favStops.forEach(function (stop) {
             $jsyourStopInfo.append(
-                '<div class="yourStop"><h3>' + yourStop + '<p class = "fetchingStatus"></p></h3></div>'
+                '<div class="yourStop"><h3>' + stop + '<p class = "fetchingStatus"></p></h3></div>'
             )
         });
     }
 
-    function filterDivs(){
-        $jsyourStopInfo.empty();
+    function filterDivs() {
 
         var filteredOutStops = app.yourStopInfo.filters.filterOne();
         app.yourStopInfo.filters.startFilters();
-        filteredOutStops.forEach(function (yourStop) {
-            $jsyourStopInfo.append(
-                '<div class="yourStop"><h3>' + yourStop.name + '<p class = "fetchingStatus"></p></h3></div>'
-            )
-        });
+
+        showDiv(filteredOutStops);
     }
 
     return {
         init: function () {
-            showDiv();
+            var favStops = app.pickYourStops.model.user.favouriteStops();
+            showDiv(favStops);
         },
         filterDivs: filterDivs,
         showDiv:showDiv

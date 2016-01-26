@@ -42,8 +42,8 @@ ns('app.yourStopInfo.filters', function ()  {
 
             if ($('#js-yourStopInfo input').val() == filtersArray[1]) {
                 //filterOne();
-                //app.yourStopInfo.main.filterDivs();
-                filterTwo();
+                app.yourStopInfo.main.filterDivs();
+                //filterTwo();
             } else {
                 console.log ('filtr litera')
             }
