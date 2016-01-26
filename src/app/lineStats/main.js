@@ -3,7 +3,9 @@
  */
 ns('app.lineStats.main', function () {
     var displayStats = function (stats) {
-        console.log(stats);
+        console.log('stats fetched');
+
+
     };
 
     return {
