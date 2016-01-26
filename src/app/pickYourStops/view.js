@@ -1,4 +1,4 @@
-//dodawanie nazw przystanków do listy i wyświetlanie wybranych przystanków
+//dodawanie nazw przystanków do listy, wyświetlanie oraz usuwanie wybranych przystanków
 ns('app.pickYourStops.view', function () {
         return {
             init: function (busStops) {
@@ -35,8 +35,3 @@ ns('app.pickYourStops.view', function () {
         }
     }
 );
-
-// logika zapisywania do local storage
-// jak wywolac funkcje modelu user albo busStops?
-// np. busStops.saveBusStop();
-// dodatkowo przycisk z usuwaniem wybranego elementu, rowniez trzeba by wywolac funckje typu removeUsersBusStop() user model z id przystanku
