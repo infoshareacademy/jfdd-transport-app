@@ -13,20 +13,30 @@ ns('app.yourStopInfo.main', function () {
         });
     }
 
-    function filterDivs() {
+    function filterOneDiv() {
 
         var filteredOutStops = app.yourStopInfo.filters.filterOne();
         showDiv(filteredOutStops);
         app.yourStopInfo.filters.startFilters();
+        app.yourStopInfo.filters.filterData();
     }
+
+    function filterTwoDiv() {
+        console.log('działa filtr 2');
+        //var filteredOutStops = app.yourStopInfo.filters.filterOne();
+        //showDiv(filteredOutStops);
+        //app.yourStopInfo.filters.startFilters();
+    }
+
 
     return {
         init: function () {
             var favStops = app.pickYourStops.model.user.favouriteStops();
             showDiv(favStops);
         },
-        filterDivs: filterDivs,
-        showDiv:showDiv
+        filterOneDiv: filterOneDiv,
+        showDiv:showDiv,
+        filterTwoDiv: filterTwoDiv
     }
 
 });
