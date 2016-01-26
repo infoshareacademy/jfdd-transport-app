@@ -14,8 +14,9 @@ ns('app.yourStopInfo.main', function () {
 
     function filterDivs(){
         $jsyourStopInfo.empty();
-        var filteredOutStops = app.yourStopInfo.filters.filterOne();
 
+        var filteredOutStops = app.yourStopInfo.filters.filterOne();
+        app.yourStopInfo.filters.startFilters();
         filteredOutStops.forEach(function (yourStop) {
             $jsyourStopInfo.append(
                 '<div class="yourStop"><h3>' + yourStop + '<p class = "fetchingStatus"></p></h3></div>'

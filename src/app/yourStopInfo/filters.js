@@ -51,7 +51,8 @@ ns('app.yourStopInfo.filters', function ()  {
             //filterOne();
             //activateFilter()
         },
-        filterOne: filterOne
+        filterOne: filterOne,
+        startFilters: startFilters
     }
 
 });
