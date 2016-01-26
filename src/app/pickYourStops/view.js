@@ -15,10 +15,12 @@ ns('app.pickYourStops.view', function () {
                     .append($('<button id="myBtn">').text("Wybierz")).append($('<div class="selectedStop">'));
 
                 $('#myBtn').on('click', function () {
-
+                        var favStop = $('#js-pickYourStops input').val();
                         $('.selectedStop').append(
-                            '<div>' + $('#js-pickYourStops input').val() + '</div>'
+                            '<div>' + favStop + '</div>'
                         );
+
+                        app.pickYourStops.model.user.addToFavouriteStops(favStop);
                     }
                 );
             }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>app.pickYourStops.model.user</title>
+    <link rel="stylesheet" href="//code.jquery.com/qunit/qunit-1.20.0.css">
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="//code.jquery.com/qunit/qunit-1.20.0.js"></script>
+<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="../src/utils.js"></script>
+<script src="../src/app/pickYourStops/model/user.js"></script>
+<script>
+    var username = 'Agnieszka Mor';
+    var stops = ['Migowo', 'Dworzec Główny', 'Żabi Kruk', 'Przymorze', 'Suchanino'];
+
+    QUnit.module('Local storage tests', {
+        beforeEach: function () {
+            localStorage.clear();
+        },
+        afterEach: function () {
+            localStorage.clear();
+        }
+    });
+
+    QUnit.test('Gets a list of user\'s favourite stops', function (assert) {
+        localStorage.setItem(username, stops);
+        assert.deepEqual(app.pickYourStops.model.user.favouriteStops(), stops);
+    });
+
+    QUnit.test('Updates local storage with stops', function (assert) {
+        function update(busStop, expected) {
+            var result;
+            app.pickYourStops.model.user.addToFavouriteStops(busStop);
+            result = JSON.parse(localStorage.getItem(''));
+            assert.deepEqual(result, expected);
+        }
+
+        update('Bażyńskiego', ['Bażyńskiego']);
+        update('Biblioteka Główna UG', ['Bażyńskiego', 'Biblioteka Główna UG']);
+    });
+
+    QUnit.test('Checks if username gets stored in local storage', function (assert) {
+        app.pickYourStops.model.user.init(username);
+        assert.ok(localStorage.key(username), 'username found in local storage');
+    });
+
+</script>
+</body>
+</html>
