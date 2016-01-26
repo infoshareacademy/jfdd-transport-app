@@ -2,17 +2,22 @@
  * Created by agmo on 22.01.16.
  */
 ns('app.lineStats.main', function () {
+    var currentLines;
+
     var displayStats = function (lines) {
         console.log('stats fetched');
 
-        lines.filter(function () {
+        var filteredLines = lines.filter(function (line) {
 
+            return currentLines.indexOf('' + line.id) !== -1;
         });
+
+        console.log(filteredLines);
     };
 
     return {
         init: function () {
-            var currentLines = [];
+            currentLines = [];
 
             app.lineStats.view.init();
 
