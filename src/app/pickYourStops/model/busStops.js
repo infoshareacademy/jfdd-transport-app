@@ -3,7 +3,7 @@
 ns('app.pickYourStops.model.busStops', function () {
     return {
         getBusStops: function () {
-            app.dataManager.fetch('data/mock_busStops.json', [
+            app.dataManager.fetch('https://isa-api.herokuapp.com/transport/stops.json', [
                 app.pickYourStops.view.init
             ])
         }
