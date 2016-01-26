@@ -28,7 +28,8 @@ ns('app.yourStopInfo.main', function () {
         init: function () {
             showDiv();
         },
-        filterDivs: filterDivs
+        filterDivs: filterDivs,
+        showDiv:showDiv
     }
 
 });
