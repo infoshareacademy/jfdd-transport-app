@@ -1,30 +1,31 @@
-ns('app.pickYourStops.model.user', function() {
+ns('app.pickYourStops.model.user', function () {
+    var currentUser = '';
 
-    var usernameInStorage = function(username) {
-        return localStorage.getItem(username);
+    var updateStorage = function (busStop) {
+        var stopsArray = JSON.parse(localStorage.getItem(currentUser)) || [];
+        stopsArray.push(busStop);
+        localStorage.setItem(currentUser, JSON.stringify(stopsArray));
     };
 
-    var displayUserStops = function(username){
-        return JSON.parse(localStorage.getItem[username]);
+    var getStops = function () {
+        return JSON.parse(localStorage.getItem(currentUser)) || [];
     };
 
-    var updateStorage = function(username, stops) {
-        localStorage.setItem(username, JSON.stringify(stops));
-    };
-
-    var getStops = function() {
-        return ['Migowo', 'Dworzec Główny', 'Żabi Kruk', 'Przymorze', 'Suchanino'];
+    var removeFromStorage = function (stopName) {
+        var stopsFromStorage = getStops();
+        var filteredStops = stopsFromStorage.filter(function (busstop) {
+            return busstop !== stopName;
+        });
+        localStorage.setItem(currentUser, JSON.stringify(filteredStops));
     };
 
     return {
 
-      init: function (username) {
-          if(usernameInStorage()) {
-              console.log(displayUserStops(usernameInStorage(username)));
-          } else {
-              updateStorage(username, getStops());
-          }
-      },
-      favouriteStops: getStops
+        init: function (username) {
+            currentUser = username;
+        },
+        favouriteStops: getStops,
+        addToFavouriteStops: updateStorage,
+        removeFromFavouriteStops: removeFromStorage
     };
 });

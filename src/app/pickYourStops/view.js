@@ -26,6 +26,7 @@ ns('app.pickYourStops.view', function () {
                                 )
                             );
 
+                            app.pickYourStops.model.user.addToFavouriteStops(inputList.val());
                             inputList.val('');
                         }
                     }
