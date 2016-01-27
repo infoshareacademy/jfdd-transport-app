@@ -12,22 +12,34 @@ ns('app.lineStats.main', function () {
 
     var calculateDelay = function (lines) {
         var userLines = filterLines(lines);
+        var results = [];
         console.log(userLines);
 
 
         userLines.forEach(function (line) {
-            var now = new Date();
+            var today = new Date();
+            var now = Date.now();
+            var busDeparture;
+            var busReturnToDepot;
             console.log(line);
             console.log(line.id);
 
-            line.departures.forEach(function (departure) {
+            line.departures.forEach(function (departure, index) {
                 console.log(departure);
 
-                var busDeparture = now.setHours(departure.hour, departure.minutes, departure.seconds);
+                busDeparture = today.setHours(departure.hour, departure.minutes, departure.seconds);
                 console.log(busDeparture);
 
-                if(busDeparture < Date.now()) {
+                if (busDeparture > now) {
                     console.log('This bus is now in service');
+                    results.push({lineid: line.id, busDeparture: busDeparture, busDelay: 0});
+                } else {
+                    busReturnToDepot = busDeparture + line.dTimes.reduce(function (a, b) {
+                            return a + b;
+                        }) + line.latencies[index];
+                    if (busReturnToDepot > now) {
+                        results.push({lineid: line.id, busDeparture: busDeparture, busDelay: line.latencies[index]});
+                    }
                 }
             });
 
