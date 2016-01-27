@@ -15,6 +15,7 @@ ns('app.yourStopInfo.filters', function () {
 
     function startFilters() {
 
+//Adds drop-down filter list and filter button:
         function addSelect(filters) {
 
             $('#filtersDiv')
@@ -32,6 +33,7 @@ ns('app.yourStopInfo.filters', function () {
         addSelect();
     }
 
+//Adds clean filter button:
     function clearFilterData() {
         $('#clearMyFilter').on('click', function () {
                 console.log("usuwam");
@@ -41,23 +43,23 @@ ns('app.yourStopInfo.filters', function () {
         )
     }
 
+//Enable appropriate filters on click:
     function filterData() {
         $('#myFilter').on('click', function () {
 
             if ($('#filtersDiv input').val() == filtersArray[1]) {
                 app.yourStopInfo.main.filterOneDiv();
-
             }
 
             else if ($('#filtersDiv input').val() == filtersArray[0]) {
                 app.yourStopInfo.main.filterTwoDiv();
-                console.log('filtr litera')
                 filterTwo();
             }
         });
         //inputList.val('');
     }
 
+//Filter "stop name length":
     function filterOne() {
         var favStops = app.pickYourStops.model.user.favouriteStops();
 
@@ -67,6 +69,8 @@ ns('app.yourStopInfo.filters', function () {
         return filteredOutStops;
     }
 
+
+//Filter "minimum thee lines":
     function filterTwo() {
 
         var favStops = app.pickYourStops.model.user.favouriteStops();
@@ -122,7 +126,6 @@ ns('app.yourStopInfo.filters', function () {
         console.log(accumulatorArray);
 
         var $emptyYourStopDiv = $('#js-yourStopInfo').empty();
-
         if (accumulatorArray.length !== 0) {
             accumulatorArray.forEach(function (stop) {
 
@@ -131,7 +134,7 @@ ns('app.yourStopInfo.filters', function () {
             });
         }
         else {
-            console.log("nie ma takiego przystanku");
+            $emptyYourStopDiv.append('<div class="yourStop"><p>Niestety, żaden z Twoich ulubionych przystanków nie spełnia kryteriów wyszukiwania!</p></div>')
         }
     }
 
@@ -152,8 +155,6 @@ ns('app.yourStopInfo.filters', function () {
             filterData();
             fetchRealData();
             clearFilterData ()
-            //filterOne();
-            //activateFilter()
         },
         filterOne: filterOne,
         startFilters: startFilters,
