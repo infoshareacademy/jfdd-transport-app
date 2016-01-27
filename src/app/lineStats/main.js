@@ -18,6 +18,7 @@ ns('app.lineStats.main', function () {
         userLines.forEach(function (line) {
             var now = new Date();
             console.log(line);
+            console.log(line.id);
 
             line.departures.forEach(function (departure) {
                 console.log(departure);
