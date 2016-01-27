@@ -5,14 +5,17 @@ ns('app.yourStopInfo.main', function () {
 
     function showDiv(favStops) {
         $jsyourStopInfo.empty();
-
-        favStops.forEach(function (stop) {
-            $jsyourStopInfo.append(
-                '<div class="yourStop"><h3>' + stop + '<button type="button" class="removeStopBtn">usuń</button></div>').click(function () {
-                app.pickYourStops.model.user.removeFromFavouriteStops($(this).find('span').text());
-                $(this).remove()}); + '<p class = "fetchingStatus"></p></h3></div>'
-            )
+        favStops.forEach(function (busStop) {
+            var busStopItem = $('<div class="yourStop"><span>' + busStop + '</span></div>');
+            var btn = $('<button type="button" class="removeStopBtn">x</button>');
+            $jsyourStopInfo.append(busStopItem);
+            busStopItem.append(btn);
+            btn.click(function () {
+                app.pickYourStops.model.user.removeFromFavouriteStops(busStopItem.find('span').text());
+                busStopItem.remove()
             });
+            //<span class = "fetchingStatus"></span>
+        });
     }
 
     function filterOneDiv() {
@@ -37,7 +40,7 @@ ns('app.yourStopInfo.main', function () {
             showDiv(favStops);
         },
         filterOneDiv: filterOneDiv,
-        showDiv:showDiv,
+        showDiv: showDiv,
         filterTwoDiv: filterTwoDiv
     }
 
