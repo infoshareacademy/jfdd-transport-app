@@ -18,10 +18,10 @@ ns('app.yourStopInfo.filters', function ()  {
         function addSelect(filters) {
 
             $('#js-yourStopInfo')
-                .prepend($('<button id="myFilter">').text("Filtruj")).append($('<div class="selectedFilter">'))
+                .prepend($('<button id="clearMyFilter">').text("Wyczyść"))//.append($('<div class="selectedFilter">'))
+                .prepend($('<button id="myFilter">').text("Filtruj"))//.append($('<div class="selectedFilter">'))
                 .prepend($('<input list="filters">').append($('<datalist id="filters">')
-                    .prepend(
-                        filtersArray.map(
+                    .append(filtersArray.map(
                             function (filtersArray) {
                                 return $('<option>').attr('value', filtersArray);
                             })
@@ -31,6 +31,16 @@ ns('app.yourStopInfo.filters', function ()  {
 
         addSelect();
     }
+
+    function clearFilterData () {
+        $('#clearMyFilter').on('click', function (){
+            console.log("usuwam");
+                var favStops = app.pickYourStops.model.user.favouriteStops();
+                app.yourStopInfo.main.showDiv(favStops);
+        }
+        )
+    }
+
 
     function filterData() {
         $('#myFilter').on('click', function () {
@@ -96,7 +106,7 @@ ns('app.yourStopInfo.filters', function ()  {
                 elements.forEach(function(details){
                     console.log(details.id)
                 })
-            }else(console.log ("nie ma takiego przystanku"))
+            }else{console.log ("nie ma takiego przystanku");}
         });
 
         //var filteredOutLines =  accumulatorArray.filter(function (stop) {
@@ -122,11 +132,26 @@ ns('app.yourStopInfo.filters', function ()  {
 //
 //        return filteredOutStops;
     }
+
+
+    function clearFilterData () {
+        $('#clearMyFilter').on('click', function (){
+                console.log("usuwam");
+                var favStops = app.pickYourStops.model.user.favouriteStops();
+                app.yourStopInfo.main.showDiv(favStops);
+            }
+
+        )
+    }
+
+
+
     return {
         init: function () {
             startFilters();
             filterData();
             fetchRealData();
+            clearFilterData ()
             //filterOne();
             //activateFilter()
         },
