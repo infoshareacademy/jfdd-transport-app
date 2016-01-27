@@ -27,7 +27,7 @@ ns('app.lineStats.main', function () {
                 console.log(busDeparture);
 
                 if(busDeparture < Date.now()) {
-                    console.log('This bus in now in service');
+                    console.log('This bus is now in service');
                 }
             });
 
