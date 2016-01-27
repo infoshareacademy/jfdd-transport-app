@@ -8,9 +8,11 @@ ns('app.yourStopInfo.main', function () {
 
         favStops.forEach(function (stop) {
             $jsyourStopInfo.append(
-                '<div class="yourStop"><h3>' + stop + '<p class = "fetchingStatus"></p></h3></div>'
+                '<div class="yourStop"><h3>' + stop + '<button type="button" class="removeStopBtn">usuń</button></div>').click(function () {
+                app.pickYourStops.model.user.removeFromFavouriteStops($(this).find('span').text());
+                $(this).remove()}); + '<p class = "fetchingStatus"></p></h3></div>'
             )
-        });
+            });
     }
 
     function filterOneDiv() {
