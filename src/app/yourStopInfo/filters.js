@@ -95,19 +95,36 @@ ns('app.yourStopInfo.filters', function ()  {
         });
         console.log(accumulator);
 
-// parse object to array:
-        var accumulatorArray = $.map(accumulator, function(stop, index) {
-            return [stop];
+// parse object to array and filter it:
+        var accumulatorArray = $.map(accumulator, function(value, key) {
+            return {
+                    stopName: key,
+                    numberOfLines: value.length
+                };
+        }).filter(function (item) {
+          return item.numberOfLines >= 3;
         });
         console.log(accumulatorArray);
 
-        accumulatorArray.forEach(function (elements){
-            if(elements.length>=3){
-                elements.forEach(function(details){
-                    console.log(details.id)
-                })
-            }else{console.log ("nie ma takiego przystanku");}
-        });
+        if(accumulatorArray.length!==0){
+            accumulatorArray.forEach(function(item){
+                console.log(item);
+
+                //$('.yourStop').append("<p>" +item+ "</p>");
+            });
+
+        }else {
+            console.log ("nie ma takiego przystanku");
+        }
+
+
+        //accumulatorArray.forEach(function (elements){
+        //    if(elements.length>=3){
+        //        elements.forEach(function(details){
+        //            console.log(details.id)
+        //        })
+        //    }else{console.log ("nie ma takiego przystanku");}
+        //});
 
         //var filteredOutLines =  accumulatorArray.filter(function (stop) {
         //    return stop.length >= 3;
