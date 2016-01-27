@@ -4,15 +4,15 @@
 ns('app.lineStats.main', function () {
     var currentLines;
 
-    var calculateDelay = function (lines) {
-        console.log('stats fetched');
-
-        var filteredLines = lines.filter(function (line) {
-
+    var filterLines = function (linesToFilter) {
+        return linesToFilter.filter(function (line) {
             return currentLines.indexOf('' + line.id) !== -1;
         });
+    };
 
-        console.log(filteredLines);
+    var calculateDelay = function (lines) {
+        var userLines = filterLines(lines);
+        console.log(userLines);
     };
 
     return {
