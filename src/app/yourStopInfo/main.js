@@ -17,8 +17,8 @@ ns('app.yourStopInfo.main', function () {
 
         var filteredOutStops = app.yourStopInfo.filters.filterOne();
         showDiv(filteredOutStops);
-        app.yourStopInfo.filters.startFilters();
-        app.yourStopInfo.filters.filterData();
+        //app.yourStopInfo.filters.startFilters();
+        //app.yourStopInfo.filters.filterData();
     }
 
     function filterTwoDiv() {

@@ -1,4 +1,4 @@
-ns('app.yourStopInfo.filters', function ()  {
+ns('app.yourStopInfo.filters', function () {
 
     var linesArray;
     var filtersArray = ["Przystanki, na których jeździ więcej niż 3 linie", "Przystanki, których nazwa jest dłuższa niż 9 znaków"];
@@ -17,14 +17,14 @@ ns('app.yourStopInfo.filters', function ()  {
 
         function addSelect(filters) {
 
-            $('#js-yourStopInfo')
+            $('#filtersDiv')
                 .prepend($('<button id="clearMyFilter">').text("Wyczyść"))//.append($('<div class="selectedFilter">'))
                 .prepend($('<button id="myFilter">').text("Filtruj"))//.append($('<div class="selectedFilter">'))
                 .prepend($('<input list="filters">').append($('<datalist id="filters">')
                     .append(filtersArray.map(
-                            function (filtersArray) {
-                                return $('<option>').attr('value', filtersArray);
-                            })
+                        function (filtersArray) {
+                            return $('<option>').attr('value', filtersArray);
+                        })
                     ))
                 )
         }
@@ -32,25 +32,24 @@ ns('app.yourStopInfo.filters', function ()  {
         addSelect();
     }
 
-    function clearFilterData () {
-        $('#clearMyFilter').on('click', function (){
-            console.log("usuwam");
+    function clearFilterData() {
+        $('#clearMyFilter').on('click', function () {
+                console.log("usuwam");
                 var favStops = app.pickYourStops.model.user.favouriteStops();
                 app.yourStopInfo.main.showDiv(favStops);
-        }
+            }
         )
     }
-
 
     function filterData() {
         $('#myFilter').on('click', function () {
 
-            if ($('#js-yourStopInfo input').val() == filtersArray[1]) {
+            if ($('#filtersDiv input').val() == filtersArray[1]) {
                 app.yourStopInfo.main.filterOneDiv();
 
             }
 
-            else if ($('#js-yourStopInfo input').val() == filtersArray[0]){
+            else if ($('#filtersDiv input').val() == filtersArray[0]) {
                 app.yourStopInfo.main.filterTwoDiv();
                 console.log('filtr litera')
                 filterTwo();
@@ -94,73 +93,57 @@ ns('app.yourStopInfo.filters', function ()  {
             });
         });
         console.log(accumulator);
+//TO DO - get numbers of filtered out lines
+//        var accumulatorArrayTwo = $.map(accumulator, function (value) {
+//return {lines: value}
+//        }).filter(function (item) {
+//            return item.lines.length >= 3;
+//        });
+//        console.log(accumulatorArrayTwo);
+//
+//        accumulatorArrayTwo.forEach(function (lines){
+//            return lines.map(function(value, key){
+//                return {
+//                    stopName: key,
+//                    numberOfLines: value.length
+//                };
+//            })
+//        })
 
 // parse object to array and filter it:
-        var accumulatorArray = $.map(accumulator, function(value, key) {
+        var accumulatorArray = $.map(accumulator, function (value, key) {
             return {
-                    stopName: key,
-                    numberOfLines: value.length
-                };
+                stopName: key,
+                numberOfLines: value.length
+            };
         }).filter(function (item) {
-          return item.numberOfLines >= 3;
+            return item.numberOfLines >= 3;
         });
         console.log(accumulatorArray);
 
-        if(accumulatorArray.length!==0){
-            accumulatorArray.forEach(function(item){
-                console.log(item);
+        var $emptyYourStopDiv = $('#js-yourStopInfo').empty();
 
-                //$('.yourStop').append("<p>" +item+ "</p>");
+        if (accumulatorArray.length !== 0) {
+            accumulatorArray.forEach(function (stop) {
+
+                $emptyYourStopDiv.append('<div class="yourStop"><h3>' + stop.stopName + '</h3></div>')
+                    .append('<div class="yourStop"><p>' + 'Liczba dostępnych linii: ' + stop.numberOfLines + '</p></div>')
             });
-
-        }else {
-            console.log ("nie ma takiego przystanku");
         }
-
-
-        //accumulatorArray.forEach(function (elements){
-        //    if(elements.length>=3){
-        //        elements.forEach(function(details){
-        //            console.log(details.id)
-        //        })
-        //    }else{console.log ("nie ma takiego przystanku");}
-        //});
-
-        //var filteredOutLines =  accumulatorArray.filter(function (stop) {
-        //    return stop.length >= 3;
-        //});
-        //return filteredOutLines;
-
-
-        //console.log(filteredOutLines);
-       //for(var value in accumulator){
-       //     console.log(value);
-       // }
-        //return filteredOutLines;
-
-        //console.log(filteredOutLines);
-
-
-
-        //var filteredOutStops = stopsArray.filter(function (stop) {
-        //    return stop.name.length >= 9;
-        //});
-//}
-//
-//        return filteredOutStops;
+        else {
+            console.log("nie ma takiego przystanku");
+        }
     }
 
 
-    function clearFilterData () {
-        $('#clearMyFilter').on('click', function (){
+    function clearFilterData() {
+        $('#clearMyFilter').on('click', function () {
                 console.log("usuwam");
                 var favStops = app.pickYourStops.model.user.favouriteStops();
                 app.yourStopInfo.main.showDiv(favStops);
             }
-
         )
     }
-
 
 
     return {
