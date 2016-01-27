@@ -4,14 +4,14 @@
 ns('app.lineStats.main', function () {
     var currentLines;
 
-    var filterLines = function (linesToFilter) {
-        return linesToFilter.filter(function (line) {
-            return currentLines.indexOf('' + line.id) !== -1;
+    var filterByLineId = function (arrayToFilter, arrayToFilterAgainst) {
+        return arrayToFilter.filter(function (line) {
+            return arrayToFilterAgainst.indexOf('' + line.id) !== -1;
         });
     };
 
     var calculateDelay = function (lines) {
-        var userLines = filterLines(lines);
+        var userLines = filterByLineId(lines, currentLines);
         var results = [];
         console.log(userLines);
 
@@ -24,25 +24,40 @@ ns('app.lineStats.main', function () {
             console.log(line);
             console.log(line.id);
 
+            var lineData = {
+                lineId: line.id,
+                lineName: line.name,
+                isInService: false,
+                delay: 0
+            };
+
+            console.log(lineData);
+
             line.departures.forEach(function (departure, index) {
                 console.log(departure);
 
                 busDeparture = today.setHours(departure.hour, departure.minutes, departure.seconds);
                 console.log(busDeparture);
 
-                if (busDeparture > now) {
-                    console.log('This bus is now in service');
-                    results.push({lineid: line.id, busDeparture: busDeparture, busDelay: 0});
-                } else {
-                    busReturnToDepot = busDeparture + line.dTimes.reduce(function (a, b) {
+                if (busDeparture < now) {
+                    busReturnToDepot = busDeparture + (line.dTimes.reduce(function (a, b) {
                             return a + b;
-                        }) + line.latencies[index];
+                        }) * 1000 * 2) + Math.floor(line.latencies[index] * 1000);
                     if (busReturnToDepot > now) {
-                        results.push({lineid: line.id, busDeparture: busDeparture, busDelay: line.latencies[index]});
+                        lineData.isInService = true;
+                        lineData.delay = Math.max(lineData.delay, Math.floor(line.latencies[index]));
                     }
                 }
+
             });
 
+            if (!lineData.isInService) {
+                lineData.delay = -1;
+            }
+
+            results.push(lineData);
+            console.log(results);
+            return results;
         });
     };
 
