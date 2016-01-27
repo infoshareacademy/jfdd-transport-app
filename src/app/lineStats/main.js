@@ -13,6 +13,25 @@ ns('app.lineStats.main', function () {
     var calculateDelay = function (lines) {
         var userLines = filterLines(lines);
         console.log(userLines);
+
+
+        userLines.forEach(function (line) {
+            var now = new Date();
+            console.log(line);
+            console.log(typeof line.departures);
+
+            line.departures.forEach(function (departure) {
+                console.log(departure);
+
+                var busDeparture = now.setHours(departure.hour, departure.minutes, departure.seconds);
+                console.log(busDeparture);
+
+                if(busDeparture < Date.now()) {
+                    console.log('This bus in now in service');
+                }
+            });
+
+        });
     };
 
     return {
