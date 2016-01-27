@@ -1,7 +1,7 @@
 ns('app.yourStopInfo.filters', function ()  {
 
     var linesArray;
-    var filtersArray = ["Przystanki, na których jeździ więcej niż 1 linia", "Przystanki, których nazwa jest dłuższa niż 9 znaków"];
+    var filtersArray = ["Przystanki, na których jeździ więcej niż 3 linie", "Przystanki, których nazwa jest dłuższa niż 9 znaków"];
     //var inputList = $('#js-yourStopInfo input[list=filters]');
 
 
@@ -84,11 +84,20 @@ ns('app.yourStopInfo.filters', function ()  {
             });
         });
         console.log(accumulator);
+
 // parse object to array:
-//        var accumulatorArray = $.map(accumulator, function(stop, index) {
-//            return [stop];
-//        });
-        //console.log(accumulatorArray);
+        var accumulatorArray = $.map(accumulator, function(stop, index) {
+            return [stop];
+        });
+        console.log(accumulatorArray);
+
+        accumulatorArray.forEach(function (elements){
+            if(elements.length>=3){
+                elements.forEach(function(details){
+                    console.log(details.id)
+                })
+            }else(console.log ("nie ma takiego przystanku"))
+        });
 
         //var filteredOutLines =  accumulatorArray.filter(function (stop) {
         //    return stop.length >= 3;
@@ -97,11 +106,11 @@ ns('app.yourStopInfo.filters', function ()  {
 
 
         //console.log(filteredOutLines);
-        for (var id in accumulator){
-            console.log(id + ': ' + accumulator[id]);
-        }
-
+       //for(var value in accumulator){
+       //     console.log(value);
+       // }
         //return filteredOutLines;
+
         //console.log(filteredOutLines);
 
 
