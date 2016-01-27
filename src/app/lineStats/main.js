@@ -4,7 +4,7 @@
 ns('app.lineStats.main', function () {
     var currentLines;
 
-    var displayStats = function (lines) {
+    var calculateDelay = function (lines) {
         console.log('stats fetched');
 
         var filteredLines = lines.filter(function (line) {
@@ -36,7 +36,7 @@ ns('app.lineStats.main', function () {
             });
 
             $('#js-lineStats').on('click', '#showStats', function () {
-                app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [displayStats]);
+                app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [calculateDelay]);
             });
         }
     };
