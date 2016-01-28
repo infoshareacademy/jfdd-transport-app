@@ -7,7 +7,7 @@ ns('app.lineStats.view', function () {
         var $datalistEl = $('#lines');
 
         $datalistEl.append(lines.map(function(line) {
-            return $('<option>').attr('value', line.id);
+            return $('<option>').attr('value', line.name);
         }));
 
     };

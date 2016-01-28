@@ -6,7 +6,7 @@ ns('app.lineStats.main', function () {
 
     var filterByLineId = function (arrayToFilter, arrayToFilterAgainst) {
         return arrayToFilter.filter(function (line) {
-            return arrayToFilterAgainst.indexOf('' + line.id) !== -1;
+            return arrayToFilterAgainst.indexOf('' + line.name) !== -1;
         });
     };
 
