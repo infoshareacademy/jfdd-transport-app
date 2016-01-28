@@ -22,10 +22,6 @@ ns('app.yourStopInfo.main', function () {
     }
 
     function filterTwoDiv() {
-        //var filteredOutLines = app.yourStopInfo.filters.filterTwo();
-        //showDiv(filteredOutLines);
-        //app.yourStopInfo.filters.startFilters();
-        //app.yourStopInfo.filters.filterData();
     }
 
 

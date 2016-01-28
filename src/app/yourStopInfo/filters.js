@@ -47,16 +47,20 @@ ns('app.yourStopInfo.filters', function () {
     function filterData() {
         $('#myFilter').on('click', function () {
 
+            var inputList = $('#filtersDiv input[list="filters"]');
+
             if ($('#filtersDiv input').val() == filtersArray[1]) {
                 app.yourStopInfo.main.filterOneDiv();
+                inputList.val('');
             }
 
             else if ($('#filtersDiv input').val() == filtersArray[0]) {
                 app.yourStopInfo.main.filterTwoDiv();
                 filterTwo();
+                inputList.val('');
             }
         });
-        //inputList.val('');
+
     }
 
 //Filter "stop name length":
@@ -97,22 +101,6 @@ ns('app.yourStopInfo.filters', function () {
             });
         });
         console.log(accumulator);
-//TO DO - get numbers of filtered out lines
-//        var accumulatorArrayTwo = $.map(accumulator, function (value) {
-//return {lines: value}
-//        }).filter(function (item) {
-//            return item.lines.length >= 3;
-//        });
-//        console.log(accumulatorArrayTwo);
-//
-//        accumulatorArrayTwo.forEach(function (lines){
-//            return lines.map(function(value, key){
-//                return {
-//                    stopName: key,
-//                    numberOfLines: value.length
-//                };
-//            })
-//        })
 
 // parse object to array and filter it:
         var accumulatorArray = $.map(accumulator, function (value, key) {
@@ -125,6 +113,7 @@ ns('app.yourStopInfo.filters', function () {
         });
         console.log(accumulatorArray);
 
+//Adds filtering result to yourStopInfo div (first it cleares it)
         var $emptyYourStopDiv = $('#js-yourStopInfo').empty();
         if (accumulatorArray.length !== 0) {
             accumulatorArray.forEach(function (stop) {
@@ -158,7 +147,8 @@ ns('app.yourStopInfo.filters', function () {
         },
         filterOne: filterOne,
         startFilters: startFilters,
-        filterData: filterData
+        filterData: filterData,
+        filterTwo: filterTwo
     }
 
 });
