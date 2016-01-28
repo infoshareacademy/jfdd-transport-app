@@ -60,14 +60,44 @@ ns('app.lineStats.main', function () {
         });
         var sortedDelayedLines = sortLineDelays(results);
         console.log(sortedDelayedLines);
+        var linesToDisplay = getHhMmSs(sortedDelayedLines);
 
-        app.lineStats.view.displaySortedBuses(sortedDelayedLines);
+        app.lineStats.view.displaySortedBuses(linesToDisplay);
     };
 
     var sortLineDelays = function (data) {
         return data.sort(function (a, b) {
             return b.delay - a.delay;
         });
+    };
+
+    var getHhMmSs = function (lineArray) {
+        var temp= lineArray.map(function (line) {
+            console.log(line);
+            if (line.delay === -1) {
+                line.delayToDisplay = ' w tej chwili nie kursuje';
+            } else if (line.delay === 0) {
+                line.delayToDisplay = ' odjeżdża o czasie';
+            } else {
+                var totalSeconds = line.delay;
+                var hours = Math.floor(totalSeconds / 3600);
+                totalSeconds %= 3600;
+                var minutes = Math.floor(totalSeconds / 60);
+                var seconds = totalSeconds % 60;
+
+                if (hours === 0 && minutes === 0) {
+                    line.delayToDisplay = ' ma opóźnienie ' + seconds + ' sek.';
+                } else if (hours === 0 && minutes !== 0 && seconds !== 0) {
+                    line.delayToDisplay = ' ma opóźnienie ' + minutes + ' min, ' + seconds + ' sek.';
+                } else if (hours !== 0 && minutes !== 0 && seconds === 0) {
+                    line.delayToDisplay = ' ma opóźnienie ' + minutes + ' min';
+                } else if (hours !== 0 && minutes !== 0 && seconds !== 0) {
+                    line.delayToDisplay = ' ma opóźnienie ' + hours + ' godz., ' + minutes + ' min, ' + seconds + ' sek.';
+                }
+            }
+        });
+        console.log(lineArray);
+        return lineArray;
     };
 
     return {
@@ -84,7 +114,13 @@ ns('app.lineStats.main', function () {
                     currentLines.push(lineList.val());
 
                     if ($('#showStats').length < 1) {
-                        $('#js-lineStats').append($('<button id="showStats" type="button">' + 'Pokaż opóźnienia' + '</button>'));
+                        $('#js-lineStats')
+                            .append($('<button id="showStats" type="button">' + 'Pokaż opóźnienia' + '</button>'));
+                    }
+
+                    if ($('#resetStats').length < 1) {
+                        $('#js-lineStats')
+                            .append($('<button id="resetStats" type="button">' + 'Wyczyść' + '</button>'));
                     }
                 }
                 lineList.val('');
@@ -93,6 +129,18 @@ ns('app.lineStats.main', function () {
             $('#js-lineStats').on('click', '#showStats', function () {
                 app.dataManager
                     .fetch('https://isa-api.herokuapp.com/transport/lines.json', [getLineDelays]);
+
+                $('#showStats').addClass('btn-disabled').prop('disabled', true);
+                $('#chooseLines').addClass('btn-disabled').prop('disabled', true);
+            });
+
+            $('#js-lineStats').on('click', '#resetStats', function () {
+                $('#showStats').remove();
+                $('#chooseLines').removeClass('btn-disabled').prop('disabled', false);
+                $('#selectedLines').empty();
+                $('.sortedLines').remove();
+                $('#resetStats').remove();
+                currentLines = [];
             });
         }
     };

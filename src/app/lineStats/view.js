@@ -21,9 +21,10 @@ ns('app.lineStats.view', function () {
 
         lines.forEach(function (item) {
             var li = $('<li>');
-            li.text(item.lineName);
+            li.text(
+                'Linia ' + item.lineName + item.delayToDisplay
+            );
             ul.append(li);
-        console.log(item.lineName);
         });
         $('#js-lineStats').append(div);
     };
