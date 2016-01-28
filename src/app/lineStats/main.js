@@ -13,16 +13,12 @@ ns('app.lineStats.main', function () {
     var getLineDelays = function (lines) {
         var userLines = filterByLineId(lines, currentLines);
         var results = [];
-        console.log(userLines);
 
         userLines.forEach(function (line) {
             var today = new Date();
             var now = Date.now();
             var busDeparture;
             var busReturnToDepot;
-            console.log(line);
-            console.log(line.id);
-
             var lineData = {
                 lineId: line.id,
                 lineName: line.name,
@@ -30,13 +26,8 @@ ns('app.lineStats.main', function () {
                 delay: 0
             };
 
-            console.log(lineData);
-
             line.departures.forEach(function (departure, index) {
-                console.log(departure);
-
                 busDeparture = today.setHours(departure.hour, departure.minutes, departure.seconds);
-                console.log(busDeparture);
 
                 if (busDeparture < now) {
                     busReturnToDepot = busDeparture + (line.dTimes.reduce(function (a, b) {
@@ -55,11 +46,9 @@ ns('app.lineStats.main', function () {
             }
 
             results.push(lineData);
-            console.log(results);
-            //return results;
         });
+
         var sortedDelayedLines = sortLineDelays(results);
-        console.log(sortedDelayedLines);
         var linesToDisplay = getHhMmSs(sortedDelayedLines);
 
         app.lineStats.view.displaySortedBuses(linesToDisplay);
@@ -72,8 +61,7 @@ ns('app.lineStats.main', function () {
     };
 
     var getHhMmSs = function (lineArray) {
-        var temp= lineArray.map(function (line) {
-            console.log(line);
+        lineArray.map(function (line) {
             if (line.delay === -1) {
                 line.delayToDisplay = ' w tej chwili nie kursuje';
             } else if (line.delay === 0) {
@@ -100,7 +88,7 @@ ns('app.lineStats.main', function () {
                 }
             }
         });
-        console.log(lineArray);
+
         return lineArray;
     };
 
@@ -118,12 +106,13 @@ ns('app.lineStats.main', function () {
                     currentLines.push(lineList.val());
 
                     if ($('#showStats').length < 1) {
-                        $('#js-lineStats')
+                        $('#js-lineStats > div')
                             .append($('<button id="showStats" type="button" class="btn">' + 'Pokaż opóźnienia' + '</button>'));
                     }
 
                     if ($('#resetStats').length < 1) {
-                        $('#js-lineStats')
+                        $('#js-lineStats > div')
+                            .append(' ')
                             .append($('<button id="resetStats" type="button" class="btn">' + 'Wyczyść' + '</button>'));
                     }
                 }

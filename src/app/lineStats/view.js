@@ -14,7 +14,7 @@ ns('app.lineStats.view', function () {
 
     var displaySortedBuses = function (lines) {
         var div = $('<div>');
-        div.addClass('sortedLines');
+        div.addClass('sortedLines voffset');
 
         var ul = $('<ul>');
         div.append(ul);
@@ -26,7 +26,7 @@ ns('app.lineStats.view', function () {
             );
             ul.append(li);
         });
-        $('#js-lineStats').append(div);
+        $('#js-lineStats > div').append(div);
     };
 
     return {
