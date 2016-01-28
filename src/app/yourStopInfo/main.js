@@ -26,7 +26,7 @@ ns('app.yourStopInfo.main', function () {
         app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [
             function (jsonWithPublicTransportLines) {
                 stopsFromLocalStorageArray.forEach(function (singleStopNameFromLocalStorageArray) {
-                    var $singleStopTable = $('<table class="yourStop table">');
+                    var $singleStopTable = $('<table class="table">');
                     var tr = $('<tr>');
                     var $tableHeading = $('<th>').append(singleStopNameFromLocalStorageArray);
                     $singleStopTable.append(tr.append($tableHeading));
@@ -49,7 +49,7 @@ ns('app.yourStopInfo.main', function () {
                         });
                         var matchingStopArrayIndex = singleLine.stops.indexOf(matchingStopFromJsonAgainstLocalstorage);
                         console.log(matchingStopArrayIndex);
-                        var time = singleLine.dTimes.slice(0, matchingStopArrayIndex).reduce(function (a, b) {
+                        var time = singleLine.dTimes.slice(0, matchingStopArrayIndex + 1).reduce(function (a, b) {
                             return a + b;
                         }, 0);
                         console.log(time);
@@ -59,13 +59,12 @@ ns('app.yourStopInfo.main', function () {
                             var depTimesInSeconds = sigleDepartureTime.hour * 3600 + sigleDepartureTime.minutes * 60 + sigleDepartureTime.seconds;
                             var depTimeOnCurrentStop = (depTimesInSeconds + time) % 86400; //?
                             var depTimeOnCurrentStopHHMMSS = toHHMMSS(depTimeOnCurrentStop);
-
-                            var $departuresCell = $('<td>');
                             $departuresCell.append("| " + depTimeOnCurrentStopHHMMSS + " |");
                         });
 
+                        $lineNumberRow.append($departuresCell);
 
-                        $singleStopTable.append($lineNumberRow).append($departuresCell);
+                        $singleStopTable.append($lineNumberRow);
                     });
                     $jsyourStopInfo.append($singleStopTable);
                 });
