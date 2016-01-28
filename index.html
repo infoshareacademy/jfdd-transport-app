@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="src/app/yourStopInfo/yourStop.css">
     <link rel="stylesheet" href="styles/reset-css.css">
     <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -44,7 +46,34 @@
                 </div>
             </div>
         </div>
-</main>
+
+        <div id="js-lineStats" class="col-sm-12">
+            <div class="row">
+                <h2>Aktualne opóźnienia na liniach</h2>
+            </div>
+            <div class="row">
+                <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
+            </div>
+            <div class="row">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" list="lines">
+                            <datalist id="lines">
+                            </datalist>
+                        </div>
+                    </div>
+                    <button id="chooseLines" type="button" class="btn icon-btn btn-success btn-sm">
+                        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="list-inline" id="selectedLines"></ul>
+            </div>
+        </div>
+
+    </main>
 
 
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
@@ -59,6 +88,9 @@
 <script src="src/app/dataManager.js"></script>
 <script src="src/app/yourStopInfo/filters.js"></script>
 <script src="src/app/login/main.js"></script>
+<script src="src/app/lineStats/main.js"></script>
+<script src="src/app/lineStats/view.js"></script>
+
 <script src="src/main.js"></script>
 <!--Bootstrap JS-->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
