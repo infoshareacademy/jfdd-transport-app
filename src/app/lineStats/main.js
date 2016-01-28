@@ -10,11 +10,10 @@ ns('app.lineStats.main', function () {
         });
     };
 
-    var calculateDelay = function (lines) {
+    var getLineDelays = function (lines) {
         var userLines = filterByLineId(lines, currentLines);
         var results = [];
         console.log(userLines);
-
 
         userLines.forEach(function (line) {
             var today = new Date();
@@ -57,8 +56,18 @@ ns('app.lineStats.main', function () {
 
             results.push(lineData);
             console.log(results);
-            return results;
+            //return results;
         });
+        var sortedDelayedLines = sortLineDelays(results);
+        console.log('sortedDelayedLines' + sortedDelayedLines);
+    };
+
+    var sortLineDelays = function (data) {
+        var sortedData = data.sort(function (a, b) {
+            return b.delay - a.delay;
+        });
+
+        return sortedData;
     };
 
     return {
@@ -82,7 +91,8 @@ ns('app.lineStats.main', function () {
             });
 
             $('#js-lineStats').on('click', '#showStats', function () {
-                app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [calculateDelay]);
+                app.dataManager
+                    .fetch('https://isa-api.herokuapp.com/transport/lines.json', [getLineDelays]);
             });
         }
     };
