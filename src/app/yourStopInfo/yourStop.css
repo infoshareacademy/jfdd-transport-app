@@ -34,3 +34,7 @@
 .hide {
     display:none;
 }
+
+.removeStopBtn {
+    margin-left: 1em
+}
