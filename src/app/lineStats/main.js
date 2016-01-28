@@ -115,12 +115,12 @@ ns('app.lineStats.main', function () {
 
                     if ($('#showStats').length < 1) {
                         $('#js-lineStats')
-                            .append($('<button id="showStats" type="button">' + 'Pokaż opóźnienia' + '</button>'));
+                            .append($('<button id="showStats" type="button" class="btn">' + 'Pokaż opóźnienia' + '</button>'));
                     }
 
                     if ($('#resetStats').length < 1) {
                         $('#js-lineStats')
-                            .append($('<button id="resetStats" type="button">' + 'Wyczyść' + '</button>'));
+                            .append($('<button id="resetStats" type="button" class="btn">' + 'Wyczyść' + '</button>'));
                     }
                 }
                 lineList.val('');
