@@ -51,7 +51,7 @@ ns('app.lineStats.main', function () {
             });
 
             if (!lineData.isInService) {
-                lineData.delay = -1;
+                lineData.delay = -1; //For easier sorting. Lines that aren't in service need to be last in sorted results.
             }
 
             results.push(lineData);
@@ -59,15 +59,13 @@ ns('app.lineStats.main', function () {
             //return results;
         });
         var sortedDelayedLines = sortLineDelays(results);
-        console.log('sortedDelayedLines' + sortedDelayedLines);
+        console.log(sortedDelayedLines);
     };
 
     var sortLineDelays = function (data) {
-        var sortedData = data.sort(function (a, b) {
+        return data.sort(function (a, b) {
             return b.delay - a.delay;
         });
-
-        return sortedData;
     };
 
     return {
@@ -84,7 +82,7 @@ ns('app.lineStats.main', function () {
                     currentLines.push(lineList.val());
 
                     if ($('#showStats').length < 1) {
-                        $('#js-lineStats').append($('<button id="showStats" type="button">' + 'Wyświetl statystyki' + '</button>'));
+                        $('#js-lineStats').append($('<button id="showStats" type="button">' + 'Pokaż opóźnienia' + '</button>'));
                     }
                 }
                 lineList.val('');
