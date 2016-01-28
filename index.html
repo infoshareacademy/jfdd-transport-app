@@ -27,17 +27,29 @@
         </div>
 
         <div id="js-lineStats" class="col-sm-12">
-            <h2>Aktualne opóźnienia</h2>
-            <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
-            <div>
-                <input list="lines">
-                <datalist id="lines">
-                </datalist>
-                <button id="chooseLines" type="button" class="btn icon-btn btn-success">
-                    <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
-                </button>
+            <div class="row">
+                <h2>Aktualne opóźnienia na liniach</h2>
             </div>
-            <div id="selectedLines"></div>
+            <div class="row">
+                <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
+            </div>
+            <div class="row">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" list="lines">
+                            <datalist id="lines">
+                            </datalist>
+                        </div>
+                    </div>
+                    <button id="chooseLines" type="button" class="btn icon-btn btn-success btn-sm">
+                        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="list-inline" id="selectedLines"></ul>
+            </div>
         </div>
 
     </main>

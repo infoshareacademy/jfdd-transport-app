@@ -113,7 +113,7 @@ ns('app.lineStats.main', function () {
             $('#chooseLines').on('click', function () {
                 var lineList = $('input[list="lines"]');
                 if (lineList.val()) {
-                    $('#selectedLines').append('<div>' + lineList.val() + '</div>');
+                    $('#selectedLines').append('<li>' + lineList.val() + '</li>');
 
                     currentLines.push(lineList.val());
 
