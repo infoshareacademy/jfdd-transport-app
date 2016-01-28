@@ -60,6 +60,8 @@ ns('app.lineStats.main', function () {
         });
         var sortedDelayedLines = sortLineDelays(results);
         console.log(sortedDelayedLines);
+
+        app.lineStats.view.displaySortedBuses(sortedDelayedLines);
     };
 
     var sortLineDelays = function (data) {
