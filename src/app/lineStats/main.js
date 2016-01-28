@@ -85,14 +85,18 @@ ns('app.lineStats.main', function () {
                 var minutes = Math.floor(totalSeconds / 60);
                 var seconds = totalSeconds % 60;
 
-                if (hours === 0 && minutes === 0) {
-                    line.delayToDisplay = ' ma opóźnienie ' + seconds + ' sek.';
-                } else if (hours === 0 && minutes !== 0 && seconds !== 0) {
-                    line.delayToDisplay = ' ma opóźnienie ' + minutes + ' min, ' + seconds + ' sek.';
-                } else if (hours !== 0 && minutes !== 0 && seconds === 0) {
-                    line.delayToDisplay = ' ma opóźnienie ' + minutes + ' min';
-                } else if (hours !== 0 && minutes !== 0 && seconds !== 0) {
-                    line.delayToDisplay = ' ma opóźnienie ' + hours + ' godz., ' + minutes + ' min, ' + seconds + ' sek.';
+                line.delayToDisplay = ' ma opóźnienie ';
+
+                if (hours !== 0) {
+                    line.delayToDisplay += hours + ' godz. ';
+                }
+
+                if (minutes !== 0) {
+                    line.delayToDisplay += minutes + ' min ';
+                }
+
+                if (seconds !== 0) {
+                    line.delayToDisplay += seconds + ' sek. ';
                 }
             }
         });
