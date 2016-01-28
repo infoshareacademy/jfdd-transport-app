@@ -39,7 +39,7 @@ ns('app.yourStopInfo.main', function () {
                     console.log(linesContainingStopFromLocalStorageArray.length);
 
                     linesContainingStopFromLocalStorageArray.forEach(function (singleLine) {
-                        var lineNumber = "[" + singleLine.id + "]";
+                        var lineNumber =singleLine.id;
                         var $lineNumberRow = $('<tr>');
                         var $lineNumberCell = $('<td>').append(lineNumber);
                         $lineNumberRow.append($lineNumberCell);
@@ -59,7 +59,7 @@ ns('app.yourStopInfo.main', function () {
                             var depTimesInSeconds = sigleDepartureTime.hour * 3600 + sigleDepartureTime.minutes * 60 + sigleDepartureTime.seconds;
                             var depTimeOnCurrentStop = (depTimesInSeconds + time) % 86400; //?
                             var depTimeOnCurrentStopHHMMSS = toHHMMSS(depTimeOnCurrentStop);
-                            $departuresCell.append("| " + depTimeOnCurrentStopHHMMSS + " |");
+                            $departuresCell.append(" " + depTimeOnCurrentStopHHMMSS + " ");
                         });
 
                         $lineNumberRow.append($departuresCell);
