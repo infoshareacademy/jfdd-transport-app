@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Statystyki transportu miejskiego</title>
-    <meta name="google-signin-client_id" content="709967216215-6kqu1k6sna5snk1nb5b6l889r1lpdsed.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+          content="709967216215-6kqu1k6sna5snk1nb5b6l889r1lpdsed.apps.googleusercontent.com">
     <link rel="stylesheet" href="src/app/login/login-css.css">
     <link rel="stylesheet" href="src/app/yourStopInfo/yourStop.css">
     <link rel="stylesheet" href="styles/reset-css.css">
@@ -12,19 +13,39 @@
 <body>
 
 <main class="hide">
-
-<div id="my-signin2"></div>
-    <!--<div id="filters"></div>-->
-
-<div id="js-pickYourStops"></div>
-
-<div id="js-yourStopInfo">
-    <h1>Twoje przystanki:</h1>
-</div>
-
-<div id ="js-lineStats"></div>
-
+    <div id="signin" class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div id="my-signin2"></div>
+                <!--<div id="filters"></div>-->
+            </div>
+        </div>
+    </div>
+    <div id="pickYourStops" class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div id="js-pickYourStops"></div>
+            </div>
+        </div>
+    </div>
+    <div id="yourStopInfo" class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div id="js-yourStopInfo">
+                    <h1>Twoje przystanki:</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div id="lineStats" class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div id="js-lineStats"></div>
+                </div>
+            </div>
+        </div>
 </main>
+
 
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="lib/jquery-2.2.0.min.js"><\/script>')</script>
@@ -39,5 +60,7 @@
 <script src="src/app/yourStopInfo/filters.js"></script>
 <script src="src/app/login/main.js"></script>
 <script src="src/main.js"></script>
+<!--Bootstrap JS-->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
