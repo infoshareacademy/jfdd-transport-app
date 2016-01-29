@@ -12,6 +12,7 @@ ns('app.yourStopInfo.main', function () {
             var $stopContainer = $('<div class="yourStop">');
             var $stopNameContainer = $('<h3>').append(stopName);
             var $stopTimetableContainer = $('<div class="stopTimetable">');
+            //var $stopTimetableContainer = $('<div class="stopTimetable">');
 
             $favStopsContainer.append(
                 $stopContainer
@@ -24,14 +25,56 @@ ns('app.yourStopInfo.main', function () {
 
                 var currentStopLines = timetables[stopName];
 
+
+            var $tableTimeTables = $('<table class="table">');
+            var $tHeadCell = $('<th>').text("Linia");
+            var $tHeadCell2 = $('<th>').text("Rozkład jazdy");
+            var $tHeadRow = $('<tr>');
+
+            var $thead = $('<thead>').append($tHeadRow.append($tHeadCell).append($tHeadCell2));
+            var $tbody = $('<tbody>');
             if (currentStopLines !== undefined) {
                 currentStopLines.forEach(function (line) {
-                    var $lineContainer = $('<div>').append(line.lineNumber);
-                    $stopTimetableContainer.append($lineContainer);
 
+
+
+
+
+
+
+                    //var $lineContainer = $('<div>').append(line.lineNumber);
+                    //$stopTimetableContainer.append($lineContainer);
+                    //
+                    //line.departures.forEach(function (departure) {
+                    //    $lineContainer.append($('<span>').append(departure));
+                    //})
+
+                    var $lineCell = $('<td>');
+                    var $lineButton = $('<button class="btn btn-success">');
+                    $lineButton.text(line.lineNumber);
+                    $lineCell.append($lineButton);
+                    //$lineButton.append($lineCell);
+
+
+
+                    var $departureCell = $('<td>');
                     line.departures.forEach(function (departure) {
-                        $lineContainer.append($('<span>').append(departure));
-                    })
+                        var $button = $('<button class="btn btn-primary">').text(departure);
+                        $departureCell.append($button);
+                    });
+
+                    var $linesRow = $('<tr>');
+
+                    $linesRow.append($lineCell).append($departureCell);
+                    $tbody.append($linesRow);
+
+
+
+                    $tableTimeTables.append($thead);
+                    $tableTimeTables.append($tbody);
+
+                    $stopTimetableContainer.append($tableTimeTables);
+
                 });
             }
         });
