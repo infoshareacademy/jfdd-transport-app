@@ -7,7 +7,7 @@ ns('app.yourStopInfo.main', function () {
         $jsyourStopInfo.empty();
         favStops.forEach(function (busStop) {
             var busStopItem = $('<div class="yourStop"><span>' + busStop + '</span></div>');
-            var btn = $('<button type="button" class="removeStopBtn">x</button>');
+            var btn = $('<button type="button" class="btn btn-xs btn-circle btn-danger removeStopBtn">x</button>');
             $jsyourStopInfo.append(busStopItem);
             busStopItem.append(btn);
             btn.click(function () {

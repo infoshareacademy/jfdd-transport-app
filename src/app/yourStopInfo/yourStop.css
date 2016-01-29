@@ -40,3 +40,10 @@
 #pickStop {
     margin-left: 2px;
 }
+.removeStopBtn {
+    border-radius: 50%;
+    padding: 0.1em;
+    width: 1.8em;
+    float: right;
+    font-weight: bold;
+}
