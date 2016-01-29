@@ -19,9 +19,20 @@ ns('app.yourStopInfo.main', function () {
                     .append($stopTimetableContainer)
             );
 
-            if (timetables) {
+
                 console.log(timetables);
-                $stopTimetableContainer.append(timetables[stopName])
+
+                var currentStopLines = timetables[stopName];
+
+            if (currentStopLines !== undefined) {
+                currentStopLines.forEach(function (line) {
+                    var $lineContainer = $('<div>').append(line.lineNumber);
+                    $stopTimetableContainer.append($lineContainer);
+
+                    line.departures.forEach(function (departure) {
+                        $lineContainer.append($('<span>').append(departure));
+                    })
+                });
             }
         });
 
