@@ -8,7 +8,7 @@ ns('app.yourStopInfo.filters', function () {
     function fetchRealData() {
 
         app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [function (lines) {
-            console.log(lines);
+            //console.log(lines);
             linesArray = lines;
         }]);
     }
@@ -154,7 +154,7 @@ ns('app.yourStopInfo.filters', function () {
         }).filter(function (item) {
             return item.numberOfLines >= 3;
         });
-        console.log(accumulatorArray);
+        //console.log(accumulatorArray);
 
 //Adds filtering result to yourStopInfo div (first it cleares it)
         var $emptyYourStopDiv = $('#js-yourStopInfo').empty();

@@ -25,7 +25,7 @@ ns('app.yourStopInfo.timetable', function () {
         var stopsFromLocalStorageArray = app.pickYourStops.model.user.favouriteStops();
         stopsFromLocalStorageArray.forEach(function (singleStopNameFromLocalStorageArray) {
 
-            timetables[singleStopNameFromLocalStorageArray] = timetables[singleStopNameFromLocalStorageArray] || {};
+            timetables[singleStopNameFromLocalStorageArray] = timetables[singleStopNameFromLocalStorageArray] || [];
 
             var linesContainingStopFromLocalStorageArray = jsonWithPublicTransportLines.filter(function (singlePublicTransportLine) {
                 return singlePublicTransportLine.stops.find(function (publicTransportStop) {
@@ -35,7 +35,7 @@ ns('app.yourStopInfo.timetable', function () {
 
             linesContainingStopFromLocalStorageArray.forEach(function (singleLine) {
                 var lineNumber = singleLine.id;
-                timetables[singleStopNameFromLocalStorageArray][lineNumber] = timetables[singleStopNameFromLocalStorageArray][lineNumber] || {};
+                //timetables[singleStopNameFromLocalStorageArray][lineNumber] = timetables[singleStopNameFromLocalStorageArray][lineNumber] || {};
 
                 var matchingStopFromJsonAgainstLocalstorage = singleLine.stops.find(function (singleStop) {
                     return singleStop.name === singleStopNameFromLocalStorageArray;
@@ -53,11 +53,13 @@ ns('app.yourStopInfo.timetable', function () {
                     return depTimeOnCurrentStopHHMMSS;
                 });
 
-                timetables[singleStopNameFromLocalStorageArray][lineNumber] = singleLineDepartures;
+                timetables[singleStopNameFromLocalStorageArray].push({
+                    lineNumber: lineNumber,
+                    departures: singleLineDepartures
+                });
             });
         });
 
-        console.log(timetables);
         app.yourStopInfo.main.refresh();
     };
 
