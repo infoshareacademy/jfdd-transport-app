@@ -6,32 +6,45 @@
     <meta name="google-signin-client_id"
           content="709967216215-6kqu1k6sna5snk1nb5b6l889r1lpdsed.apps.googleusercontent.com">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="src/app/login/login-css.css">
-    <link rel="stylesheet" href="src/app/yourStopInfo/yourStop.css">
     <link rel="stylesheet" href="styles/reset-css.css">
     <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="src/app/lineStats/lineStats-css.css">
+    <link rel="stylesheet" href="src/app/yourStopInfo/yourStop.css">
+    <link rel="stylesheet" href="src/app/login/login-css.css">
 </head>
-<body>
+<body class="container">
 
 <div class="container">
-    <main class="hide col-sm-12">
 
-        <div id="my-signin2"></div>
-        <!--<div id="filters"></div>-->
+    <main class="hide">
 
-        <div id="js-pickYourStops"></div>
+        <div id="my-signin2" class="row">
+            <div class="col-sm-12"></div>
+        </div>
 
-        <div id="js-yourStopInfo">
-            <h1>Twoje przystanki:</h1>
+        <div class="row">
+            <div id="js-pickYourStops" class="col-sm-12"></div>
+        </div>
+
+        <div id="filtersDiv" class="row">
+            <div class="col-sm-12">
+            </div>
+        </div>
+
+        <div id="js-yourStopInfo" class="row">
+            <div class="col-sm-12">
+                <h1>Twoje przystanki:</h1>
+            </div>
         </div>
 
         <div id="js-lineStats" class="row">
             <div class="col-sm-12">
                 <h2>Aktualne opóźnienia na liniach</h2>
+
                 <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
+
                 <div class="form-inline">
                     <div class="form-group">
                         <div class="input-group">

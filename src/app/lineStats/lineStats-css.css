@@ -1,3 +1,7 @@
 .voffset {
     margin-top: 10px;
 }
+
+.col-sm-12 {
+    padding-left: 0;
+}
