@@ -1,5 +1,7 @@
 ns('app.yourStopInfo.timetable', function () {
 
+    var timetables = {};
+
     var toHHMMSS = function (seconds_parameter) {
         var sec_num = parseInt(seconds_parameter, 10); // don't forget the second param
         var hours = Math.floor(sec_num / 3600);
@@ -20,55 +22,47 @@ ns('app.yourStopInfo.timetable', function () {
     };
 
     var wpFunction = function (jsonWithPublicTransportLines) {
-        $jsyourStopInfo = $('#js-yourStopInfo');
         var stopsFromLocalStorageArray = app.pickYourStops.model.user.favouriteStops();
         stopsFromLocalStorageArray.forEach(function (singleStopNameFromLocalStorageArray) {
-            var $singleStopTable = $('<table class="table">');
-            var tr = $('<tr>');
-            var $tableHeading = $('<th>').append(singleStopNameFromLocalStorageArray);
-            $singleStopTable.append(tr.append($tableHeading));
+
+            timetables[singleStopNameFromLocalStorageArray] = timetables[singleStopNameFromLocalStorageArray] || {};
 
             var linesContainingStopFromLocalStorageArray = jsonWithPublicTransportLines.filter(function (singlePublicTransportLine) {
                 return singlePublicTransportLine.stops.find(function (publicTransportStop) {
                         return publicTransportStop.name === singleStopNameFromLocalStorageArray;
                     }) !== undefined; // why check against undefined?
             });
-            console.log(linesContainingStopFromLocalStorageArray.length);
 
             linesContainingStopFromLocalStorageArray.forEach(function (singleLine) {
                 var lineNumber = singleLine.id;
-                var $lineNumberRow = $('<tr>');
-                var $lineNumberCell = $('<td>').append(lineNumber);
-                $lineNumberRow.append($lineNumberCell);
+                timetables[singleStopNameFromLocalStorageArray][lineNumber] = timetables[singleStopNameFromLocalStorageArray][lineNumber] || {};
 
                 var matchingStopFromJsonAgainstLocalstorage = singleLine.stops.find(function (singleStop) {
                     return singleStop.name === singleStopNameFromLocalStorageArray;
                 });
                 var matchingStopArrayIndex = singleLine.stops.indexOf(matchingStopFromJsonAgainstLocalstorage);
-                console.log(matchingStopArrayIndex);
+
                 var time = singleLine.dTimes.slice(0, matchingStopArrayIndex + 1).reduce(function (a, b) {
                     return a + b;
                 }, 0);
-                console.log(time);
 
-                var $departuresCell = $('<td id = "departureTimes">');
-
-                var singleLineDepartures = singleLine.departures.forEach(function (sigleDepartureTime) {
+                var singleLineDepartures = singleLine.departures.map(function (sigleDepartureTime) {
                     var depTimesInSeconds = sigleDepartureTime.hour * 3600 + sigleDepartureTime.minutes * 60 + sigleDepartureTime.seconds;
                     var depTimeOnCurrentStop = (depTimesInSeconds + time) % 86400; //?
                     var depTimeOnCurrentStopHHMMSS = toHHMMSS(depTimeOnCurrentStop);
-                    $departuresCell.append(" " + depTimeOnCurrentStopHHMMSS + " ");
+                    return depTimeOnCurrentStopHHMMSS;
                 });
 
-                $lineNumberRow.append($departuresCell);
-
-                $singleStopTable.append($lineNumberRow);
+                timetables[singleStopNameFromLocalStorageArray][lineNumber] = singleLineDepartures;
             });
-            $jsyourStopInfo.append($singleStopTable);
         });
+
+        console.log(timetables);
+        app.yourStopInfo.main.refresh();
     };
 
     return {
-        wpFunction: wpFunction
+        wpFunction: wpFunction,
+        timetables: timetables
     }
 });
