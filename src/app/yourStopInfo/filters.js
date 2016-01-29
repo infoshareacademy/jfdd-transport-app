@@ -68,55 +68,52 @@ ns('app.yourStopInfo.filters', function () {
 //Filter "minimum thee lines":
     function filterTwo(stopName) {
 
-        var favStops = app.pickYourStops.model.user.favouriteStops();
         //filtruje dane o liniach z jsona, wyszukując te, które poruszają się po jednym z ulubionych przystanków
         //zwraca tablicę z obiektami (z jsona - linie)
 
         filteredLines = linesArray.filter(function (line) {
             return line.stops.find(function (stop) {
-                    return favStops.indexOf(stop.name) !== -1;
+                    return stop.name === stopName;
                 }) !== undefined;
         });
         console.log(filteredLines);
 
-        var accumulator = {};
-        //TO CHECK
-        favStops.forEach(function (name) {
-            accumulator[name] = [];
-        });
+        var accumulator = [];
+
 
         filteredLines.forEach(function (line) {
             line.stops.forEach(function (stop) {
-                if (accumulator[stop.name] !== undefined) {
-                    accumulator[stop.name].push(line);
+                if (stop.name === stopName) {
+                    accumulator.push(line);
                 }
             });
         });
         console.log(accumulator);
 
-// parse object to array and filter it:
-        var accumulatorArray = $.map(accumulator, function (value, key) {
-            return {
-                stopName: key,
-                numberOfLines: value.length
-            };
-        }).filter(function (item) {
-            return item.numberOfLines >= 3;
-        });
-        //console.log(accumulatorArray);
+        if (accumulator.length >= 3) {
+            return true;
+        }
+        //accumulatorArray.filter(function(stopName){
+        //    if(favStops.indexOf(stopName)!== -1){return true}
+        //
+        //});
+
+        //for (var stopName in accumulatorArray){
+        //    if(favStops.indexOf(stopName)!== -1){return true}
+        //}
 
 //Adds filtering result to yourStopInfo div (first it cleares it)
-        var $emptyYourStopDiv = $('#js-yourStopInfo').empty();
-        if (accumulatorArray.length !== 0) {
-            accumulatorArray.forEach(function (stop) {
-
-                $emptyYourStopDiv.append('<div class="yourStop"><h3>' + stop.stopName + '</h3></div>')
-                    .append('<div class="yourStop"><p>' + 'Liczba dostępnych linii: ' + stop.numberOfLines + '</p></div>')
-            });
-        }
-        else {
-            $emptyYourStopDiv.append('<div class="yourStop"><p>Niestety, żaden z Twoich ulubionych przystanków nie spełnia kryteriów wyszukiwania!</p></div>')
-        }
+//        var $emptyYourStopDiv = $('#js-yourStopInfo').empty();
+//        if (accumulatorArray.length !== 0) {
+//            accumulatorArray.forEach(function (stop) {
+//
+//                $emptyYourStopDiv.append('<div class="yourStop"><h3>' + stop.stopName + '</h3></div>')
+//                    .append('<div class="yourStop"><p>' + 'Liczba dostępnych linii: ' + stop.numberOfLines + '</p></div>')
+//            });
+//        }
+//        else {
+//            $emptyYourStopDiv.append('<div class="yourStop"><p>Niestety, żaden z Twoich ulubionych przystanków nie spełnia kryteriów wyszukiwania!</p></div>')
+//        }
     }
 
     function dummyFilter(stopName, index) {
@@ -131,11 +128,11 @@ ns('app.yourStopInfo.filters', function () {
         },
         availableFilters: [
             {
-                label: "Przystanki, na których jeździ więcej niż 3 linie",
+                label: "Przystanki, na które wjedzie autobus w przeciągu 5 minut",
                 filter: filterOne
             },
             {
-                label: "Przystanki, na które wjedzie autobus w przeciągu 5 minut",
+                label: "Przystanki, na których jeżdżą minimum 3 linie",
                 filter: filterTwo
             },
             {
