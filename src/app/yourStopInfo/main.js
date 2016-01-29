@@ -19,6 +19,8 @@ ns('app.yourStopInfo.main', function () {
     };
 
     function showDiv(favStops) {
+        var favStops = app.pickYourStops.model.user.favouriteStops();
+        var $jsyourStopInfo = $('#js-yourStopInfo');
         $jsyourStopInfo.empty();
 
         favStops.forEach(function (stop) {
@@ -26,7 +28,6 @@ ns('app.yourStopInfo.main', function () {
                 '<div class="yourStop"><h3>' + stop + '<p class = "fetchingStatus"></p></h3></div>'
             )
         });
-        var $jsyourStopInfo = $('#js-yourStopInfo');
         var stopsFromLocalStorageArray = app.pickYourStops.model.user.favouriteStops();
 
 
@@ -61,8 +62,9 @@ ns('app.yourStopInfo.main', function () {
                         }, 0);
                         console.log(time);
 
-                        var $departuresCell = $('<td>');
-                        singleLine.departures.forEach(function (sigleDepartureTime) {
+                        var $departuresCell = $('<td id = "departureTimes">');
+
+                        var singleLineDepartures = singleLine.departures.forEach(function (sigleDepartureTime) {
                             var depTimesInSeconds = sigleDepartureTime.hour * 3600 + sigleDepartureTime.minutes * 60 + sigleDepartureTime.seconds;
                             var depTimeOnCurrentStop = (depTimesInSeconds + time) % 86400; //?
                             var depTimeOnCurrentStopHHMMSS = toHHMMSS(depTimeOnCurrentStop);
@@ -100,7 +102,8 @@ ns('app.yourStopInfo.main', function () {
         },
         filterOneDiv: filterOneDiv,
         showDiv:showDiv,
-        filterTwoDiv: filterTwoDiv
+        filterTwoDiv: filterTwoDiv,
+
     }
 
 });

@@ -65,12 +65,59 @@ ns('app.yourStopInfo.filters', function () {
 
 //Filter "stop name length":
     function filterOne() {
-        var favStops = app.pickYourStops.model.user.favouriteStops();
 
-        var filteredOutStops = favStops.filter(function (stop) {
-            return stop.length >= 9;
-        });
-        return filteredOutStops;
+        var actualTime = new Date();
+        console.log(actualTime.getHours());
+        //var departureTimes = [];
+        var $departuresTextValue = $('#departureTimes').text();
+        //if (typeof($departuresTextValue)== "string" ){console.log ("string")}
+        //departureTimes.push($departuresTextValue);
+        console.log($departuresTextValue);
+        var departureValuesSplit = $departuresTextValue.split(" ");
+        console.log(departureValuesSplit);
+
+        //departureValuesSplit.forEach(
+
+            function compare (time1,time2){
+            var t1 = new Date();
+            var parts = time1.split(":");
+            t1.setHours(parts[0],parts[1],parts[2],0);
+                var t2;
+            departureValuesSplit.forEach(function (time){
+               t2 = departureValuesSplit(time)});
+                console.log(t2);
+
+                if (t1.getTime()>t2.getTime()) console.log(1)
+                if (t1.getTime()<t2.getTime()) return -1;
+
+
+
+        }
+
+        //var slicedDepartureTimes = departureTimes.slice(0);
+        //var slicedDepartureTimesToArray = [];
+        //slicedDepartureTimesToArray.push(slicedDepartureTimes);
+        //console.log(slicedDepartureTimesToArray);
+
+        //function dateCompare(time1,time2) {
+        //    var t1 = new Date();
+        //    var parts = time1.split(":");
+        //    t1.setHours(parts[0],parts[1],parts[2],0);
+        //    var t2 = new Date();
+        //    parts = time2.split(":");
+        //    t2.setHours(parts[0],parts[1],parts[2],0);
+        //
+        //     returns 1 if greater, -1 if less and 0 if the same
+            //if (t1.getTime()>t2.getTime()) return 1;
+            //if (t1.getTime()<t2.getTime()) return -1;
+            //return 0;
+        //}
+        //var favStops = app.pickYourStops.model.user.favouriteStops();
+        //
+        //var filteredOutStops = favStops.filter(function (stop) {
+        //    return stop.length >= 9;
+        //});
+        //return filteredOutStops;
     }
 
 
