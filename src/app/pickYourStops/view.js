@@ -16,7 +16,7 @@ ns('app.pickYourStops.view', function () {
                             .append($('<input class="form-control input-sm" list="stops">')
                                 .append($('<datalist id="stops">')
                                     .append(
-                                        sortedBusStop.map(
+                                        sortedBusStops.map(
                                             function (busStop) {
                                                 return $('<option>').attr('value', busStop.name);
                                             }
