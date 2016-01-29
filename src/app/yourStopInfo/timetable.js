@@ -55,6 +55,7 @@ ns('app.yourStopInfo.timetable', function () {
 
                 timetables[singleStopNameFromLocalStorageArray].push({
                     lineNumber: lineNumber,
+                    lineName: singleLine.name,
                     departures: singleLineDepartures
                 });
             });

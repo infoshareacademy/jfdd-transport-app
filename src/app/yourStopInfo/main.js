@@ -12,7 +12,6 @@ ns('app.yourStopInfo.main', function () {
             var $stopContainer = $('<div class="yourStop">');
             var $stopNameContainer = $('<h3>').append(stopName);
             var $stopTimetableContainer = $('<div class="stopTimetable">');
-            //var $stopTimetableContainer = $('<div class="stopTimetable">');
 
             $favStopsContainer.append(
                 $stopContainer
@@ -26,7 +25,7 @@ ns('app.yourStopInfo.main', function () {
                 var currentStopLines = timetables[stopName];
 
 
-            var $tableTimeTables = $('<table class="table">');
+            var $tableTimeTables = $('<table class="table table-striped">');
             var $tHeadCell = $('<th>').text("Linia");
             var $tHeadCell2 = $('<th>').text("Rozkład jazdy");
             var $tHeadRow = $('<tr>');
@@ -36,24 +35,10 @@ ns('app.yourStopInfo.main', function () {
             if (currentStopLines !== undefined) {
                 currentStopLines.forEach(function (line) {
 
-
-
-
-
-
-
-                    //var $lineContainer = $('<div>').append(line.lineNumber);
-                    //$stopTimetableContainer.append($lineContainer);
-                    //
-                    //line.departures.forEach(function (departure) {
-                    //    $lineContainer.append($('<span>').append(departure));
-                    //})
-
                     var $lineCell = $('<td>');
                     var $lineButton = $('<button class="btn btn-success">');
-                    $lineButton.text(line.lineNumber);
+                    $lineButton.text(line.lineName);
                     $lineCell.append($lineButton);
-                    //$lineButton.append($lineCell);
 
 
 
