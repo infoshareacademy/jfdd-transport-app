@@ -10,17 +10,23 @@ ns('app.login.main', function () {
         var $close = $('<span>x</span>');
         $close.appendTo(popup);
         $close.click(function(){window.location.href = 'http://test.transport.jfdd.infoshareaca.nazwa.pl/';});
+        initializeSocialButton();
+    }
 
+    function prepareUI(name) {
+        $('main').removeClass('hide');
+        $('body').prepend("Witaj, " + name +"!");
+        $('.popup').hide();
     }
 
     function initializeSocialButton () {
         var onSuccess = function(googleUser) {
-            var $name= googleUser.getBasicProfile().getName();
-            $('main').removeClass('hide');
-            app.pickYourStops.model.user.init($name);
-            $('body').prepend("Witaj, " + $name +"!");
-            $('.popup').hide();
-            app.pickYourStops.model.busStops.getBusStops();
+            var name = googleUser.getBasicProfile().getName();
+
+            prepareUI(name);
+
+            app.pickYourStops.model.user.init(name);
+            app.state.init();
             app.yourStopInfo.main.init();
             app.yourStopInfo.filters.init();
             app.lineStats.main.init();
@@ -45,7 +51,6 @@ ns('app.login.main', function () {
 
     return {
         init: function () {
-            initializeSocialButton();
             createPopup();
         }
     };

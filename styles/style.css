@@ -1,0 +1,16 @@
+body {
+    font-family: 'Play', sans-serif;
+}
+
+.hide {
+    display:none;
+}
+
+#helloDiv {
+
+}
+
+#helloDiv h1{
+    font-size: 60px;
+    padding-top: 120px;
+}

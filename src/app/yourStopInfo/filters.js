@@ -1,4 +1,4 @@
-ns('app.yourStopInfo.filters', function ()  {
+ns('app.yourStopInfo.filters', function () {
 
     var linesArray;
     var filtersArray = ["Przystanki, na których jeździ więcej niż 3 linie", "Przystanki, których nazwa jest dłuższa niż 9 znaków"];
@@ -8,23 +8,24 @@ ns('app.yourStopInfo.filters', function ()  {
     function fetchRealData() {
 
         app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [function (lines) {
-            console.log(lines);
+            //console.log(lines);
             linesArray = lines;
         }]);
     }
 
     function startFilters() {
 
+//Adds drop-down filter list and filter button:
         function addSelect(filters) {
 
-            $('#js-yourStopInfo')
+            $('#filtersDiv')
                 .prepend($('<button id="clearMyFilter">').text("Wyczyść"))//.append($('<div class="selectedFilter">'))
                 .prepend($('<button id="myFilter">').text("Filtruj"))//.append($('<div class="selectedFilter">'))
                 .prepend($('<input list="filters">').append($('<datalist id="filters">')
                     .append(filtersArray.map(
-                            function (filtersArray) {
-                                return $('<option>').attr('value', filtersArray);
-                            })
+                        function (filtersArray) {
+                            return $('<option>').attr('value', filtersArray);
+                        })
                     ))
                 )
         }
@@ -32,42 +33,95 @@ ns('app.yourStopInfo.filters', function ()  {
         addSelect();
     }
 
-    function clearFilterData () {
-        $('#clearMyFilter').on('click', function (){
-            console.log("usuwam");
+//Adds clean filter button:
+    function clearFilterData() {
+        $('#clearMyFilter').on('click', function () {
+                console.log("usuwam");
                 var favStops = app.pickYourStops.model.user.favouriteStops();
                 app.yourStopInfo.main.showDiv(favStops);
-        }
+            }
         )
     }
 
-
+//Enable appropriate filters on click:
     function filterData() {
         $('#myFilter').on('click', function () {
 
-            if ($('#js-yourStopInfo input').val() == filtersArray[1]) {
+            var inputList = $('#filtersDiv input[list="filters"]');
+
+            if ($('#filtersDiv input').val() == filtersArray[1]) {
                 app.yourStopInfo.main.filterOneDiv();
-
+                inputList.val('');
             }
 
-            else if ($('#js-yourStopInfo input').val() == filtersArray[0]){
+            else if ($('#filtersDiv input').val() == filtersArray[0]) {
                 app.yourStopInfo.main.filterTwoDiv();
-                console.log('filtr litera')
                 filterTwo();
+                inputList.val('');
             }
         });
-        //inputList.val('');
+
     }
 
+//Filter "stop name length":
     function filterOne() {
-        var favStops = app.pickYourStops.model.user.favouriteStops();
 
-        var filteredOutStops = favStops.filter(function (stop) {
-            return stop.length >= 9;
-        });
-        return filteredOutStops;
+        var actualTime = new Date();
+        console.log(actualTime.getHours());
+        //var departureTimes = [];
+        var $departuresTextValue = $('#departureTimes').text();
+        //if (typeof($departuresTextValue)== "string" ){console.log ("string")}
+        //departureTimes.push($departuresTextValue);
+        console.log($departuresTextValue);
+        var departureValuesSplit = $departuresTextValue.split(" ");
+        console.log(departureValuesSplit);
+
+        //departureValuesSplit.forEach(
+
+            function compare (time1,time2){
+            var t1 = new Date();
+            var parts = time1.split(":");
+            t1.setHours(parts[0],parts[1],parts[2],0);
+                var t2;
+            departureValuesSplit.forEach(function (time){
+               t2 = departureValuesSplit(time)});
+                console.log(t2);
+
+                if (t1.getTime()>t2.getTime()) console.log(1)
+                if (t1.getTime()<t2.getTime()) return -1;
+
+
+
+        }
+
+        //var slicedDepartureTimes = departureTimes.slice(0);
+        //var slicedDepartureTimesToArray = [];
+        //slicedDepartureTimesToArray.push(slicedDepartureTimes);
+        //console.log(slicedDepartureTimesToArray);
+
+        //function dateCompare(time1,time2) {
+        //    var t1 = new Date();
+        //    var parts = time1.split(":");
+        //    t1.setHours(parts[0],parts[1],parts[2],0);
+        //    var t2 = new Date();
+        //    parts = time2.split(":");
+        //    t2.setHours(parts[0],parts[1],parts[2],0);
+        //
+        //     returns 1 if greater, -1 if less and 0 if the same
+            //if (t1.getTime()>t2.getTime()) return 1;
+            //if (t1.getTime()<t2.getTime()) return -1;
+            //return 0;
+        //}
+        //var favStops = app.pickYourStops.model.user.favouriteStops();
+        //
+        //var filteredOutStops = favStops.filter(function (stop) {
+        //    return stop.length >= 9;
+        //});
+        //return filteredOutStops;
     }
 
+
+//Filter "minimum thee lines":
     function filterTwo() {
 
         var favStops = app.pickYourStops.model.user.favouriteStops();
@@ -95,55 +149,40 @@ ns('app.yourStopInfo.filters', function ()  {
         });
         console.log(accumulator);
 
-// parse object to array:
-        var accumulatorArray = $.map(accumulator, function(stop, index) {
-            return [stop];
+// parse object to array and filter it:
+        var accumulatorArray = $.map(accumulator, function (value, key) {
+            return {
+                stopName: key,
+                numberOfLines: value.length
+            };
+        }).filter(function (item) {
+            return item.numberOfLines >= 3;
         });
-        console.log(accumulatorArray);
+        //console.log(accumulatorArray);
 
-        accumulatorArray.forEach(function (elements){
-            if(elements.length>=3){
-                elements.forEach(function(details){
-                    console.log(details.id)
-                })
-            }else{console.log ("nie ma takiego przystanku");}
-        });
+//Adds filtering result to yourStopInfo div (first it cleares it)
+        var $emptyYourStopDiv = $('#js-yourStopInfo').empty();
+        if (accumulatorArray.length !== 0) {
+            accumulatorArray.forEach(function (stop) {
 
-        //var filteredOutLines =  accumulatorArray.filter(function (stop) {
-        //    return stop.length >= 3;
-        //});
-        //return filteredOutLines;
-
-
-        //console.log(filteredOutLines);
-       //for(var value in accumulator){
-       //     console.log(value);
-       // }
-        //return filteredOutLines;
-
-        //console.log(filteredOutLines);
-
-
-
-        //var filteredOutStops = stopsArray.filter(function (stop) {
-        //    return stop.name.length >= 9;
-        //});
-//}
-//
-//        return filteredOutStops;
+                $emptyYourStopDiv.append('<div class="yourStop"><h3>' + stop.stopName + '</h3></div>')
+                    .append('<div class="yourStop"><p>' + 'Liczba dostępnych linii: ' + stop.numberOfLines + '</p></div>')
+            });
+        }
+        else {
+            $emptyYourStopDiv.append('<div class="yourStop"><p>Niestety, żaden z Twoich ulubionych przystanków nie spełnia kryteriów wyszukiwania!</p></div>')
+        }
     }
 
 
-    function clearFilterData () {
-        $('#clearMyFilter').on('click', function (){
+    function clearFilterData() {
+        $('#clearMyFilter').on('click', function () {
                 console.log("usuwam");
                 var favStops = app.pickYourStops.model.user.favouriteStops();
                 app.yourStopInfo.main.showDiv(favStops);
             }
-
         )
     }
-
 
 
     return {
@@ -151,13 +190,12 @@ ns('app.yourStopInfo.filters', function ()  {
             startFilters();
             filterData();
             fetchRealData();
-            clearFilterData ()
-            //filterOne();
-            //activateFilter()
+            clearFilterData();
         },
         filterOne: filterOne,
         startFilters: startFilters,
-        filterData: filterData
+        filterData: filterData,
+        filterTwo: filterTwo
     }
 
 });
