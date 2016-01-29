@@ -2,14 +2,20 @@ ns('app.yourStopInfo.main', function () {
 
 
     function showDiv(favStops) {
-        var favStops = app.pickYourStops.model.user.favouriteStops();
-        var $jsyourStopInfo = $('#js-yourStopInfo');
-        $jsyourStopInfo.empty();
+        var $favStopsContainer = $('#js-yourStopInfo');
 
-        favStops.forEach(function (stop) {
-            $jsyourStopInfo.append(
-                '<div class="yourStop"><h3>' + stop + '<p class = "fetchingStatus"></p></h3></div>'
-            )
+        $favStopsContainer.empty();
+
+        favStops.forEach(function (stopName) {
+            var $stopContainer = $('<div class="yourStop">');
+            var $stopNameContainer = $('<h3>').append(stopName);
+            var $stopTimetableContainer = $('<div class="stopTimetable">');
+
+            $favStopsContainer.append(
+                $stopContainer
+                    .append($stopNameContainer)
+                    .append($stopTimetableContainer)
+            );
         });
 
 

@@ -1,5 +1,7 @@
 ns('app.yourStopInfo.timetable', function () {
 
+    var timetables = {};
+
     var toHHMMSS = function (seconds_parameter) {
         var sec_num = parseInt(seconds_parameter, 10); // don't forget the second param
         var hours = Math.floor(sec_num / 3600);
