@@ -1,7 +1,14 @@
 //dodawanie nazw przystanków do listy, wyświetlanie oraz usuwanie wybranych przystanków
 ns('app.pickYourStops.view', function () {
+    var sortBusStops = function (busStopsToSort) {
+        return busStopsToSort.sort(function (a, b) {
+            return a.name.localeCompare(b.name);
+        });
+    };
+
     return {
         init: function (busStops) {
+            var sortedBusStops = sortBusStops(busStops);
             $('#js-pickYourStops')
                 .append($('<div class="form-inline">')
                     .append($('<div class="form-group">')
@@ -9,7 +16,7 @@ ns('app.pickYourStops.view', function () {
                             .append($('<input class="form-control input-sm" list="stops">')
                                 .append($('<datalist id="stops">')
                                     .append(
-                                        busStops.map(
+                                        sortedBusStop.map(
                                             function (busStop) {
                                                 return $('<option>').attr('value', busStop.name);
                                             }
