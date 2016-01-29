@@ -1,7 +1,9 @@
 ns('app.yourStopInfo.main', function () {
 
 
+
     function showDiv(favStops, timetables) {
+
         var $favStopsContainer = $('#js-yourStopInfo');
 
         $favStopsContainer.empty();
