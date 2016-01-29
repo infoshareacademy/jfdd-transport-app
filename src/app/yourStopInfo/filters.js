@@ -3,7 +3,7 @@ ns('app.yourStopInfo.filters', function () {
     var linesArray;
     var filtersArray = ["Przystanki, na których jeździ więcej niż 3 linie", "Przystanki, których nazwa jest dłuższa niż 9 znaków"];
     //var inputList = $('#js-yourStopInfo input[list=filters]');
-
+    var filteredLines;
 
     function fetchRealData() {
 
@@ -33,7 +33,7 @@ ns('app.yourStopInfo.filters', function () {
         addSelect();
     }
 
-//Adds clean filter button:
+//Adds clean filter button:-----------------------------------------------
     function clearFilterData() {
         $('#clearMyFilter').on('click', function () {
                 console.log("usuwam");
@@ -43,7 +43,7 @@ ns('app.yourStopInfo.filters', function () {
         )
     }
 
-//Enable appropriate filters on click:
+//Enable appropriate filters on click:---------------------------------------
     function filterData() {
         $('#myFilter').on('click', function () {
 
@@ -63,8 +63,9 @@ ns('app.yourStopInfo.filters', function () {
 
     }
 
-//Filter "stop name length":
+//Filter Departure time <5 minutes:----------------------------------------
     function filterOne() {
+
 
         var actualTime = new Date();
         var hours = actualTime.getHours();
@@ -83,7 +84,6 @@ ns('app.yourStopInfo.filters', function () {
         var actualHour = hours + ':' + minutes + ':' + seconds;
         //return actualHour;
 
-debugger;
         console.log(actualHour);
         var $departuresTextValue = $('#departureTimes').text();
 
@@ -92,13 +92,21 @@ debugger;
         console.log(departureValuesSplit);
 
         var fixDepartureValuesSplit = [];
-        for(var i=0; i<departureValuesSplit.length; i=i+3){
-            fixDepartureValuesSplit.push(fruits[i]);
+        for(var i=1; i<departureValuesSplit.length; i=i+2){
+            fixDepartureValuesSplit.push(departureValuesSplit[i]);
         }
-        coconsole.log(fixDepartureValuesSplit);
 
-        departureValuesSplit.forEach(function (time) {
-            console.log(actualHour - time);
+
+        console.log(fixDepartureValuesSplit);
+
+       var hourToSeconds = actualHour.split(':');
+         var actualSeconds = (+hourToSeconds[0]) * 60 * 60 + (+hourToSeconds[1]) * 60 + (+hourToSeconds[2])
+
+        fixDepartureValuesSplit.forEach(function (time) {
+            var linesHourToSeconds = time.split(':');
+            var linesTimeInSeconds = (+linesHourToSeconds[0]) * 60 * 60 + (+linesHourToSeconds[1]) * 60 + (+linesHourToSeconds[2])
+
+            console.log(actualSeconds - linesTimeInSeconds);
 
 
             });
@@ -111,7 +119,7 @@ debugger;
         var favStops = app.pickYourStops.model.user.favouriteStops();
         //filtruje dane o liniach z jsona, wyszukując te, które poruszają się po jednym z ulubionych przystanków
         //zwraca tablicę z obiektami (z jsona - linie)
-        var filteredLines = linesArray.filter(function (line) {
+        filteredLines = linesArray.filter(function (line) {
             return line.stops.find(function (stop) {
                     return favStops.indexOf(stop.name) !== -1;
                 }) !== undefined;
