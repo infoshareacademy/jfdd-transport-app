@@ -37,6 +37,6 @@
     display:none;
 }
 
-.removeStopBtn {
-    margin-left: 1em
+#pickStop {
+    margin-left: 2px;
 }

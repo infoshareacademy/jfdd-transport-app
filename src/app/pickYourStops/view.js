@@ -3,16 +3,22 @@ ns('app.pickYourStops.view', function () {
     return {
         init: function (busStops) {
             $('#js-pickYourStops')
-                .append($('<input list="stops">').append($('<datalist id="stops">')
-                    .append(
-                        busStops.map(
-                            function (busStop) {
-                                return $('<option>').attr('value', busStop.name);
-                            }
-                        )
-                    ))
-                )
-                .append($('<button type="button" id="pickStop">').text("Wybierz"));
+                .append($('<div class="form-inline">')
+                    .append($('<div class="form-group">')
+                        .append($('<div class="input-group">')
+                            .append($('<input class="form-control input-sm" list="stops">')
+                                .append($('<datalist id="stops">')
+                                .append(
+                                    busStops.map(
+                                        function (busStop) {
+                                            return $('<option>').attr('value', busStop.name);
+                                        }
+                                    )
+                                ))
+                            )))
+                .append($('<button class="btn btn-default btn-sm" type="button" id="pickStop">')
+                    .text("Wybierz")
+                    ));
 
             $('#pickStop').on('click', function () {
                     var inputList = $('#js-pickYourStops input[list="stops"]');
