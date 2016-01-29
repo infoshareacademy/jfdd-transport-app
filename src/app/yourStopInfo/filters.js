@@ -28,24 +28,32 @@ ns('app.yourStopInfo.filters', function () {
         var actualHour = hours + ':' + minutes + ':' + seconds;
 
         console.log(actualHour);
-        return actualHour;
+
 
 
 
         var departureTimes = app.yourStopInfo.timetable.timetables;
         console.log(departureTimes);
 
+
         console.log(actualHour);
-        var $departuresTextValue = departureTimes.text();
 
-        console.log($departuresTextValue);
-        var departureValuesSplit = $departuresTextValue.split(" ");
-        console.log(departureValuesSplit);
+for (var i=0; i<stopName.length; i++){
+    departureTimes[stopName][0].departures[0].pure
+}
 
-        var fixDepartureValuesSplit = [];
-        for(var i=1; i<departureValuesSplit.length; i=i+2){
-            fixDepartureValuesSplit.push(departureValuesSplit[i]);
-        }
+
+
+        //var $departuresTextValue = departureTimes.text();
+        //
+        //console.log($departuresTextValue);
+        //var departureValuesSplit = $departuresTextValue.split(" ");
+        //console.log(departureValuesSplit);
+        //
+        //var fixDepartureValuesSplit = [];
+        //for(var i=1; i<departureValuesSplit.length; i=i+2){
+        //    fixDepartureValuesSplit.push(departureValuesSplit[i]);
+        //}
 
 
         console.log(fixDepartureValuesSplit);
@@ -93,33 +101,8 @@ ns('app.yourStopInfo.filters', function () {
         if (accumulator.length >= 3) {
             return true;
         }
-        //accumulatorArray.filter(function(stopName){
-        //    if(favStops.indexOf(stopName)!== -1){return true}
-        //
-        //});
-
-        //for (var stopName in accumulatorArray){
-        //    if(favStops.indexOf(stopName)!== -1){return true}
-        //}
-
-//Adds filtering result to yourStopInfo div (first it cleares it)
-//        var $emptyYourStopDiv = $('#js-yourStopInfo').empty();
-//        if (accumulatorArray.length !== 0) {
-//            accumulatorArray.forEach(function (stop) {
-//
-//                $emptyYourStopDiv.append('<div class="yourStop"><h3>' + stop.stopName + '</h3></div>')
-//                    .append('<div class="yourStop"><p>' + 'Liczba dostępnych linii: ' + stop.numberOfLines + '</p></div>')
-//            });
-//        }
-//        else {
-//            $emptyYourStopDiv.append('<div class="yourStop"><p>Niestety, żaden z Twoich ulubionych przystanków nie spełnia kryteriów wyszukiwania!</p></div>')
-//        }
     }
 
-    function dummyFilter(stopName, index) {
-        console.log(stopName);
-        return index === 0;
-    }
 
     return {
         init: function (lines) {
@@ -134,10 +117,6 @@ ns('app.yourStopInfo.filters', function () {
             {
                 label: "Przystanki, na których jeżdżą minimum 3 linie",
                 filter: filterTwo
-            },
-            {
-                label: "Dummy",
-                filter: dummyFilter
             }
         ],
         currentFilter: null,
