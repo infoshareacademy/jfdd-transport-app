@@ -3,28 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Statystyki transportu miejskiego</title>
-    <meta name="google-signin-client_id" content="709967216215-6kqu1k6sna5snk1nb5b6l889r1lpdsed.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+          content="709967216215-6kqu1k6sna5snk1nb5b6l889r1lpdsed.apps.googleusercontent.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="src/app/login/login-css.css">
     <link rel="stylesheet" href="src/app/yourStopInfo/yourStop.css">
     <link rel="stylesheet" href="styles/reset-css.css">
     <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="src/app/lineStats/lineStats-css.css">
 </head>
 <body>
 
-<main class="hide">
+<div class="container">
+    <main class="hide col-sm-12">
 
-<div id="my-signin2"></div>
-    <!--<div id="filters"></div>-->
+        <div id="my-signin2"></div>
+        <!--<div id="filters"></div>-->
 
-<div id="js-pickYourStops"></div>
+        <div id="js-pickYourStops"></div>
 
-<div id="js-yourStopInfo">
-    <h1>Twoje przystanki:</h1>
+        <div id="js-yourStopInfo">
+            <h1>Twoje przystanki:</h1>
+        </div>
+
+        <div id="js-lineStats" class="row">
+            <div class="col-sm-12">
+                <h2>Aktualne opóźnienia na liniach</h2>
+                <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control input-sm" list="lines">
+                            <datalist id="lines">
+                            </datalist>
+                        </div>
+                    </div>
+                    <button id="chooseLines" type="button" class="btn icon-btn btn-success btn-sm">
+                        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+                    </button>
+                </div>
+                <ul class="list-inline voffset" id="selectedLines"></ul>
+            </div>
+        </div>
+
+    </main>
 </div>
-
-<div id ="js-lineStats"></div>
-
-</main>
 
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="lib/jquery-2.2.0.min.js"><\/script>')</script>
@@ -38,6 +63,11 @@
 <script src="src/app/dataManager.js"></script>
 <script src="src/app/yourStopInfo/filters.js"></script>
 <script src="src/app/login/main.js"></script>
+<script src="src/app/lineStats/main.js"></script>
+<script src="src/app/lineStats/view.js"></script>
+
 <script src="src/main.js"></script>
+<!--Bootstrap JS-->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
