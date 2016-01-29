@@ -50,13 +50,18 @@ ns('app.yourStopInfo.timetable', function () {
                     var depTimesInSeconds = sigleDepartureTime.hour * 3600 + sigleDepartureTime.minutes * 60 + sigleDepartureTime.seconds;
                     var depTimeOnCurrentStop = (depTimesInSeconds + time) % 86400; //?
                     var depTimeOnCurrentStopHHMMSS = toHHMMSS(depTimeOnCurrentStop);
-                    return depTimeOnCurrentStopHHMMSS;
+                    return {
+                        pure: depTimesInSeconds,
+                        formated: depTimeOnCurrentStopHHMMSS
+                    };
                 });
 
                 timetables[singleStopNameFromLocalStorageArray].push({
                     lineNumber: lineNumber,
                     departures: singleLineDepartures
+
                 });
+                console.log(timetables);
             });
         });
 

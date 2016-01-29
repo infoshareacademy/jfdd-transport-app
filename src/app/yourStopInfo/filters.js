@@ -5,66 +5,10 @@ ns('app.yourStopInfo.filters', function () {
     //var inputList = $('#js-yourStopInfo input[list=filters]');
     var filteredLines;
 
-    function fetchRealData() {
 
-        app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [function (lines) {
-            //console.log(lines);
-            linesArray = lines;
-        }]);
-    }
-
-    function startFilters() {
-
-//Adds drop-down filter list and filter button:
-        function addSelect(filters) {
-
-            $('#filtersDiv')
-                .prepend($('<button id="clearMyFilter">').text("Wyczyść"))//.append($('<div class="selectedFilter">'))
-                .prepend($('<button id="myFilter">').text("Filtruj"))//.append($('<div class="selectedFilter">'))
-                .prepend($('<input list="filters">').append($('<datalist id="filters">')
-                    .append(filtersArray.map(
-                        function (filtersArray) {
-                            return $('<option>').attr('value', filtersArray);
-                        })
-                    ))
-                )
-        }
-
-        addSelect();
-    }
-
-//Adds clean filter button:-----------------------------------------------
-    function clearFilterData() {
-        $('#clearMyFilter').on('click', function () {
-                console.log("usuwam");
-                var favStops = app.pickYourStops.model.user.favouriteStops();
-                app.yourStopInfo.main.showDiv(favStops);
-            }
-        )
-    }
-
-//Enable appropriate filters on click:---------------------------------------
-    function filterData() {
-        $('#myFilter').on('click', function () {
-
-            var inputList = $('#filtersDiv input[list="filters"]');
-
-            if ($('#filtersDiv input').val() == filtersArray[1]) {
-                app.yourStopInfo.main.filterOneDiv();
-                inputList.val('');
-            }
-
-            else if ($('#filtersDiv input').val() == filtersArray[0]) {
-                app.yourStopInfo.main.filterTwoDiv();
-                filterTwo();
-                inputList.val('');
-            }
-        });
-
-    }
 
 //Filter Departure time <5 minutes:----------------------------------------
-    function filterOne() {
+    function filterOne(stopName) {
 
 
         var actualTime = new Date();
@@ -82,13 +26,17 @@ ns('app.yourStopInfo.filters', function () {
             seconds = "0" + seconds;
         }
         var actualHour = hours + ':' + minutes + ':' + seconds;
-        //return actualHour;
+
+        console.log(actualHour);
+        return actualHour;
+
+
 
         var departureTimes = app.yourStopInfo.timetable.timetables;
         console.log(departureTimes);
 
         console.log(actualHour);
-        var $departuresTextValue = $('#departureTimes').text();
+        var $departuresTextValue = departureTimes.text();
 
         console.log($departuresTextValue);
         var departureValuesSplit = $departuresTextValue.split(" ");
@@ -108,7 +56,7 @@ ns('app.yourStopInfo.filters', function () {
         fixDepartureValuesSplit.forEach(function (time) {
             var linesHourToSeconds = time.split(':');
             var linesTimeInSeconds = (+linesHourToSeconds[0]) * 60 * 60 + (+linesHourToSeconds[1]) * 60 + (+linesHourToSeconds[2])
-        var wynik = actualSeconds-linesTimeInSeconds;
+            var wynik = actualSeconds - linesTimeInSeconds;
             return wynik;
             console.log(wynik);
 
@@ -118,11 +66,12 @@ ns('app.yourStopInfo.filters', function () {
 
 
 //Filter "minimum thee lines":
-    function filterTwo() {
+    function filterTwo(stopName) {
 
         var favStops = app.pickYourStops.model.user.favouriteStops();
         //filtruje dane o liniach z jsona, wyszukując te, które poruszają się po jednym z ulubionych przystanków
         //zwraca tablicę z obiektami (z jsona - linie)
+
         filteredLines = linesArray.filter(function (line) {
             return line.stops.find(function (stop) {
                     return favStops.indexOf(stop.name) !== -1;
@@ -170,28 +119,39 @@ ns('app.yourStopInfo.filters', function () {
         }
     }
 
-
-    function clearFilterData() {
-        $('#clearMyFilter').on('click', function () {
-                console.log("usuwam");
-                var favStops = app.pickYourStops.model.user.favouriteStops();
-                app.yourStopInfo.main.showDiv(favStops);
-            }
-        )
+    function dummyFilter(stopName, index) {
+        console.log(stopName);
+        return index === 0;
     }
 
-
     return {
-        init: function () {
-            startFilters();
-            filterData();
-            fetchRealData();
-            clearFilterData();
+        init: function (lines) {
+            linesArray = lines;
+            app.yourStopInfo.filtersView.init();
         },
-        filterOne: filterOne,
-        startFilters: startFilters,
-        filterData: filterData,
-        filterTwo: filterTwo
+        availableFilters: [
+            {
+                label: "Przystanki, na których jeździ więcej niż 3 linie",
+                filter: filterOne
+            },
+            {
+                label: "Przystanki, na które wjedzie autobus w przeciągu 5 minut",
+                filter: filterTwo
+            },
+            {
+                label: "Dummy",
+                filter: dummyFilter
+            }
+        ],
+        currentFilter: null,
+        clearFilters: function () {
+            this.currentFilter = null;
+            app.yourStopInfo.main.refresh();
+        },
+        setFilter: function (filter) {
+            this.currentFilter = filter;
+            app.yourStopInfo.main.refresh();
+        }
     }
 
 });

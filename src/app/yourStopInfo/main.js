@@ -2,13 +2,13 @@ ns('app.yourStopInfo.main', function () {
 
 
 
-    function showDiv(favStops, timetables) {
+    function showDiv(favStops, timetables, currentFilter) {
 
         var $favStopsContainer = $('#js-yourStopInfo');
 
         $favStopsContainer.empty();
 
-        favStops.forEach(function (stopName) {
+        favStops.filter(currentFilter || function () { return true; }).forEach(function (stopName) {
             var $stopContainer = $('<div class="yourStop">');
             var $stopNameContainer = $('<h3>').append(stopName);
             var $stopTimetableContainer = $('<div class="stopTimetable">');
@@ -30,27 +30,12 @@ ns('app.yourStopInfo.main', function () {
                     $stopTimetableContainer.append($lineContainer);
 
                     line.departures.forEach(function (departure) {
-                        $lineContainer.append($('<span>').append(departure));
+                        $lineContainer.append($('<span>').append(departure.formated));
                     })
                 });
             }
         });
     }
-
-    function filterOneDiv() {
-
-        var filteredOutStops = app.yourStopInfo.filters.filterOne();
-        showDiv(filteredOutStops);
-        //app.yourStopInfo.filters.startFilters();
-        //app.yourStopInfo.filters.filterData();
-    }
-
-    function filterTwoDiv() {
-
-        //var wynik = app.yourStopInfo.filters.filterTwo();
-        //showDiv(wynik);
-    }
-
 
     return {
         init: function () {
@@ -59,12 +44,9 @@ ns('app.yourStopInfo.main', function () {
         refresh: function () {
             var favStops = app.pickYourStops.model.user.favouriteStops();
             var timetables = app.yourStopInfo.timetable.timetables;
-            showDiv(favStops, timetables);
-        },
-        filterOneDiv: filterOneDiv,
-        showDiv:showDiv,
-        filterTwoDiv: filterTwoDiv
-
+            var currentFilter = app.yourStopInfo.filters.currentFilter;
+            showDiv(favStops, timetables, currentFilter);
+        }
     }
 
 });
