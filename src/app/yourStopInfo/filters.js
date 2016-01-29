@@ -1,7 +1,7 @@
 ns('app.yourStopInfo.filters', function () {
 
     var linesArray;
-    var filtersArray = ["Przystanki, na których jeździ więcej niż 3 linie", "Przystanki, których nazwa jest dłuższa niż 9 znaków"];
+    var filtersArray = ["Przystanki, na których jeździ więcej niż 3 linie", "Przystanki, na które wjedzie autobus w przeciągu 5 minut"];
     //var inputList = $('#js-yourStopInfo input[list=filters]');
     var filteredLines;
 
@@ -84,6 +84,9 @@ ns('app.yourStopInfo.filters', function () {
         var actualHour = hours + ':' + minutes + ':' + seconds;
         //return actualHour;
 
+        var departureTimes = app.yourStopInfo.timetable.timetables;
+        console.log(departureTimes);
+
         console.log(actualHour);
         var $departuresTextValue = $('#departureTimes').text();
 
@@ -105,8 +108,9 @@ ns('app.yourStopInfo.filters', function () {
         fixDepartureValuesSplit.forEach(function (time) {
             var linesHourToSeconds = time.split(':');
             var linesTimeInSeconds = (+linesHourToSeconds[0]) * 60 * 60 + (+linesHourToSeconds[1]) * 60 + (+linesHourToSeconds[2])
-
-            console.log(actualSeconds - linesTimeInSeconds);
+        var wynik = actualSeconds-linesTimeInSeconds;
+            return wynik;
+            console.log(wynik);
 
 
             });

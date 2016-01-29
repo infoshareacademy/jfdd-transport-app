@@ -64,5 +64,6 @@ ns('app.yourStopInfo.timetable', function () {
     return {
         wpFunction: wpFunction,
         timetables: timetables
+
     }
 });

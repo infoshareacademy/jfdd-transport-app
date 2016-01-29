@@ -24,10 +24,6 @@ ns('app.yourStopInfo.main', function () {
                 $stopTimetableContainer.append(timetables[stopName])
             }
         });
-
-
-
-
     }
 
     function filterOneDiv() {
@@ -39,6 +35,9 @@ ns('app.yourStopInfo.main', function () {
     }
 
     function filterTwoDiv() {
+
+        //var wynik = app.yourStopInfo.filters.filterTwo();
+        //showDiv(wynik);
     }
 
 
