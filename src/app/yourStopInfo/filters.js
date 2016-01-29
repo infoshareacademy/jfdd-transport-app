@@ -67,57 +67,41 @@ ns('app.yourStopInfo.filters', function () {
     function filterOne() {
 
         var actualTime = new Date();
-        console.log(actualTime.getHours());
-        //var departureTimes = [];
+        var hours = actualTime.getHours();
+        var minutes = actualTime.getMinutes();
+        var seconds = actualTime.getSeconds();
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        var actualHour = hours + ':' + minutes + ':' + seconds;
+        //return actualHour;
+
+debugger;
+        console.log(actualHour);
         var $departuresTextValue = $('#departureTimes').text();
-        //if (typeof($departuresTextValue)== "string" ){console.log ("string")}
-        //departureTimes.push($departuresTextValue);
+
         console.log($departuresTextValue);
         var departureValuesSplit = $departuresTextValue.split(" ");
         console.log(departureValuesSplit);
 
-        //departureValuesSplit.forEach(
-
-            function compare (time1,time2){
-            var t1 = new Date();
-            var parts = time1.split(":");
-            t1.setHours(parts[0],parts[1],parts[2],0);
-                var t2;
-            departureValuesSplit.forEach(function (time){
-               t2 = departureValuesSplit(time)});
-                console.log(t2);
-
-                if (t1.getTime()>t2.getTime()) console.log(1)
-                if (t1.getTime()<t2.getTime()) return -1;
-
-
-
+        var fixDepartureValuesSplit = [];
+        for(var i=0; i<departureValuesSplit.length; i=i+3){
+            fixDepartureValuesSplit.push(fruits[i]);
         }
+        coconsole.log(fixDepartureValuesSplit);
 
-        //var slicedDepartureTimes = departureTimes.slice(0);
-        //var slicedDepartureTimesToArray = [];
-        //slicedDepartureTimesToArray.push(slicedDepartureTimes);
-        //console.log(slicedDepartureTimesToArray);
+        departureValuesSplit.forEach(function (time) {
+            console.log(actualHour - time);
 
-        //function dateCompare(time1,time2) {
-        //    var t1 = new Date();
-        //    var parts = time1.split(":");
-        //    t1.setHours(parts[0],parts[1],parts[2],0);
-        //    var t2 = new Date();
-        //    parts = time2.split(":");
-        //    t2.setHours(parts[0],parts[1],parts[2],0);
-        //
-        //     returns 1 if greater, -1 if less and 0 if the same
-            //if (t1.getTime()>t2.getTime()) return 1;
-            //if (t1.getTime()<t2.getTime()) return -1;
-            //return 0;
-        //}
-        //var favStops = app.pickYourStops.model.user.favouriteStops();
-        //
-        //var filteredOutStops = favStops.filter(function (stop) {
-        //    return stop.length >= 9;
-        //});
-        //return filteredOutStops;
+
+            });
     }
 
 
