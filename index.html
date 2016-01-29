@@ -5,12 +5,14 @@
     <title>Statystyki transportu miejskiego</title>
     <meta name="google-signin-client_id"
           content="709967216215-6kqu1k6sna5snk1nb5b6l889r1lpdsed.apps.googleusercontent.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="src/app/login/login-css.css">
     <link rel="stylesheet" href="src/app/yourStopInfo/yourStop.css">
     <link rel="stylesheet" href="styles/reset-css.css">
     <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="src/app/lineStats/lineStats-css.css">
 </head>
 <body>
 
@@ -47,18 +49,14 @@
             </div>
         </div>-->
 
-        <div id="js-lineStats" class="col-sm-12">
-            <div class="row">
+        <div id="js-lineStats" class="row">
+            <div class="col-sm-12">
                 <h2>Aktualne opóźnienia na liniach</h2>
-            </div>
-            <div class="row">
                 <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
-            </div>
-            <div class="row">
                 <div class="form-inline">
                     <div class="form-group">
                         <div class="input-group">
-                            <input class="form-control" list="lines">
+                            <input class="form-control input-sm" list="lines">
                             <datalist id="lines">
                             </datalist>
                         </div>
@@ -67,14 +65,12 @@
                         <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
                     </button>
                 </div>
-            </div>
-            <div class="row">
-                <ul class="list-inline" id="selectedLines"></ul>
+                <ul class="list-inline voffset" id="selectedLines"></ul>
             </div>
         </div>
 
     </main>
-
+</div>
 
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="lib/jquery-2.2.0.min.js"><\/script>')</script>
