@@ -11,23 +11,23 @@ ns('app.yourStopInfo.filters', function () {
     function filterOne(stopName) {
 
 
-        var actualTime = new Date();
-        var hours = actualTime.getHours();
-        var minutes = actualTime.getMinutes();
-        var seconds = actualTime.getSeconds();
-
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-        if (seconds < 10) {
-            seconds = "0" + seconds;
-        }
-        var actualHour = hours + ':' + minutes + ':' + seconds;
-
-        console.log(actualHour);
+        //var actualTime = new Date();
+        //var hours = actualTime.getHours();
+        //var minutes = actualTime.getMinutes();
+        //var seconds = actualTime.getSeconds();
+        //
+        //if (hours < 10) {
+        //    hours = "0" + hours;
+        //}
+        //if (minutes < 10) {
+        //    minutes = "0" + minutes;
+        //}
+        //if (seconds < 10) {
+        //    seconds = "0" + seconds;
+        //}
+        //var actualHour = hours + ':' + minutes + ':' + seconds;
+        //
+        //console.log(actualHour);
 
 
 
@@ -36,11 +36,26 @@ ns('app.yourStopInfo.filters', function () {
         console.log(departureTimes);
 
 
-        console.log(actualHour);
+        //console.log(actualHour);
 
-for (var i=0; i<stopName.length; i++){
-    departureTimes[stopName][0].departures[0].pure
-}
+        var actualHour = new Date();
+        var seconds = actualHour.getSeconds();
+
+        for(departures in departureTimes[stopName]){
+               for(pure in departures){
+                   if(pure-seconds<300){
+                       return true
+                   }
+               }
+
+        }
+
+        //console.log(departureTimes[stopName][0].departures[0].pure);
+
+        //var lineTime = departureTimes[stopName][0].departures[0].pure;
+        //
+        //if(lineTime - seconds<300){return true;}
+
 
 
 
@@ -56,20 +71,20 @@ for (var i=0; i<stopName.length; i++){
         //}
 
 
-        console.log(fixDepartureValuesSplit);
-
-       var hourToSeconds = actualHour.split(':');
-         var actualSeconds = (+hourToSeconds[0]) * 60 * 60 + (+hourToSeconds[1]) * 60 + (+hourToSeconds[2])
-
-        fixDepartureValuesSplit.forEach(function (time) {
-            var linesHourToSeconds = time.split(':');
-            var linesTimeInSeconds = (+linesHourToSeconds[0]) * 60 * 60 + (+linesHourToSeconds[1]) * 60 + (+linesHourToSeconds[2])
-            var wynik = actualSeconds - linesTimeInSeconds;
-            return wynik;
-            console.log(wynik);
-
-
-            });
+        //console.log(fixDepartureValuesSplit);
+       //
+       //var hourToSeconds = actualHour.split(':');
+       //  var actualSeconds = (+hourToSeconds[0]) * 60 * 60 + (+hourToSeconds[1]) * 60 + (+hourToSeconds[2])
+       //
+       // fixDepartureValuesSplit.forEach(function (time) {
+       //     var linesHourToSeconds = time.split(':');
+       //     var linesTimeInSeconds = (+linesHourToSeconds[0]) * 60 * 60 + (+linesHourToSeconds[1]) * 60 + (+linesHourToSeconds[2])
+       //     var wynik = actualSeconds - linesTimeInSeconds;
+       //     return wynik;
+       //     console.log(wynik);
+       //
+       //
+       //     });
     }
 
 
