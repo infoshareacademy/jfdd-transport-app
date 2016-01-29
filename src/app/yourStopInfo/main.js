@@ -1,22 +1,5 @@
 ns('app.yourStopInfo.main', function () {
-    var toHHMMSS = function (seconds_parameter) {
-        var sec_num = parseInt(seconds_parameter, 10); // don't forget the second param
-        var hours = Math.floor(sec_num / 3600);
-        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-        var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-        if (seconds < 10) {
-            seconds = "0" + seconds;
-        }
-        var time = hours + ':' + minutes + ':' + seconds;
-        return time;
-    };
 
     function showDiv(favStops) {
         var favStops = app.pickYourStops.model.user.favouriteStops();
@@ -28,12 +11,6 @@ ns('app.yourStopInfo.main', function () {
                 '<div class="yourStop"><h3>' + stop + '<p class = "fetchingStatus"></p></h3></div>'
             )
         });
-        var stopsFromLocalStorageArray = app.pickYourStops.model.user.favouriteStops();
-        //
-        //
-        //app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [
-        //
-        //]);
 
 
     }
@@ -57,7 +34,7 @@ ns('app.yourStopInfo.main', function () {
         },
         filterOneDiv: filterOneDiv,
         showDiv:showDiv,
-        filterTwoDiv: filterTwoDiv,
+        filterTwoDiv: filterTwoDiv
 
     }
 

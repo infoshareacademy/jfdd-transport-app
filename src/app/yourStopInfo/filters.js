@@ -182,7 +182,7 @@ ns('app.yourStopInfo.filters', function () {
             startFilters();
             filterData();
             fetchRealData();
-            clearFilterData ()
+            clearFilterData();
         },
         filterOne: filterOne,
         startFilters: startFilters,
