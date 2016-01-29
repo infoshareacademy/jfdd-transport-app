@@ -29,6 +29,7 @@ ns('app.login.main', function () {
             app.state.init();
             app.yourStopInfo.main.init();
             app.yourStopInfo.filters.init();
+            app.lineStats.main.init();
         };
 
         var onFailure = function(error) {

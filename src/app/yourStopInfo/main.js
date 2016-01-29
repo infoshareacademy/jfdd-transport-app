@@ -13,6 +13,13 @@ ns('app.yourStopInfo.main', function () {
             var $stopNameContainer = $('<h3>').append(stopName);
             var $stopTimetableContainer = $('<div class="stopTimetable">');
 
+            var $btn = $('<button type="button" class="btn btn-xs btn-circle btn-danger removeStopBtn">x</button>');
+            $stopNameContainer.append($btn);
+            $btn.click(function () {
+                app.pickYourStops.model.user.removeFromFavouriteStops(stopName);
+                app.yourStopInfo.main.refresh();
+            });
+
             $favStopsContainer.append(
                 $stopContainer
                     .append($stopNameContainer)
@@ -63,23 +70,7 @@ ns('app.yourStopInfo.main', function () {
                 });
             }
         });
-
-
-
-
     }
-
-    function filterOneDiv() {
-
-        var filteredOutStops = app.yourStopInfo.filters.filterOne();
-        showDiv(filteredOutStops);
-        //app.yourStopInfo.filters.startFilters();
-        //app.yourStopInfo.filters.filterData();
-    }
-
-    function filterTwoDiv() {
-    }
-
 
     return {
         init: function () {
@@ -91,7 +82,7 @@ ns('app.yourStopInfo.main', function () {
             showDiv(favStops, timetables);
         },
         filterOneDiv: filterOneDiv,
-        showDiv:showDiv,
+        showDiv: showDiv,
         filterTwoDiv: filterTwoDiv
 
     }
