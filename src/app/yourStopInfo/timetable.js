@@ -59,16 +59,13 @@ ns('app.yourStopInfo.timetable', function () {
                     departures: singleLineDepartures
 
                 });
-                //console.log(timetables);
             });
         });
-
         app.yourStopInfo.main.refresh();
     };
 
     return {
         wpFunction: wpFunction,
         timetables: timetables
-
     }
 });

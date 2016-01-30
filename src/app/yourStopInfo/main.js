@@ -1,8 +1,5 @@
 ns('app.yourStopInfo.main', function () {
 
-    //var $jsyourStopInfo = $('#js-yourStopInfo');
-
-
     function showDiv(favStops, timetables, currentFilter) {
 
         var $favStopsContainer = $('#js-yourStopInfo');
@@ -14,7 +11,6 @@ ns('app.yourStopInfo.main', function () {
                 var $stopContainer = $('<div class="yourStop">');
                 var $stopNameContainer = $('<h3>').append(stopName);
                 var $stopTimetableContainer = $('<div class="stopTimetable">');
-
 
                 $favStopsContainer
                     .append($stopContainer
@@ -29,7 +25,6 @@ ns('app.yourStopInfo.main', function () {
                 app.pickYourStops.model.user.removeFromFavouriteStops(stopName);
                 app.yourStopInfo.main.refresh();
             });
-
                 console.log(timetables);
 
                 var currentStopLines = timetables[stopName];
@@ -48,8 +43,6 @@ ns('app.yourStopInfo.main', function () {
                         $lineButton.text(line.lineName);
                         $lineCell.append($lineButton);
 
-
-
                         var $departureCell = $('<td>');
                         line.departures.forEach(function (departure) {
                             var $button = $('<button class="btn btn-primary">').text(departure);
@@ -61,20 +54,14 @@ ns('app.yourStopInfo.main', function () {
                         $linesRow.append($lineCell).append($departureCell);
                         $tbody.append($linesRow);
 
-
-
                         $tableTimeTables.append($thead);
                         $tableTimeTables.append($tbody);
 
                         $stopTimetableContainer.append($tableTimeTables);
 
-
-
                     });
-
                 }
             });
-
     }
 
     return {
