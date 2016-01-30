@@ -21,6 +21,8 @@ ns('app.yourStopInfo.main', function () {
                     app.pickYourStops.model.user.removeFromFavouriteStops(stopName);
                     app.yourStopInfo.main.refresh();
                 });
+
+
                 $favStopsContainer.append(
                     $stopContainer
                         .append($stopNameContainer)
