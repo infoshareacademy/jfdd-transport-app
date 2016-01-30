@@ -65,7 +65,7 @@ console.log(filteredLines);
         },
         availableFilters: [
             {
-                label: "Przystanki, na które wjedzie autobus w przeciągu 5 minut",
+                label: "Przystanki, na które wjedzie autobus w przeciągu 15 minut",
                 filter: filterOne
             },
             {
