@@ -28,6 +28,7 @@ ns('app.login.main', function () {
             app.pickYourStops.model.user.init(name);
             app.state.init();
             app.yourStopInfo.main.init();
+            app.lineStats.main.init();
         };
 
         var onFailure = function(error) {
@@ -49,6 +50,7 @@ ns('app.login.main', function () {
 
     return {
         init: function () {
+            initializeSocialButton();
             createPopup();
         }
     };
