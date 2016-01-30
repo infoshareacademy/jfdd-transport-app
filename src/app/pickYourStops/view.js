@@ -35,9 +35,9 @@ ns('app.pickYourStops.view', function () {
                     var inputList = $('#js-pickYourStops input[list="stops"]');
                     var selectedBusStop = inputList.val();
                     if (selectedBusStop) {
-
                         app.pickYourStops.model.user.addToFavouriteStops(selectedBusStop);
                         app.yourStopInfo.main.refresh();
+
                         //app.yourStopInfo.main.showDiv(app.pickYourStops.model.user.favouriteStops());
                         inputList.val('');
                     }
