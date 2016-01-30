@@ -1,7 +1,7 @@
 ns('app.yourStopInfo.filters', function () {
 
     var linesArray;
-    var filtersArray = ["Przystanki, na których jeździ więcej niż 3 linie", "Przystanki, na które wjedzie autobus w przeciągu X minut"];
+    var filtersArray = ["Przystanki, na których jeździ więcej niż 3 linie", "Przystanki, na które wjedzie autobus w przeciągu 15 minut"];
     //var inputList = $('#js-yourStopInfo input[list=filters]');
     var filteredLines;
 
@@ -27,7 +27,7 @@ ns('app.yourStopInfo.filters', function () {
 
                     var dTime = pure - seconds;
                     console.log(dTime);
-                    return prev || (dTime <= 600 && dTime >= 0);
+                    return prev || (dTime <= 900 && dTime >= 0);
                 }, false);
         }, false);
     }
