@@ -1,6 +1,6 @@
 ns('app.yourStopInfo.main', function () {
 
-    var $jsyourStopInfo = $('#js-yourStopInfo');
+    //var $jsyourStopInfo = $('#js-yourStopInfo');
 
 
     function showDiv(favStops, timetables, currentFilter) {
@@ -9,7 +9,8 @@ ns('app.yourStopInfo.main', function () {
 
         $favStopsContainer.empty();
 
-            favStops.forEach(function (stopName) {
+        favStops.filter(currentFilter || function ()
+            { return true; }).forEach(function (stopName) {
                 var $stopContainer = $('<div class="yourStop">');
                 var $stopNameContainer = $('<h3>').append(stopName);
                 var $stopTimetableContainer = $('<div class="stopTimetable">');
@@ -29,19 +30,6 @@ ns('app.yourStopInfo.main', function () {
                 console.log(timetables);
 
                 var currentStopLines = timetables[stopName];
-
-            //if (currentStopLines !== undefined) {
-            //    currentStopLines.forEach(function (line) {
-            //        var $lineContainer = $('<div>').append(line.lineNumber);
-            //        $stopTimetableContainer.append($lineContainer);
-            //
-            //        line.departures.forEach(function (departure) {
-            //            $lineContainer.append($('<span>').append(departure.formated));
-            //        })
-            //    });
-            //}
-        //});
-
                 var $tableTimeTables = $('<table class="table table-striped">');
                 var $tHeadCell = $('<th>').text("Linia");
                 var $tHeadCell2 = $('<th>').text("Rozkład jazdy");

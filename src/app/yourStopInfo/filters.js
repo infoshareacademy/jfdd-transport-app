@@ -16,13 +16,14 @@ ns('app.yourStopInfo.filters', function () {
 
         var seconds = hours + minutes + secs;
         console.log(seconds);
+        console.log(departureTimes[stopName][0].departures[0].pure)
 
         var departureTimes = app.yourStopInfo.timetable.timetables;
         return departureTimes[stopName].reduce(function (prev, curr) {
             return prev || curr.departures.reduce(function (prev, curr) {
                     console.log(curr.formated);
-                    var toSeconds = curr.formated.split(":");
-                    var pure = (+toSeconds[0]) * 60 * 60 + (+toSeconds[1]) * 60 + (+toSeconds[2]);
+                    //var toSeconds = curr.formated.split(":");
+                    //var pure = (+toSeconds[0]) * 60 * 60 + (+toSeconds[1]) * 60 + (+toSeconds[2]);
 
                     var dTime = pure - seconds;
                     console.log(dTime);

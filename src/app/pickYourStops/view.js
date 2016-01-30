@@ -37,17 +37,13 @@ ns('app.pickYourStops.view', function () {
                     if (selectedBusStop) {
 
                         app.pickYourStops.model.user.addToFavouriteStops(selectedBusStop);
-                        app.yourStopInfo.main.showDiv(app.pickYourStops.model.user.favouriteStops());
-                        app.yourStopInfo.filters.startFilters();
-                        app.yourStopInfo.filters.filterData();
+                        app.yourStopInfo.main.refresh();
+                        //app.yourStopInfo.main.showDiv(app.pickYourStops.model.user.favouriteStops());
                         inputList.val('');
                     }
                 }
             );
 
-            app.yourStopInfo.main.showDiv(app.pickYourStops.model.user.favouriteStops());
-            app.yourStopInfo.filters.startFilters();
-            app.yourStopInfo.filters.filterData();
         }
     }
-);
+});

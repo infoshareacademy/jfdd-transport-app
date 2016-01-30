@@ -24,7 +24,6 @@ ns('app.login.main', function () {
             var name = googleUser.getBasicProfile().getName();
 
             prepareUI(name);
-
             app.pickYourStops.model.user.init(name);
             app.state.init();
             app.yourStopInfo.main.init();
@@ -50,7 +49,7 @@ ns('app.login.main', function () {
 
     return {
         init: function () {
-            initializeSocialButton();
+            //initializeSocialButton();
             createPopup();
         }
     };
