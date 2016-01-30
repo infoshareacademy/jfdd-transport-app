@@ -16,25 +16,20 @@ ns('app.yourStopInfo.filters', function () {
         var secs = actualTime.getSeconds();
 
         var seconds = hours + minutes + secs;
-        //console.log('test');
+        console.log(seconds);
 
         var departureTimes = app.yourStopInfo.timetable.timetables;
-        //console.log(departureTimes[stopName]);
+        return departureTimes[stopName].reduce(function (prev, curr) {
+            return prev || curr.departures.reduce(function (prev, curr) {
+                    console.log(curr.formated);
+                    var toSeconds = curr.formated.split(":");
+                    var pure = (+toSeconds[0]) * 60 * 60 + (+toSeconds[1]) * 60 + (+toSeconds[2]);
 
-        departureTimes[stopName].forEach(function (stopName) {
-            stopName.departures.forEach(function (departures) {
-                //console.log(departures.pure-seconds);
-
-                if (departures.pure-seconds <= 1000) {
-                    //return true;
-                console.log('true')
-                }
-                //else {
-                //console.log('false')
-                //    return false;
-                //}
-            })
-        });
+                    var dTime = pure - seconds;
+                    console.log(dTime);
+                    return prev || (dTime <= 600 && dTime >= 0);
+                }, false);
+        }, false);
     }
 
 
