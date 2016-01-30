@@ -2,7 +2,6 @@ ns('app.yourStopInfo.filters', function () {
 
     var linesArray;
     var filtersArray = ["Przystanki, na których jeździ więcej niż 3 linie", "Przystanki, na które wjedzie autobus w przeciągu 15 minut"];
-    //var inputList = $('#js-yourStopInfo input[list=filters]');
     var filteredLines;
 
 
@@ -35,9 +34,6 @@ ns('app.yourStopInfo.filters', function () {
 
 //Filter "minimum thee lines":
     function filterTwo(stopName) {
-
-        //filtruje dane o liniach z jsona, wyszukując te, które poruszają się po jednym z ulubionych przystanków
-        //zwraca tablicę z obiektami (z jsona - linie)
 
         filteredLines = linesArray.filter(function (line) {
             return line.stops.find(function (stop) {
