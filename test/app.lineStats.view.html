@@ -7,33 +7,51 @@
 
 </head>
 <body>
-    <div id="qunit"></div>
-    <div id="qunit-fixture"></div>
-    <script src="//code.jquery.com/qunit/qunit-1.20.0.js"></script>
-    <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script src="../src/utils.js"></script>
-    <script src="../src/app/dataManager.js"></script>
-    <script src="../src/app/lineStats/view.js"></script>
-    <script>
-        var sortedBusesToDisplay;
+<div id="qunit"></div>
+<div id="qunit-fixture">
+    <div id="js-lineStats" class="row">
+        <div class="col-sm-12">
+            <h2>Aktualne opóźnienia na liniach</h2>
 
-        QUnit.module('Line delays section, view', {
-            beforeEach: function () {
-                sortedBusesToDisplay = [
-                    {delayToDisplay: " ma opóźnienie 2 min 47 sek. ", lineName: '100'},
-                    {delayToDisplay: " ma opóźnienie 1 min 30 sek. ", lineName: '109'}
-                ];
-            },
-            afterEach: function () {
-            }
-        });
+            <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
 
-        QUnit.test("Displays sorted buses", function (assert) {
-            app.lineStats.view.displaySortedBuses(sortedBusesToDisplay);
+            <div class="form-inline js-lineInputContainer">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control input-sm" list="lines">
+                        <datalist id="lines">
+                        </datalist>
+                    </div>
+                </div>
+                <button id="chooseLines" type="button" class="btn icon-btn btn-success btn-sm">
+                    <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+                </button>
+            </div>
+            <ul class="list-inline voffset" id="selectedLines"></ul>
+        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/qunit/qunit-1.20.0.js"></script>
+<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="../src/utils.js"></script>
+<script src="../src/app/dataManager.js"></script>
+<script src="../src/app/lineStats/view.js"></script>
+<script>
+    var sortedLinesToDisplay = [
+        {delayToDisplay: " ma opóźnienie 2 min 47 sek. ", lineName: '100'},
+        {delayToDisplay: " ma opóźnienie 1 min 30 sek. ", lineName: '109'}
+    ];
 
-            assert.ok($('.sortedLines:contains("Linia 100 ma opóźnienie 2 min 47 sek. ")'), '1st bus delay info');
-            assert.ok($('.sortedLines:contains("Linia 100 ma opóźnienie 2 min 47 sek. ")'), '2nd bus delay info');
-        });
-    </script>
+    QUnit.test("Displays sorted lines", function (assert) {
+        app.lineStats.view.displaySortedBuses(sortedLinesToDisplay);
+
+        var $firstBusDelayInfo = $('.sortedLines li')[0];
+        var $secondBusDelayInfo = $('.sortedLines li')[1];
+
+        assert.ok($('.sortedLines li').length === 2, 'Two \<li\> elements were created');
+        assert.ok($firstBusDelayInfo.innerHTML === 'Linia 100 ma opóźnienie 2 min 47 sek. ', '1st bus delay info');
+        assert.ok($secondBusDelayInfo.innerHTML === 'Linia 109 ma opóźnienie 1 min 30 sek. ', '2nd bus delay info');
+    });
+</script>
 </body>
 </html>
