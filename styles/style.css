@@ -55,12 +55,12 @@ th{
     font-size: 20px;
 }
 
-#pickYourStops,#filters,#yourStop,#lineStats {
+#pickYourStops,#filtersId,#yourStop,#lineStats {
     padding: 10px;
     border: 1px solid lightgray;
     margin-top: 5px;
     margin-bottom: 5px;
-    background-color: rgba(250,250,250, 0.7);
+    background-color: rgba(250,250,250, 0.8);
 }
 
 #js-pickYourStops{
@@ -73,6 +73,13 @@ th{
     padding-bottom: 0;
 }
 
+h3.wrapper{
+    background-color: rgba(250,250,250, 0.8);
+}
+
+div.stopTimetable.wrapper {
+    background-color: rgba(250,250,250, 0.8);
+}
 div.yourStop {
     background-color: rgba(250,250,250, 0.5);
     margin-bottom: 10px;
