@@ -21,7 +21,7 @@ ns('app.yourStopInfo.timetable', function () {
         return time;
     };
 
-    var wpFunction = function (jsonWithPublicTransportLines) {
+    var prepareTimetables = function (jsonWithPublicTransportLines) {
         // get stop names from local storage for user
         var stopsFromLocalStorageArray = app.pickYourStops.model.user.favouriteStops();
 
@@ -81,7 +81,7 @@ ns('app.yourStopInfo.timetable', function () {
     };
 
     return {
-        wpFunction: wpFunction,
+        prepareTimetables: prepareTimetables,
         timetables: timetables
     }
 });
