@@ -10,7 +10,7 @@ ns('app.pickYourStops.view', function () {
         init: function (busStops) {
             var sortedBusStops = sortBusStops(busStops);
             $('#js-pickYourStops')
-                .append($('<div class="form-inline">')
+                .append($('<div class="form-inline wrapper col-sm-8 col-sm-offset-2">')
                     .append($('<div class="form-group">')
                         .append($('<div class="input-group">')
                             .append($('<input class="form-control input-sm" list="stops">')

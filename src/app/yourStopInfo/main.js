@@ -8,9 +8,9 @@ ns('app.yourStopInfo.main', function () {
 
         favStops.filter(currentFilter || function ()
             { return true; }).forEach(function (stopName) {
-                var $stopContainer = $('<div class="yourStop">');
-                var $stopNameContainer = $('<h3>').append(stopName);
-                var $stopTimetableContainer = $('<div class="stopTimetable">');
+                var $stopContainer = $('<div class="yourStop wrapper col-sm-8 col-sm-offset-2">');
+                var $stopNameContainer = $('<h3 class="wrapper">').append(stopName);
+                var $stopTimetableContainer = $('<div class="stopTimetable wrapper">');
 
                 $favStopsContainer
                     .append($stopContainer

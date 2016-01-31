@@ -2,7 +2,7 @@ ns('app.yourStopInfo.filtersView', function () {
 
     function startFilters(filters) {
         $('#filtersDiv')
-            .append($('<div class="form-inline">')
+            .append($('<div class="form-inline wrapper col-sm-8 col-sm-offset-2">')
                 .append($('<div class="form-group">')
                 .append($('<div class="input-group">')
                     .append($('<input class="form-control input-sm" list="filters">')

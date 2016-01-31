@@ -16,12 +16,12 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="shortcut icon" href="styles/images/favicon.ico" type="image/x-icon"/>
 </head>
-<body class="fluid-container">
 
-<div class="fluid-container">
-
+<body>
+<div class = "fluid-container">
     <header id="header" class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-10 col-sm-offset-2">
+            <p class="helloUser"></p>
             <img src="styles/images/logofinal1.png">
         </div>
     </header>
@@ -30,32 +30,39 @@
     <main class="hide">
 
         <div id="my-signin2" class="row">
-            <div class="col-sm-12"></div>
+            <div class="col-sm-10 col-sm-offset-2"></div>
         </div>
 
 
-            <div id="js-pickYourStops" class="row" >
-                <div class="col-sm-12" style="padding: 10px; border: 1px solid lightgray; margin-top: 5px; margin-bottom: 5px;background-color: rgba(250,250,250, 0.3);">
-                <h3>Wybierz przystanki, które chcesz obserwować:</h3>
-                <p>MOŻESZ W KAŻDEJ CHWILI MODYFIKOWAĆ SWOJĄ LISTĘ, DODAWAĆ I USUWAĆ PRZYSTANKI</p>
+        <div id="js-pickYourStops" class="row">
+            <div class="wrapper col-sm-8 col-sm-offset-2">
+                <div style="padding: 10px; border: 1px solid lightgray; margin-top: 5px; margin-bottom: 5px;background-color: rgba(250,250,250, 0.5);">
+                    <h3>Wybierz przystanki, które chcesz obserwować:</h3>
+                    <p>MOŻESZ W KAŻDEJ CHWILI MODYFIKOWAĆ SWOJĄ LISTĘ, DODAWAĆ I USUWAĆ PRZYSTANKI</p>
+                </div>
             </div>
         </div>
 
         <div id="filtersDiv" class="row">
-            <div class="col-sm-12" style="padding: 10px; border: 1px solid lightgray; margin-top: 5px; margin-bottom: 5px;background-color: rgba(250,250,250, 0.3);">
+            <div  class="wrapper col-sm-8 col-sm-offset-2">
+                <div style="padding: 10px; border: 1px solid lightgray; margin-top: 5px; margin-bottom: 5px;background-color: rgba(250,250,250, 0.5);">
                 <h3>Obserwowane przystanki</h3>
                 <p>SPRAWDŹ SYTUACJĘ NA SWOIM PRZYSTANKU</p>
             </div>
         </div>
+            </div>
 
         <div id="js-yourStopInfo" class="row">
-            <div class="col-sm-12">
-                <h1>Twoje przystanki:</h1>
+            <div class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="yourStop" style="padding: 10px; border: 1px solid lightgray; margin-top: 5px; margin-bottom: 5px;background-color: rgba(250,250,250, 0.5);">
+
+                </div>
             </div>
         </div>
 
-        <div id="js-lineStats" class="row">
-            <div class="col-sm-12" style=" padding: 10px; border: 1px solid lightgray; margin-top: 5px; margin-bottom: 5px;background-color: rgba(250,250,250, 0.3);">
+        <div id="js-lineStats" class="row ">
+            <div class="wrapper col-sm-8 col-sm-offset-2">
+                <div style=" padding: 10px; border: 1px solid lightgray; margin-top: 5px; margin-bottom: 5px;background-color: rgba(250,250,250, 0.5);">
                 <h2>Aktualne opóźnienia na liniach</h2>
 
                 <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
@@ -72,14 +79,15 @@
                         <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
                     </button>
                 </div>
-                <ul class="list-inline voffset" id="selectedLines"></ul>
+                <ul class="list-inline offset" id="selectedLines"></ul>
             </div>
+                </div>
         </div>
 
     </main>
 
-    <footer>
-        <div class="footer_style">
+    <footer class="row">
+        <div class="col-sm-12 footer_style">
             <div class="footer_image"><img src="styles/images/logofinal1.png" alt="logo"/></div>
             <p><span>&copy;</span> 2015 by Fantastic 4</p>
         </div>

@@ -16,31 +16,69 @@ main {
     padding-top: 30px;
 }
 
-div#js-yourStopInfo.row{
-    background-color: rgba(250,250,250, 0.5);
-    margin:auto;
+#header{
+    -webkit-box-shadow: 5px 5px 25px -4px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 5px 5px 25px -4px rgba(0, 0, 0, 1);
+    box-shadow: 5px 5px 25px -4px rgba(0, 0, 0, 1);
+}
+
+h3{
+    font-size: 30px;
+}
+
+th{
+    font-size: 20px;
+}
+#js-pickYourStops{
+    padding:20px;
+}
+
+#filtersDiv{
+    padding:20px;
+    padding-bottom: 0;
+}
+
+
+#js-yourStopInfo{
+    padding:20px;
+    padding-top:0;
 }
 
 div.yourStop {
-    background-color: rgba(250,250,250, 0.3);
+    background-color: rgba(250,250,250, 0.4);
+    margin-bottom: 10px;
 }
 
 div.yourStop td {
     background-color: #d7ccbe;
 }
-
-#js-lineStats, #filtersDiv, #js-pickYourStops{
-    background-color: rgba(250,250,250, 0.5);
-    margin-top: 30px;
-    margin-left:auto;
-    margin-right:auto;
-    width: 60%;
-    -webkit-box-shadow: 0 5px 18px -4px rgba(0, 0, 0, 1);
-    -moz-box-shadow: 0 5px 18px -4px rgba(0, 0, 0, 1);
-    box-shadow: 0 5px 18px -4px rgba(0, 0, 0, 1);
-    padding:10px;
+.removeStopBtn {
+    border-radius: 50%;
+    padding: 0.1em;
+    width: 1.8em;
+    float: right;
+    font-weight: bold;
 }
 
+.wrapper{
+    background-color: rgba(250,250,250, 0.4);
+    padding: 20px;
+}
+
+ .yourStop.wrapper, #js-lineStats div.wrapper {
+    -webkit-box-shadow: 5px 5px 18px -4px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 5px 5px 18px -4px rgba(0, 0, 0, 1);
+    box-shadow: 5px 5px 18px -4px rgba(0, 0, 0, 1);
+}
+
+h3.wrapper, .stopTimetable.wrapper {
+    border: 1px solid lightgray
+}
+
+#js-lineStats{
+    padding:20px;
+    padding-top:0;
+}
 
 .footer_style {
     padding-top: 10px;
@@ -69,3 +107,4 @@ div.yourStop td {
     font-size: 15px;
     font-weight: normal;
 }
+
