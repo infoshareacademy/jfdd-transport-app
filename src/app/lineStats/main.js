@@ -11,6 +11,10 @@ ns('app.lineStats.main', function () {
     };
 
     var getLineDelays = function (lines) {
+        if ($('.fetchingStatus').length > 0) {
+            $('.fetchingStatus').remove();
+        }
+
         var userLines = filterByLineId(lines, currentLines);
         var results = [];
 
@@ -94,45 +98,91 @@ ns('app.lineStats.main', function () {
 
     return {
         init: function () {
+            var apiUrl = 'https://isa-api.herokuapp.com/transport/lines.json';
             currentLines = [];
 
-            app.lineStats.view.init();
+            app.lineStats.view.init(apiUrl);
+
+            $('input[list="lines"]').on('focus', function () {
+                if ($('.lineErrorMessage').length > 0) {
+                    $('.lineErrorMessage').remove();
+                }
+            });
 
             $('#chooseLines').on('click', function () {
+                if ($('.lineErrorMessage').length > 0) {
+                    $('.lineErrorMessage').remove();
+                }
+
                 var lineList = $('input[list="lines"]');
-                if (lineList.val()) {
+
+                var inputContainsValueFromDatalist = false;
+                $('datalist#lines > option').each(function () {
+                    if ($(this).attr('value') === lineList.val()) {
+                        inputContainsValueFromDatalist = true;
+                    }
+                });
+
+                var valueAlreadyPicked = false;
+                $('#selectedLines li').each(function () {
+                    if ($(this).text() === lineList.val()) {
+                        valueAlreadyPicked = true;
+                    }
+                });
+
+                if (inputContainsValueFromDatalist && !valueAlreadyPicked) {
                     $('#selectedLines').append('<li>' + lineList.val() + '</li>');
 
                     currentLines.push(lineList.val());
 
                     if ($('#showStats').length < 1) {
                         $('#js-lineStats > div')
-                            .append($('<button id="showStats" type="button" class="btn">' + 'Pokaż opóźnienia' + '</button>'));
+                            .append($('<button id="showStats" type="button" class="btn btn-default">' + 'Pokaż opóźnienia' + '</button>'));
                     }
 
                     if ($('#resetStats').length < 1) {
                         $('#js-lineStats > div')
                             .append(' ')
-                            .append($('<button id="resetStats" type="button" class="btn">' + 'Wyczyść' + '</button>'));
+                            .append($('<button id="resetStats" type="button" class="btn btn-default">' + 'Wyczyść' + '</button>'));
                     }
+                } else {
+                    var $errorMessage = ($('<span class="lineErrorMessage">'));
+
+                    if (valueAlreadyPicked) {
+                        $errorMessage.text('Ta linia została już wybrana.');
+                    } else {
+                        $errorMessage.text('Wybierz jedną z dostępnych linii.');
+                    }
+
+                    $('.js-lineInputContainer').after($errorMessage);
                 }
                 lineList.val('');
             });
 
             $('#js-lineStats').on('click', '#showStats', function () {
-                app.dataManager
-                    .fetch('https://isa-api.herokuapp.com/transport/lines.json', [getLineDelays]);
+                var $fetchingStatus = $('<p>');
+                $fetchingStatus.addClass('fetchingStatus voffset');
+                $fetchingStatus.text('Pobieram dane...');
+                $('#resetStats').after($fetchingStatus);
 
-                $('#showStats').addClass('btn-disabled').prop('disabled', true);
-                $('#chooseLines').addClass('btn-disabled').prop('disabled', true);
+                if ($('.lineErrorMessage').length > 0) {
+                    $('.lineErrorMessage').remove();
+                }
+
+                $('.sortedLines').empty();
+                app.dataManager.fetch(apiUrl, [getLineDelays]);
             });
 
             $('#js-lineStats').on('click', '#resetStats', function () {
                 $('#showStats').remove();
-                $('#chooseLines').removeClass('btn-disabled').prop('disabled', false);
                 $('#selectedLines').empty();
                 $('.sortedLines').remove();
                 $('#resetStats').remove();
+
+                if ($('.lineErrorMessage').length > 0) {
+                    $('.lineErrorMessage').remove();
+                }
+
                 currentLines = [];
             });
         }

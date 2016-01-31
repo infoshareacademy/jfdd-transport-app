@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Statystyki transportu miejskiego</title>
+    <meta name="description" content="Strona ze statystykami komunikacji miejskiej">
+    <meta name="author" content="Fantastic4">
+    <meta name="keywords" content="Fantastic4, statystyki komunikacji miejskiej">
+    <meta charset="UTF-8">
     <meta name="google-signin-client_id"
           content="709967216215-6kqu1k6sna5snk1nb5b6l889r1lpdsed.apps.googleusercontent.com">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,12 +43,10 @@
         </div>
 
         <div id="js-lineStats" class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12 js-lineStatsContainer">
                 <h2>Aktualne opóźnienia na liniach</h2>
-
                 <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
-
-                <div class="form-inline">
+                <div class="form-inline js-lineInputContainer">
                     <div class="form-group">
                         <div class="input-group">
                             <input class="form-control input-sm" list="lines">

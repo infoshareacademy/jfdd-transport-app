@@ -3,7 +3,11 @@
  */
 ns('app.lineStats.view', function () {
 
-    var getLineList = function(lines) {
+    var displayLineList = function(lines) {
+        if ($('.fetchingStatus').length > 0) {
+            $('.fetchingStatus').remove();
+        }
+
         var $datalistEl = $('#lines');
 
         $datalistEl.append(lines.map(function(line) {
@@ -26,12 +30,17 @@ ns('app.lineStats.view', function () {
             );
             ul.append(li);
         });
-        $('#js-lineStats > div').append(div);
+        $('.js-lineStatsContainer').append(div);
     };
 
     return {
-        init: function () {
-            app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [getLineList]);
+        init: function (url) {
+            var $fetchingStatus = $('<p>');
+            $fetchingStatus.addClass('fetchingStatus voffset');
+            $fetchingStatus.text('Pobieram dane...');
+            $('#selectedLines').before($fetchingStatus);
+
+            app.dataManager.fetch(url, [displayLineList]);
         },
         displaySortedBuses: displaySortedBuses
     }
