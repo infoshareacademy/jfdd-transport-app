@@ -4,6 +4,10 @@
 ns('app.lineStats.view', function () {
 
     var displayLineList = function(lines) {
+        if ($('.fetchingStatus').length > 0) {
+            $('.fetchingStatus').remove();
+        }
+
         var $datalistEl = $('#lines');
 
         $datalistEl.append(lines.map(function(line) {
@@ -31,6 +35,11 @@ ns('app.lineStats.view', function () {
 
     return {
         init: function (url) {
+            var $fetchingStatus = $('<p>');
+            $fetchingStatus.addClass('fetchingStatus voffset');
+            $fetchingStatus.text('Pobieram dane...');
+            $('#selectedLines').before($fetchingStatus);
+
             app.dataManager.fetch(url, [displayLineList]);
         },
         displaySortedBuses: displaySortedBuses

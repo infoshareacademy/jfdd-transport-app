@@ -11,6 +11,10 @@ ns('app.lineStats.main', function () {
     };
 
     var getLineDelays = function (lines) {
+        if ($('.fetchingStatus').length > 0) {
+            $('.fetchingStatus').remove();
+        }
+
         var userLines = filterByLineId(lines, currentLines);
         var results = [];
 
@@ -152,6 +156,11 @@ ns('app.lineStats.main', function () {
             });
 
             $('#js-lineStats').on('click', '#showStats', function () {
+                var  $fetchingStatus = $('<p>');
+                $fetchingStatus.addClass('fetchingStatus voffset');
+                $fetchingStatus.text('Pobieram dane...');
+                $('#resetStats').after($fetchingStatus);
+
                 if ($('.lineErrorMessage').length > 0) {
                     $('.lineErrorMessage').remove();
                 }
