@@ -110,6 +110,10 @@ ns('app.lineStats.main', function () {
             });
 
             $('#chooseLines').on('click', function () {
+                if ($('.lineErrorMessage').length > 0) {
+                    $('.lineErrorMessage').remove();
+                }
+
                 var lineList = $('input[list="lines"]');
 
                 var inputContainsValueFromDatalist = false;
@@ -156,7 +160,7 @@ ns('app.lineStats.main', function () {
             });
 
             $('#js-lineStats').on('click', '#showStats', function () {
-                var  $fetchingStatus = $('<p>');
+                var $fetchingStatus = $('<p>');
                 $fetchingStatus.addClass('fetchingStatus voffset');
                 $fetchingStatus.text('Pobieram dane...');
                 $('#resetStats').after($fetchingStatus);
