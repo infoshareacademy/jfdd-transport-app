@@ -13,6 +13,7 @@ main {
     background-position: center ;
     background-attachment: fixed;
     padding-bottom: 30px;
+    padding-top: 30px;
 }
 
 div#js-yourStopInfo.row{
@@ -28,7 +29,7 @@ div.yourStop td {
     background-color: #d7ccbe;
 }
 
-#js-lineStats{
+#js-lineStats, #filtersDiv, #js-pickYourStops{
     background-color: rgba(250,250,250, 0.5);
     margin-top: 30px;
     margin-left:auto;
