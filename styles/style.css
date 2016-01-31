@@ -59,6 +59,7 @@ th{
 #js-yourStopInfo, #filtersDiv{
     padding:20px;
     padding-top:0;
+    padding-bottom: 0;
 }
 
 div.yourStop {
