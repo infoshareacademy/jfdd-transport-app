@@ -19,7 +19,9 @@ ns('app.yourStopInfo.timetable', function () {
     var cachedJson = null;
     var prepareTimetables = function (jsonWithPublicTransportLines) {
         if (jsonWithPublicTransportLines === undefined) {
-            jsonWithPublicTransportLines = jsonWithPublicTransportLines || cachedJson;
+            jsonWithPublicTransportLines = cachedJson;
+        } else {
+            cachedJson = jsonWithPublicTransportLines;
         }
         // get stop names from local storage for user
         var stopsFromLocalStorageArray = app.pickYourStops.model.user.favouriteStops();
@@ -76,8 +78,7 @@ ns('app.yourStopInfo.timetable', function () {
                 });
             });
         });
-
-        return timetables;
+        app.yourStopInfo.main.refresh();
     };
 
     return {
