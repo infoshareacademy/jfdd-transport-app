@@ -7,16 +7,31 @@
 
 </head>
 <body>
-    <div id="qunit"></div>
-    <div id="qunit-fixture"></div>
-    <script src="//code.jquery.com/qunit/qunit-1.20.0.js"></script>
-    <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script src="../src/utils.js"></script>
-    <script src="../src/app/lineStats/view.js"></script>
-    <script>
-        QUnit.test("a temporary test", function (assert) {
-            assert.ok($('#js-lineStats'), 'div exists');
-        });
-    </script>
+<div id="qunit"></div>
+<div id="qunit-fixture">
+    <div class="js-lineStatsContainer"></div>
+</div>
+<script src="//code.jquery.com/qunit/qunit-1.20.0.js"></script>
+<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="../src/utils.js"></script>
+<script src="../src/app/dataManager.js"></script>
+<script src="../src/app/lineStats/view.js"></script>
+<script>
+    var sortedLinesToDisplay = [
+        {delayToDisplay: " ma opóźnienie 2 min 47 sek. ", lineName: '100'},
+        {delayToDisplay: " ma opóźnienie 1 min 30 sek. ", lineName: '109'}
+    ];
+
+    QUnit.test("Displays sorted lines", function (assert) {
+        app.lineStats.view.displaySortedBuses(sortedLinesToDisplay);
+
+        var $firstBusDelayInfo = $('.sortedLines li')[0];
+        var $secondBusDelayInfo = $('.sortedLines li')[1];
+
+        assert.ok($('.sortedLines li').length === 2, 'Two \<li\> elements were created');
+        assert.ok($firstBusDelayInfo.innerHTML === 'Linia 100 ma opóźnienie 2 min 47 sek. ', '1st bus delay info');
+        assert.ok($secondBusDelayInfo.innerHTML === 'Linia 109 ma opóźnienie 1 min 30 sek. ', '2nd bus delay info');
+    });
+</script>
 </body>
 </html>

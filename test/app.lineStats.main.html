@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>app.lineStats.main</title>
+    <link rel="stylesheet" href="//code.jquery.com/qunit/qunit-1.20.0.css">
+
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture">
+    <div id="js-lineStats" class="row">
+        <div class="col-sm-12 js-lineStatsContainer">
+            <h2>Aktualne opóźnienia na liniach</h2>
+            <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
+            <div class="form-inline js-lineInputContainer">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control input-sm" list="lines">
+                        <datalist id="lines">
+                        </datalist>
+                    </div>
+                </div>
+                <button id="chooseLines" type="button" class="btn icon-btn btn-success btn-sm">
+                    <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+                </button>
+            </div>
+            <ul class="list-inline voffset" id="selectedLines"></ul>
+        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/qunit/qunit-1.20.0.js"></script>
+<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="../src/utils.js"></script>
+<script src="../src/app/dataManager.js"></script>
+<script src="../src/app/lineStats/view.js"></script>
+<script src="../src/app/lineStats/main.js"></script>
+<script>
+    QUnit.module('Delay section tests: removing errors', {
+        beforeEach: function () {
+            $('.lineErrorMessage').remove();
+        },
+        afterEach: function () {
+            $('.lineErrorMessage').remove();
+        }
+    });
+
+    QUnit.test('Clears an error message when the input field has focus', function (assert) {
+        $('.js-lineInputContainer').after($('<span class="lineErrorMessage">'));
+        app.lineStats.main.init();
+        $('input[list="lines"]').trigger('focus');
+
+        assert.ok($('.lineErrorMessage').length === 0, 'The message gets removed.');
+    });
+
+    QUnit.test('Displays the Show Delays and Reset buttons', function (assert) {
+        app.lineStats.main.init();
+        $('#lines').append($('<option>').attr('value', 99));
+        $('input[list="lines"]').val(99);
+        $('#chooseLines').trigger('click');
+
+        assert.ok($('#showStats').length === 1, 'Displays the Show Delays button');
+        assert.ok($('#resetStats').length === 1, 'Displays the Reset button');
+    });
+
+    QUnit.test('Doesn\'t display the Show Delays and Reset buttons if the input ' +
+            '\ value doesn\'t match a value from the datalist', function (assert) {
+        app.lineStats.main.init();
+        $('#lines').append($('<option>').attr('value', 99));
+        $('input[list="lines"]').val(98);
+        $('#chooseLines').trigger('click');
+
+        assert.notOk($('#showStats').length === 1, 'Doesn\'t display Show Delays button');
+        assert.notOk($('#resetStats').length === 1, 'Doesn\'t display Show Delays button');
+
+    });
+
+    QUnit.test('Displays an error message if the input ' +
+            '\ value doesn\'t match a value from the datalist', function (assert) {
+        app.lineStats.main.init();
+        $('#lines').append($('<option>').attr('value', 99));
+        $('input[list="lines"]').val(98);
+        $('#chooseLines').trigger('click');
+
+        var errorMessage = $('.lineErrorMessage').text();
+        assert.equal(errorMessage, 'Wybierz jedną z dostępnych linii.', 'Displays an error message');
+    });
+
+    QUnit.test('Displays an error message if the input ' +
+            '\ value has already been selected', function (assert) {
+        app.lineStats.main.init();
+        $('#lines').append($('<option>').attr('value', 99));
+        $('#selectedLines').append($('<li>').text(99));
+
+        $('input[list="lines"]').val(99);
+        $('#chooseLines').trigger('click');
+
+        var errorMessage = $('.lineErrorMessage').text();
+        assert.equal(errorMessage, 'Ta linia została już wybrana.', 'Displays an error message');
+    });
+</script>
+</body>
+</html>

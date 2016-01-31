@@ -2,6 +2,10 @@
     margin-top: 10px;
 }
 
+.lineErrorMessage {
+    color: darkred;
+}
+
 .col-sm-12 {
     padding-left: 0;
 }
