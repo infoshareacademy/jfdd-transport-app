@@ -9,27 +9,7 @@
 <body>
 <div id="qunit"></div>
 <div id="qunit-fixture">
-    <div id="js-lineStats" class="row">
-        <div class="col-sm-12">
-            <h2>Aktualne opóźnienia na liniach</h2>
-
-            <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
-
-            <div class="form-inline js-lineInputContainer">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input class="form-control input-sm" list="lines">
-                        <datalist id="lines">
-                        </datalist>
-                    </div>
-                </div>
-                <button id="chooseLines" type="button" class="btn icon-btn btn-success btn-sm">
-                    <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
-                </button>
-            </div>
-            <ul class="list-inline voffset" id="selectedLines"></ul>
-        </div>
-    </div>
+    <div class="js-lineStatsContainer"></div>
 </div>
 <script src="//code.jquery.com/qunit/qunit-1.20.0.js"></script>
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>

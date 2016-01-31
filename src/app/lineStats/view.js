@@ -26,7 +26,7 @@ ns('app.lineStats.view', function () {
             );
             ul.append(li);
         });
-        $('#js-lineStats > div').append(div);
+        $('.js-lineStatsContainer').append(div);
     };
 
     return {
