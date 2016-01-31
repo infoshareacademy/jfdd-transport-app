@@ -28,7 +28,7 @@ ns('app.yourStopInfo.filtersView', function () {
             }
 
             else if ($('#filtersDiv input').val() == filters[0].label) {
-                app.yourStopInfo.filters.setFilter(filters[0].filter)
+                app.yourStopInfo.filters.setFilter(filters[0].filter);
                 inputList.val('');
             }
         });
