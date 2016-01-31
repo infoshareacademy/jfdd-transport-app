@@ -3,7 +3,7 @@ ns('app.yourStopInfo.timetable', function () {
     var timetables = {};
 
     var toHHMMSS = function (seconds_parameter) {
-        var sec_num = parseInt(seconds_parameter, 10); // don't forget the second param
+        var sec_num = parseInt(seconds_parameter, 10);  // don't forget the radix in the second param
         var hours = Math.floor(sec_num / 3600);
         var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
         var seconds = sec_num - (hours * 3600) - (minutes * 60);

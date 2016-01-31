@@ -49,7 +49,6 @@ ns('app.login.main', function () {
 
     return {
         init: function () {
-            //initializeSocialButton();
             createPopup();
         }
     };

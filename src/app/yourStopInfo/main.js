@@ -25,7 +25,6 @@ ns('app.yourStopInfo.main', function () {
                 app.pickYourStops.model.user.removeFromFavouriteStops(stopName);
                 app.yourStopInfo.main.refresh();
             });
-                console.log(timetables);
 
                 var currentStopLines = timetables[stopName];
                 var $tableTimeTables = $('<table class="table table-striped">');
