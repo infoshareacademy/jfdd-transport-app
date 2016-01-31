@@ -98,9 +98,22 @@ ns('app.lineStats.main', function () {
 
             app.lineStats.view.init();
 
+            $('input[list="lines"]').on('focus', function () {
+                if ($('.lineErrorMessage').length > 0) {
+                    $('.lineErrorMessage').remove();
+                }
+            });
+
             $('#chooseLines').on('click', function () {
                 var lineList = $('input[list="lines"]');
-                if (lineList.val()) {
+                var linesInDatalist = [];
+                $('datalist#lines > option').each(function () {
+                    linesInDatalist.push($(this).attr('value'));
+                });
+
+                var inputContainsValueFromDatalist = linesInDatalist.indexOf(lineList.val());
+
+                if (inputContainsValueFromDatalist >= 0) {
                     $('#selectedLines').append('<li>' + lineList.val() + '</li>');
 
                     currentLines.push(lineList.val());
@@ -115,6 +128,10 @@ ns('app.lineStats.main', function () {
                             .append(' ')
                             .append($('<button id="resetStats" type="button" class="btn">' + 'Wyczyść' + '</button>'));
                     }
+                } else {
+                    $('.js-lineInputContainer')
+                        .after($('<span class="lineErrorMessage">')
+                            .text('Wybierz jedną z dostępnych linii.'));
                 }
                 lineList.val('');
             });
