@@ -16,8 +16,11 @@ ns('app.yourStopInfo.timetable', function () {
         var time = hours + ':' + minutes;
         return time;
     };
-
+    var cachedJson = null;
     var prepareTimetables = function (jsonWithPublicTransportLines) {
+        if (jsonWithPublicTransportLines === undefined) {
+            jsonWithPublicTransportLines = jsonWithPublicTransportLines || cachedJson;
+        }
         // get stop names from local storage for user
         var stopsFromLocalStorageArray = app.pickYourStops.model.user.favouriteStops();
 
