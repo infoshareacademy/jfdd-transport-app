@@ -13,10 +13,19 @@
     <link rel="stylesheet" href="src/app/lineStats/lineStats-css.css">
     <link rel="stylesheet" href="src/app/yourStopInfo/yourStop.css">
     <link rel="stylesheet" href="src/app/login/login-css.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="shortcut icon" href="styles/images/favicon.ico" type="image/x-icon"/>
 </head>
-<body class="container">
+<body class="fluid-container">
 
-<div class="container">
+<div class="fluid-container">
+
+    <header id="header" class="row">
+        <div class="col-sm-12">
+            <img src="styles/images/logofinal1.png">
+        </div>
+    </header>
+
 
     <main class="hide">
 
@@ -40,7 +49,10 @@
         </div>
 
         <div id="js-lineStats" class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12" style=" padding: 10px;
+    border: 1px solid lightgray;
+    margin-top: 5px;
+    margin-bottom: 5px;background-color: rgba(250,250,250, 0.3);">
                 <h2>Aktualne opóźnienia na liniach</h2>
 
                 <p>Wybierz linie i sprawdź, na których występują w tej chwili największe opóźnienia.</p>
@@ -62,6 +74,14 @@
         </div>
 
     </main>
+
+    <footer>
+        <div class="footer_style">
+            <div class="footer_image"><img src="styles/images/logofinal1.png" alt="logo"/></div>
+            <p><span>&copy;</span> 2015 by Fantastic 4</p>
+        </div>
+
+    </footer>
 </div>
 
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
@@ -79,6 +99,7 @@
 <script src="src/app/yourStopInfo/filtersView.js"></script>
 <script src="src/app/lineStats/main.js"></script>
 <script src="src/app/lineStats/view.js"></script>
+<!--<script src="styles/parallax.js"></script>-->
 <script src="src/main.js"></script>
 <!--Bootstrap JS-->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

@@ -6,11 +6,65 @@ body {
     display:none;
 }
 
-#helloDiv {
-
+main {
+    background-image: url("images/foto_background1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center ;
+    background-attachment: fixed;
+    padding-bottom: 30px;
 }
 
-#helloDiv h1{
-    font-size: 60px;
-    padding-top: 120px;
+div#js-yourStopInfo.row{
+    background-color: rgba(250,250,250, 0.5);
+    margin:auto;
+}
+
+div.yourStop {
+    background-color: rgba(250,250,250, 0.3);
+}
+
+div.yourStop td {
+    background-color: #d7ccbe;
+}
+
+#js-lineStats{
+    background-color: rgba(250,250,250, 0.5);
+    margin-top: 30px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 60%;
+    -webkit-box-shadow: 0 5px 18px -4px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0 5px 18px -4px rgba(0, 0, 0, 1);
+    box-shadow: 0 5px 18px -4px rgba(0, 0, 0, 1);
+    padding:10px;
+}
+
+
+.footer_style {
+    padding-top: 10px;
+    background-color: #282828;
+    border-bottom: solid 10px #0f1214;
+}
+
+.footer_image {
+    text-align: center;
+}
+
+.footer_image img {
+    height: 80px;
+    -webkit-filter: invert(100%);
+    -moz-filter: invert(100%);
+    -o-filter: invert(100%);
+    -ms-filter: invert(100%);
+    filter: invert(100%);
+}
+
+.footer_style p {
+    padding-top: 10px;
+    text-align: center;
+    color: white;
+    letter-spacing: 4px;
+    font-size: 15px;
+    font-weight: normal;
 }
