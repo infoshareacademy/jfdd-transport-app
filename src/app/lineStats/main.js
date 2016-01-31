@@ -107,14 +107,22 @@ ns('app.lineStats.main', function () {
 
             $('#chooseLines').on('click', function () {
                 var lineList = $('input[list="lines"]');
-                var linesInDatalist = [];
+
+                var inputContainsValueFromDatalist = false;
                 $('datalist#lines > option').each(function () {
-                    linesInDatalist.push($(this).attr('value'));
+                    if ($(this).attr('value') === lineList.val()) {
+                        inputContainsValueFromDatalist = true;
+                    }
                 });
 
-                var inputContainsValueFromDatalist = linesInDatalist.indexOf(lineList.val());
+                var valueAlreadyPicked = false;
+                $('#selectedLines li').each(function () {
+                    if ($(this).text() === lineList.val()) {
+                        valueAlreadyPicked = true;
+                    }
+                });
 
-                if (inputContainsValueFromDatalist >= 0) {
+                if (inputContainsValueFromDatalist && !valueAlreadyPicked) {
                     $('#selectedLines').append('<li>' + lineList.val() + '</li>');
 
                     currentLines.push(lineList.val());
@@ -130,14 +138,24 @@ ns('app.lineStats.main', function () {
                             .append($('<button id="resetStats" type="button" class="btn btn-default">' + 'Wyczyść' + '</button>'));
                     }
                 } else {
-                    $('.js-lineInputContainer')
-                        .after($('<span class="lineErrorMessage">')
-                            .text('Wybierz jedną z dostępnych linii.'));
+                    var $errorMessage = ($('<span class="lineErrorMessage">'));
+
+                    if (valueAlreadyPicked) {
+                        $errorMessage.text('Ta linia została już wybrana.');
+                    } else {
+                        $errorMessage.text('Wybierz jedną z dostępnych linii.');
+                    }
+
+                    $('.js-lineInputContainer').after($errorMessage);
                 }
                 lineList.val('');
             });
 
             $('#js-lineStats').on('click', '#showStats', function () {
+                if ($('.lineErrorMessage').length > 0) {
+                    $('.lineErrorMessage').remove();
+                }
+
                 $('.sortedLines').empty();
                 app.dataManager.fetch(apiUrl, [getLineDelays]);
             });
