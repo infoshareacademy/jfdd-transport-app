@@ -94,9 +94,10 @@ ns('app.lineStats.main', function () {
 
     return {
         init: function () {
+            var apiUrl = 'https://isa-api.herokuapp.com/transport/lines.json';
             currentLines = [];
 
-            app.lineStats.view.init();
+            app.lineStats.view.init(apiUrl);
 
             $('input[list="lines"]').on('focus', function () {
                 if ($('.lineErrorMessage').length > 0) {
@@ -138,16 +139,19 @@ ns('app.lineStats.main', function () {
 
             $('#js-lineStats').on('click', '#showStats', function () {
                 $('.sortedLines').empty();
-                app.dataManager
-                    .fetch('https://isa-api.herokuapp.com/transport/lines.json', [getLineDelays]);
+                app.dataManager.fetch(apiUrl, [getLineDelays]);
             });
 
             $('#js-lineStats').on('click', '#resetStats', function () {
                 $('#showStats').remove();
-                $('#chooseLines').removeClass('btn-disabled').prop('disabled', false);
                 $('#selectedLines').empty();
                 $('.sortedLines').remove();
                 $('#resetStats').remove();
+
+                if ($('.lineErrorMessage').length > 0) {
+                    $('.lineErrorMessage').remove();
+                }
+
                 currentLines = [];
             });
         }

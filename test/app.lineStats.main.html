@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>app.lineStats.main</title>
+    <link rel="stylesheet" href="//code.jquery.com/qunit/qunit-1.20.0.css">
+
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="//code.jquery.com/qunit/qunit-1.20.0.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../src/utils.js"></script>
+    <script src="../src/app/dataManager.js"></script>
+    <script src="../src/app/lineStats/view.js"></script>
+    <script src="../src/app/lineStats/main.js"></script>
+    <script>
+        var $lineErrorMessageElement;
+
+        QUnit.module('Line delays section, main', {
+            beforeEach: function () {
+                $lineErrorMessageElement = $('<span class="lineErrorMessage">');
+            },
+            afterEach: function () {
+                $lineErrorMessageElement
+            }
+        });
+
+        QUnit.test("", function (assert) {
+
+        });
+    </script>
+</body>
+</html>

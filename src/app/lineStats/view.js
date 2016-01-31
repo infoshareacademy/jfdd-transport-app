@@ -3,7 +3,7 @@
  */
 ns('app.lineStats.view', function () {
 
-    var getLineList = function(lines) {
+    var displayLineList = function(lines) {
         var $datalistEl = $('#lines');
 
         $datalistEl.append(lines.map(function(line) {
@@ -30,8 +30,8 @@ ns('app.lineStats.view', function () {
     };
 
     return {
-        init: function () {
-            app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [getLineList]);
+        init: function (url) {
+            app.dataManager.fetch(url, [displayLineList]);
         },
         displaySortedBuses: displaySortedBuses
     }

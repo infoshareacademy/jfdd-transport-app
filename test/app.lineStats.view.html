@@ -12,10 +12,27 @@
     <script src="//code.jquery.com/qunit/qunit-1.20.0.js"></script>
     <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="../src/utils.js"></script>
+    <script src="../src/app/dataManager.js"></script>
     <script src="../src/app/lineStats/view.js"></script>
     <script>
-        QUnit.test("a temporary test", function (assert) {
-            assert.ok($('#js-lineStats'), 'div exists');
+        var sortedBusesToDisplay;
+
+        QUnit.module('Line delays section, view', {
+            beforeEach: function () {
+                sortedBusesToDisplay = [
+                    {delayToDisplay: " ma opóźnienie 2 min 47 sek. ", lineName: '100'},
+                    {delayToDisplay: " ma opóźnienie 1 min 30 sek. ", lineName: '109'}
+                ];
+            },
+            afterEach: function () {
+            }
+        });
+
+        QUnit.test("Displays sorted buses", function (assert) {
+            app.lineStats.view.displaySortedBuses(sortedBusesToDisplay);
+
+            assert.ok($('.sortedLines:contains("Linia 100 ma opóźnienie 2 min 47 sek. ")'), '1st bus delay info');
+            assert.ok($('.sortedLines:contains("Linia 100 ma opóźnienie 2 min 47 sek. ")'), '2nd bus delay info');
         });
     </script>
 </body>
