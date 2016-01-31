@@ -120,13 +120,13 @@ ns('app.lineStats.main', function () {
 
                     if ($('#showStats').length < 1) {
                         $('#js-lineStats > div')
-                            .append($('<button id="showStats" type="button" class="btn">' + 'Pokaż opóźnienia' + '</button>'));
+                            .append($('<button id="showStats" type="button" class="btn btn-default">' + 'Pokaż opóźnienia' + '</button>'));
                     }
 
                     if ($('#resetStats').length < 1) {
                         $('#js-lineStats > div')
                             .append(' ')
-                            .append($('<button id="resetStats" type="button" class="btn">' + 'Wyczyść' + '</button>'));
+                            .append($('<button id="resetStats" type="button" class="btn btn-default">' + 'Wyczyść' + '</button>'));
                     }
                 } else {
                     $('.js-lineInputContainer')
@@ -137,11 +137,9 @@ ns('app.lineStats.main', function () {
             });
 
             $('#js-lineStats').on('click', '#showStats', function () {
+                $('.sortedLines').empty();
                 app.dataManager
                     .fetch('https://isa-api.herokuapp.com/transport/lines.json', [getLineDelays]);
-
-                $('#showStats').addClass('btn-disabled').prop('disabled', true);
-                $('#chooseLines').addClass('btn-disabled').prop('disabled', true);
             });
 
             $('#js-lineStats').on('click', '#resetStats', function () {
