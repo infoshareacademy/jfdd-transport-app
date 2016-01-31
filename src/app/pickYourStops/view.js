@@ -36,7 +36,7 @@ ns('app.pickYourStops.view', function () {
                     var selectedBusStop = inputList.val();
                     if (selectedBusStop) {
                         app.pickYourStops.model.user.addToFavouriteStops(selectedBusStop);
-                        app.state.init();
+                        app.state.updateData();
                         app.yourStopInfo.main.refresh();
                         inputList.val('');
                     }

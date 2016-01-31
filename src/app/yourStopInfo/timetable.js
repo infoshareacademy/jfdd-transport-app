@@ -73,7 +73,8 @@ ns('app.yourStopInfo.timetable', function () {
                 });
             });
         });
-        app.yourStopInfo.main.refresh();
+
+        return timetables;
     };
 
     return {
