@@ -25,6 +25,24 @@ main {
     opacity: 0.8;
 }
 
+.helloUser{
+    margin-top: 10px;
+}
+
+.icones{
+    -moz-transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+.icones:hover{
+    -moz-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    -o-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    transform: scale(1.15);
+}
 
 h3{
     font-size: 30px;
@@ -37,13 +55,8 @@ th{
     padding:20px;
 }
 
-#filtersDiv{
-    padding:20px;
-    padding-bottom: 0;
-}
 
-
-#js-yourStopInfo{
+#js-yourStopInfo, #filtersDiv{
     padding:20px;
     padding-top:0;
 }
@@ -74,6 +87,7 @@ div.yourStop td {
     -moz-box-shadow: 5px 5px 18px -4px rgba(0, 0, 0, 1);
     box-shadow: 5px 5px 18px -4px rgba(0, 0, 0, 1);
 }
+
 
 h3.wrapper, .stopTimetable.wrapper {
     border: 1px solid lightgray
