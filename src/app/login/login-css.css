@@ -1,10 +1,5 @@
-body {
-    font-family: 'Play', sans-serif;
-}
-
 #my-signin2 {
     position: absolute;
-    padding-top: 50px;
     width: 250px;
     left:50%;
     margin-left: -125px;
@@ -15,6 +10,7 @@ body {
     background-color: white;
     padding: 20px;
     padding-top: 50px;
+    padding-bottom: 50px;
     top: 80px;
     left: 50%;
     margin-left:-200px;
@@ -23,15 +19,15 @@ body {
     height: 200px;
     font-size: 20px;
     font-weight: bold;
-    -webkit-box-shadow: 4px -2px 23px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 4px -2px 23px 0px rgba(0,0,0,0.75);
-    box-shadow: 4px -2px 23px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 4px -2px 23px 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px -2px 23px 0 rgba(0,0,0,0.75);
+    box-shadow: 4px -2px 23px 0 rgba(0,0,0,0.75);
 }
 
 .popup:hover {
-    -webkit-box-shadow: 4px -2px 14px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 4px -2px 14px 0px rgba(0,0,0,0.75);
-    box-shadow: 4px -2px 14px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 4px -2px 14px 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px -2px 14px 0 rgba(0,0,0,0.75);
+    box-shadow: 4px -2px 14px 0 rgba(0,0,0,0.75);
 }
 
 .popup>span {

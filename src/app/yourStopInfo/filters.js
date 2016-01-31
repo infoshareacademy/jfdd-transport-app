@@ -1,163 +1,83 @@
-ns('app.yourStopInfo.filters', function ()  {
+ns('app.yourStopInfo.filters', function () {
 
     var linesArray;
-    var filtersArray = ["Przystanki, na których jeździ więcej niż 3 linie", "Przystanki, których nazwa jest dłuższa niż 9 znaków"];
-    //var inputList = $('#js-yourStopInfo input[list=filters]');
+    var filtersArray = ["Przystanki, na których jeżdżą więcej niż 3 linie", "Przystanki, na które wjedzie autobus w ciągu 15 minut"];
+    var filteredLines;
 
 
-    function fetchRealData() {
 
-        app.dataManager.fetch('https://isa-api.herokuapp.com/transport/lines.json', [function (lines) {
-            console.log(lines);
-            linesArray = lines;
-        }]);
-    }
+//Filter Departure time <15 minutes:----------------------------------------
+    function filterOne(stopName) {
 
-    function startFilters() {
+        var actualTime = new Date();
+        var hours = actualTime.getHours() * 3600;
+        var minutes = actualTime.getMinutes() * 60;
+        var secs = actualTime.getSeconds();
 
-        function addSelect(filters) {
+        var seconds = hours + minutes + secs;
 
-            $('#js-yourStopInfo')
-                .prepend($('<button id="clearMyFilter">').text("Wyczyść"))//.append($('<div class="selectedFilter">'))
-                .prepend($('<button id="myFilter">').text("Filtruj"))//.append($('<div class="selectedFilter">'))
-                .prepend($('<input list="filters">').append($('<datalist id="filters">')
-                    .append(filtersArray.map(
-                            function (filtersArray) {
-                                return $('<option>').attr('value', filtersArray);
-                            })
-                    ))
-                )
-        }
+        var departureTimes = app.yourStopInfo.timetable.timetables;
+        return departureTimes[stopName].reduce(function (prev, curr) {
+            return prev || curr.departures.reduce(function (prev, curr) {
+                    var toSeconds = curr.split(":");
+                    var pure = (+toSeconds[0]) * 60 * 60 + (+toSeconds[1]) * 60 + (+toSeconds[2]);
 
-        addSelect();
-    }
-
-    function clearFilterData () {
-        $('#clearMyFilter').on('click', function (){
-            console.log("usuwam");
-                var favStops = app.pickYourStops.model.user.favouriteStops();
-                app.yourStopInfo.main.showDiv(favStops);
-        }
-        )
+                    var dTime = pure - seconds;
+                    return prev || (dTime <= 900 && dTime >= 0);
+                }, false);
+        }, false);
     }
 
 
-    function filterData() {
-        $('#myFilter').on('click', function () {
+//Filter "minimum thee lines"------------------------------------------:
+    function filterTwo(stopName) {
 
-            if ($('#js-yourStopInfo input').val() == filtersArray[1]) {
-                app.yourStopInfo.main.filterOneDiv();
-
-            }
-
-            else if ($('#js-yourStopInfo input').val() == filtersArray[0]){
-                app.yourStopInfo.main.filterTwoDiv();
-                console.log('filtr litera')
-                filterTwo();
-            }
-        });
-        //inputList.val('');
-    }
-
-    function filterOne() {
-        var favStops = app.pickYourStops.model.user.favouriteStops();
-
-        var filteredOutStops = favStops.filter(function (stop) {
-            return stop.length >= 9;
-        });
-        return filteredOutStops;
-    }
-
-    function filterTwo() {
-
-        var favStops = app.pickYourStops.model.user.favouriteStops();
-        //filtruje dane o liniach z jsona, wyszukując te, które poruszają się po jednym z ulubionych przystanków
-        //zwraca tablicę z obiektami (z jsona - linie)
-        var filteredLines = linesArray.filter(function (line) {
+        filteredLines = linesArray.filter(function (line) {
             return line.stops.find(function (stop) {
-                    return favStops.indexOf(stop.name) !== -1;
+                    return stop.name === stopName;
                 }) !== undefined;
         });
-        console.log(filteredLines);
 
-        var accumulator = {};
-        //TO CHECK
-        favStops.forEach(function (name) {
-            accumulator[name] = [];
-        });
+        var accumulator = [];
 
         filteredLines.forEach(function (line) {
             line.stops.forEach(function (stop) {
-                if (accumulator[stop.name] !== undefined) {
-                    accumulator[stop.name].push(line);
+                if (stop.name === stopName) {
+                    accumulator.push(line);
                 }
             });
         });
-        console.log(accumulator);
 
-// parse object to array:
-        var accumulatorArray = $.map(accumulator, function(stop, index) {
-            return [stop];
-        });
-        console.log(accumulatorArray);
-
-        accumulatorArray.forEach(function (elements){
-            if(elements.length>=3){
-                elements.forEach(function(details){
-                    console.log(details.id)
-                })
-            }else{console.log ("nie ma takiego przystanku");}
-        });
-
-        //var filteredOutLines =  accumulatorArray.filter(function (stop) {
-        //    return stop.length >= 3;
-        //});
-        //return filteredOutLines;
-
-
-        //console.log(filteredOutLines);
-       //for(var value in accumulator){
-       //     console.log(value);
-       // }
-        //return filteredOutLines;
-
-        //console.log(filteredOutLines);
-
-
-
-        //var filteredOutStops = stopsArray.filter(function (stop) {
-        //    return stop.name.length >= 9;
-        //});
-//}
-//
-//        return filteredOutStops;
+        if (accumulator.length >= 3) {
+            return true;
+        }
     }
-
-
-    function clearFilterData () {
-        $('#clearMyFilter').on('click', function (){
-                console.log("usuwam");
-                var favStops = app.pickYourStops.model.user.favouriteStops();
-                app.yourStopInfo.main.showDiv(favStops);
-            }
-
-        )
-    }
-
 
 
     return {
-        init: function () {
-            startFilters();
-            filterData();
-            fetchRealData();
-            clearFilterData ()
-            //filterOne();
-            //activateFilter()
+        init: function (lines) {
+            linesArray = lines;
+            app.yourStopInfo.filtersView.init();
         },
-        filterOne: filterOne,
-        startFilters: startFilters,
-        filterData: filterData
+        availableFilters: [
+            {
+                label: "Przystanki, na które wjedzie autobus w ciągu 15 minut",
+                filter: filterOne
+            },
+            {
+                label: "Przystanki, na których jeżdżą więcej niż 3 linie",
+                filter: filterTwo
+            }
+        ],
+        currentFilter: null,
+        clearFilters: function () {
+            this.currentFilter = null;
+            app.yourStopInfo.main.refresh();
+        },
+        setFilter: function (filter) {
+            this.currentFilter = filter;
+            app.yourStopInfo.main.refresh();
+        }
     }
 
 });

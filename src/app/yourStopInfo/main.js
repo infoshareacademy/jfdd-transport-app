@@ -1,47 +1,78 @@
 ns('app.yourStopInfo.main', function () {
 
-    var $jsyourStopInfo = $('#js-yourStopInfo');
+    function showDiv(favStops, timetables, currentFilter) {
 
+        var $favStopsContainer = $('#js-yourStopInfo');
 
-    function showDiv(favStops) {
-        $jsyourStopInfo.empty();
-        favStops.forEach(function (busStop) {
-            var busStopItem = $('<div class="yourStop"><span>' + busStop + '</span></div>');
-            var btn = $('<button type="button" class="btn btn-xs btn-circle btn-danger removeStopBtn">x</button>');
-            $jsyourStopInfo.append(busStopItem);
-            busStopItem.append(btn);
-            btn.click(function () {
-                app.pickYourStops.model.user.removeFromFavouriteStops(busStopItem.find('span').text());
-                busStopItem.remove()
+        $favStopsContainer.empty();
+
+        favStops.filter(currentFilter || function ()
+            { return true; }).forEach(function (stopName) {
+                var $stopContainer = $('<div class="yourStop">');
+                var $stopNameContainer = $('<h3>').append(stopName);
+                var $stopTimetableContainer = $('<div class="stopTimetable">');
+
+                $favStopsContainer
+                    .append($stopContainer
+                        .append($stopNameContainer)
+                        .append($stopTimetableContainer)
+
+                    );
+
+            var $btn = $('<button type="button" class="btn btn-xs btn-circle btn-danger removeStopBtn">x</button>');
+            $stopNameContainer.append($btn);
+            $btn.click(function () {
+                app.pickYourStops.model.user.removeFromFavouriteStops(stopName);
+                app.yourStopInfo.main.refresh();
             });
-            //<span class = "fetchingStatus"></span>
-        });
+
+                var currentStopLines = timetables[stopName];
+                var $tableTimeTables = $('<table class="table table-striped">');
+                var $tHeadCell = $('<th>').text("Linia");
+                var $tHeadCell2 = $('<th>').text("Rozkład jazdy");
+                var $tHeadRow = $('<tr>');
+
+                var $thead = $('<thead>').append($tHeadRow.append($tHeadCell).append($tHeadCell2));
+                var $tbody = $('<tbody>');
+                if (currentStopLines !== undefined) {
+                    currentStopLines.forEach(function (line) {
+
+                        var $lineCell = $('<td>');
+                        var $lineButton = $('<button class="btn btn-success">');
+                        $lineButton.text(line.lineName);
+                        $lineCell.append($lineButton);
+
+                        var $departureCell = $('<td>');
+                        line.departures.forEach(function (departure) {
+                            var $button = $('<button class="btn btn-primary">').text(departure);
+                            $departureCell.append($button);
+                        });
+
+                        var $linesRow = $('<tr>');
+
+                        $linesRow.append($lineCell).append($departureCell);
+                        $tbody.append($linesRow);
+
+                        $tableTimeTables.append($thead);
+                        $tableTimeTables.append($tbody);
+
+                        $stopTimetableContainer.append($tableTimeTables);
+
+                    });
+                }
+            });
     }
-
-    function filterOneDiv() {
-
-        var filteredOutStops = app.yourStopInfo.filters.filterOne();
-        showDiv(filteredOutStops);
-        app.yourStopInfo.filters.startFilters();
-        app.yourStopInfo.filters.filterData();
-    }
-
-    function filterTwoDiv() {
-        //var filteredOutLines = app.yourStopInfo.filters.filterTwo();
-        //showDiv(filteredOutLines);
-        //app.yourStopInfo.filters.startFilters();
-        //app.yourStopInfo.filters.filterData();
-    }
-
 
     return {
         init: function () {
-            var favStops = app.pickYourStops.model.user.favouriteStops();
-            showDiv(favStops);
+           this.refresh();
         },
-        filterOneDiv: filterOneDiv,
-        showDiv: showDiv,
-        filterTwoDiv: filterTwoDiv
+        refresh: function () {
+            var favStops = app.pickYourStops.model.user.favouriteStops();
+            var timetables = app.yourStopInfo.timetable.timetables;
+            var currentFilter = app.yourStopInfo.filters.currentFilter;
+            showDiv(favStops, timetables, currentFilter);
+        }
     }
 
 });
