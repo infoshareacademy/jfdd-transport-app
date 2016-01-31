@@ -30,12 +30,11 @@ ns('app.yourStopInfo.timetable', function () {
             var linesContainingStopFromLocalStorageArray = jsonWithPublicTransportLines.filter(function (singlePublicTransportLine) {
                 return singlePublicTransportLine.stops.find(function (publicTransportStop) {
                         return publicTransportStop.name === singleStopNameFromLocalStorageArray;
-                    }) !== undefined; // why check against undefined?
+                    }) !== undefined;
             });
 
             linesContainingStopFromLocalStorageArray.forEach(function (singleLine) {
                 var lineNumber = singleLine.id;
-                //timetables[singleStopNameFromLocalStorageArray][lineNumber] = timetables[singleStopNameFromLocalStorageArray][lineNumber] || {};
 
                 var matchingStopFromJsonAgainstLocalstorage = singleLine.stops.find(function (singleStop) {
                     return singleStop.name === singleStopNameFromLocalStorageArray;
@@ -48,7 +47,7 @@ ns('app.yourStopInfo.timetable', function () {
 
                 var singleLineDepartures = singleLine.departures.map(function (sigleDepartureTime) {
                     var depTimesInSeconds = sigleDepartureTime.hour * 3600 + sigleDepartureTime.minutes * 60 + sigleDepartureTime.seconds;
-                    var depTimeOnCurrentStop = (depTimesInSeconds + time) % 86400; //?
+                    var depTimeOnCurrentStop = (depTimesInSeconds + time) % 86400;
                     var depTimeOnCurrentStopHHMMSS = toHHMMSS(depTimeOnCurrentStop);
                     return depTimeOnCurrentStopHHMMSS;
                 });

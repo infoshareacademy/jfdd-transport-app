@@ -19,12 +19,10 @@ ns('app.yourStopInfo.filters', function () {
         var departureTimes = app.yourStopInfo.timetable.timetables;
         return departureTimes[stopName].reduce(function (prev, curr) {
             return prev || curr.departures.reduce(function (prev, curr) {
-                    console.log(curr);
                     var toSeconds = curr.split(":");
                     var pure = (+toSeconds[0]) * 60 * 60 + (+toSeconds[1]) * 60 + (+toSeconds[2]);
 
                     var dTime = pure - seconds;
-                    console.log(dTime);
                     return prev || (dTime <= 900 && dTime >= 0);
                 }, false);
         }, false);
@@ -41,7 +39,6 @@ ns('app.yourStopInfo.filters', function () {
         });
 
         var accumulator = [];
-console.log(filteredLines);
 
         filteredLines.forEach(function (line) {
             line.stops.forEach(function (stop) {
