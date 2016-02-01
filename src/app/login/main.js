@@ -15,6 +15,8 @@ ns('app.login.main', function () {
 
     function prepareUI(name) {
         $('main').removeClass('hide');
+        $('header').removeClass('hide');
+        $('footer').removeClass('hide');
         $('.helloUser').prepend("Witaj, " + name +"!");
         $('.popup').hide();
     }
