@@ -18,6 +18,9 @@ ns('app.yourStopInfo.timetable', function () {
     };
     var cachedJson = null;
     var prepareTimetables = function (jsonWithPublicTransportLines) {
+        for (var i in timetables) {
+            delete timetables[i];
+        }
         if (jsonWithPublicTransportLines === undefined) {
             jsonWithPublicTransportLines = cachedJson;
         } else {
