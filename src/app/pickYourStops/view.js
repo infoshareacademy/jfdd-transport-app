@@ -34,7 +34,10 @@ ns('app.pickYourStops.view', function () {
             $('#pickStop').on('click', function () {
                     var inputList = $('#js-pickYourStops input[list="stops"]');
                     var selectedBusStop = inputList.val();
-                    if (selectedBusStop) {
+                    var busesAlreadyInStorage = app.pickYourStops.model.user.favouriteStops();
+                    var busAlreadyPicked = busesAlreadyInStorage.indexOf(selectedBusStop) !== -1;
+
+                    if (selectedBusStop && !busAlreadyPicked) {
                         app.pickYourStops.model.user.addToFavouriteStops(selectedBusStop);
                         app.yourStopInfo.timetable.prepareTimetables();
                         app.yourStopInfo.main.refresh();
