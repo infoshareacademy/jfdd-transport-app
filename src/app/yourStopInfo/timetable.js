@@ -69,11 +69,13 @@ ns('app.yourStopInfo.timetable', function () {
                     return depTimeOnCurrentStopHHMMSS;
                 });
 
+                var sortedDepartures = singleLineDepartures.sort();
+
                 // push object with data to timetables
                 timetables[singleStopNameFromLocalStorageArray].push({
                     lineNumber: lineNumber,
                     lineName: singleLine.name,
-                    departures: singleLineDepartures
+                    departures: sortedDepartures
 
                 });
             });
