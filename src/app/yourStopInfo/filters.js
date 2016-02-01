@@ -20,7 +20,7 @@ ns('app.yourStopInfo.filters', function () {
         return departureTimes[stopName].reduce(function (prev, curr) {
             return prev || curr.departures.reduce(function (prev, curr) {
                     var toSeconds = curr.split(":");
-                    var pure = (+toSeconds[0]) * 60 * 60 + (+toSeconds[1]) * 60 + (+toSeconds[2]);
+                    var pure = (+toSeconds[0]) * 60 * 60 + (+toSeconds[1]) * 60;
 
                     var dTime = pure - seconds;
                     return prev || (dTime <= 900 && dTime >= 0);
