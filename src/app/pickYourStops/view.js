@@ -34,16 +34,10 @@ ns('app.pickYourStops.view', function () {
             $('#pickStop').on('click', function () {
                     var inputList = $('#js-pickYourStops input[list="stops"]');
                     var selectedBusStop = inputList.val();
+                    var busesAlreadyInStorage = app.pickYourStops.model.user.favouriteStops();
+                    var busAlreadyPicked = busesAlreadyInStorage.indexOf(selectedBusStop) !== -1;
 
-                var valueAlreadyPicked = false;
-                $('#yourStop h2').each(function () {
-                    if ($(this).text() === lineList.val()) {
-                        valueAlreadyPicked = true;
-                    }
-                });
-
-
-                    if (selectedBusStop) {
+                    if (selectedBusStop && !busAlreadyPicked) {
                         app.pickYourStops.model.user.addToFavouriteStops(selectedBusStop);
                         app.yourStopInfo.timetable.prepareTimetables();
                         app.yourStopInfo.main.refresh();
