@@ -16,7 +16,6 @@ ns('app.yourStopInfo.filters', function () {
 
         var seconds = hours + minutes + secs;
         var departureTimes = app.yourStopInfo.timetable.timetables;
-        console.log(departureTimes)
         return departureTimes[stopName].reduce(function (prev, curr) {
             return prev || curr.departures.reduce(function (prev, curr) {
                     var toSeconds = curr.split(":");
