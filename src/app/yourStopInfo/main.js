@@ -29,20 +29,28 @@ ns('app.yourStopInfo.main', function () {
                 var currentStopLines = timetables[stopName];
                 var $tableTimeTables = $('<table class="table table-striped">');
                 var $tHeadCell = $('<th>').text("Linia");
-                var $tHeadCell2 = $('<th>').text("Rozkład jazdy");
+                var $tHeadCell2 = $('<th>').text("Kierunek");
+                var $tHeadCell3 = $('<th>').text("Rozkład jazdy");
                 var $tHeadRow = $('<tr>');
 
-                var $thead = $('<thead>').append($tHeadRow.append($tHeadCell).append($tHeadCell2));
+                var $thead = $('<thead>').append($tHeadRow.append($tHeadCell).append($tHeadCell2).append($tHeadCell3));
                 var $tbody = $('<tbody>');
                 if (currentStopLines !== undefined) {
                     currentStopLines.forEach(function (line) {
 
-                        var $lineCell = $('<td>');
+                        var $lineCell = $('<td class="col-xs-1">');
                         var $lineButton = $('<button class="btn btn-success">');
+                        var $directionButton = $('<button class="btn btn-info">');
                         $lineButton.text(line.lineName);
-                        $lineCell.append($lineButton);
 
-                        var $departureCell = $('<td>');
+                        $lineCell.append($lineButton).append($directionButton);
+
+                        var $directionCell = $('<td class="col-xs-2">');
+                        $directionButton.text(line.direction);
+                        $directionCell.append($directionButton);
+
+
+                        var $departureCell = $('<td class="col-xs-8">');
                         line.departures.forEach(function (departure) {
                             var $button = $('<button class="btn btn-primary">').text(departure);
                             $departureCell.append($button);
@@ -50,7 +58,10 @@ ns('app.yourStopInfo.main', function () {
 
                         var $linesRow = $('<tr>');
 
-                        $linesRow.append($lineCell).append($departureCell);
+                        $linesRow.append($lineCell)
+                            .append($directionCell)
+                            .append($departureCell);
+
                         $tbody.append($linesRow);
 
                         $tableTimeTables.append($thead);
