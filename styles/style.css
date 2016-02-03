@@ -162,3 +162,7 @@ h3.wrapper, .stopTimetable.wrapper {
         margin-top:25px;
     }
 }
+
+form {
+    background-color: white;
+}
