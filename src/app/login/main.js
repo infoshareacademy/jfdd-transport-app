@@ -24,7 +24,6 @@ ns('app.login.main', function () {
     function initializeSocialButton () {
         var onSuccess = function(googleUser) {
             var name = googleUser.getBasicProfile().getName();
-
             prepareUI(name);
             app.pickYourStops.model.user.init(name);
             app.state.init();
