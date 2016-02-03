@@ -1,7 +1,7 @@
 ns('app.yourStopInfo.filters', function () {
 
     var linesArray;
-    var filtersArray = ["Przystanki, na których jeżdżą więcej niż 3 linie", "Przystanki, na które wjedzie autobus w ciągu 15 minut"];
+    var filtersArray = ["Przystanki, na których jeżdżą przynajmniej 3 linie", "Przystanki, na które wjedzie autobus w ciągu 15 minut"];
     var filteredLines;
 
 
@@ -47,7 +47,7 @@ ns('app.yourStopInfo.filters', function () {
             });
         });
 
-        if (accumulator.length >= 4) {
+        if (accumulator.length >= 3) {
             return true;
         }
     }
@@ -64,7 +64,7 @@ ns('app.yourStopInfo.filters', function () {
                 filter: filterOne
             },
             {
-                label: "Przystanki, na których jeżdżą więcej niż 3 linie",
+                label: "Przystanki, na których jeżdżą przynajmniej 3 linie",
                 filter: filterTwo
             }
         ],
