@@ -5,6 +5,7 @@ ns('app.pickYourStops.model.user', function () {
         var stopsArray = JSON.parse(localStorage.getItem(currentUser)) || [];
         stopsArray.push(busStop);
         localStorage.setItem(currentUser, JSON.stringify(stopsArray));
+        app.logger.log(busStop);
     };
 
     var getStops = function () {
