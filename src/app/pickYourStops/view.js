@@ -26,7 +26,7 @@ ns('app.pickYourStops.view', function () {
                             )
                         )
                     )
-                    .append($('<button class="btn btn-default btn-sm" type="button" id="pickStop">')
+                    .append($('<button  ng-click="$log.log(message)" class="btn btn-default btn-sm" type="button" id="pickStop">')
                         .text("Wybierz")
                     )
                 );

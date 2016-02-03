@@ -105,10 +105,10 @@
         </div>
 
 
-        <div id="js-pickYourStops" class="row">
+        <div ng-controller="loggerCtrl" id="js-pickYourStops" class="row">
             <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="pickYourStops">
-                    <h3>Wybierz przystanki, które chcesz obserwować</h3>
+                    <h3 ng-click="$log.log(message)">Wybierz przystanki, które chcesz obserwować</h3>
                     <p>MOŻESZ W KAŻDEJ CHWILI MODYFIKOWAĆ SWOJĄ LISTĘ, DODAWAĆ I USUWAĆ PRZYSTANKI</p>
                 </div>
             </div>
@@ -169,6 +169,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
 <script src="src/app/angularapp.js"></script>
 <script src="src/app/controllers/journeyPlannerCtrl.js"></script>
+<script src="src/app/controllers/logController.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>
