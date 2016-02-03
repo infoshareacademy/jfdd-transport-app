@@ -44,6 +44,7 @@ ns('app.yourStopInfo.timetable', function () {
                 return singlePublicTransportLine.stops.find(isStopFromJsonEqualToStopFromLocalStorage);
             }
 
+
             // from all the lines from json, get only those who stop at a stop saved in local storage
             // return new array
             var linesContainingStopFromLocalStorageArray = jsonWithPublicTransportLines.filter(getStopEqualToStopFromLocalStorage);
@@ -59,11 +60,17 @@ ns('app.yourStopInfo.timetable', function () {
                 var matchingStopArrayIndex = singleLine.stops.indexOf(matchingStopFromJsonAgainstLocalStorage);
 
 
+                var reversedTime = singleLine.dTimes.slice(matchingStopArrayIndex).push(0).reverse().reduce(function (a, b) {
+                    return a + b;
+                }, 0);
+
                 // get the time in second from starting stop to given stop
                 var time = singleLine.dTimes.slice(0, matchingStopArrayIndex + 1).reduce(function (a, b) {
                     return a + b;
                 }, 0);
 
+                var depTimesInSeconds = 0;
+                var arrivalTimeOnTheLastStop =
                 // return departures for single stop
                 var singleLineDepartures = singleLine.departures.map(function (sigleDepartureTime) {
                     var depTimesInSeconds = sigleDepartureTime.hour * 3600 + sigleDepartureTime.minutes * 60 + sigleDepartureTime.seconds;
