@@ -1,10 +1,10 @@
 ns('app.yourStopInfo.timetable', function () {
     var timetables = {};
-    var toHHMMSS;
+    var toHHMM;
     var cachedJson;
     var prepareTimetables;
 
-    toHHMMSS = function (seconds_parameter) {
+    toHHMM = function (seconds_parameter) {
         var sec_num = parseInt(seconds_parameter, 10);  // don't forget the radix in the second param
         var hours = Math.floor(sec_num / 3600);
         var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
@@ -59,7 +59,11 @@ ns('app.yourStopInfo.timetable', function () {
                 var lineNumber = singleLine.id;
                 var matchingStopFromJsonAgainstLocalStorage = singleLine.stops.find(isStopFromJsonEqualToStopFromLocalStorage);
                 var matchingStopArrayIndex = singleLine.stops.indexOf(matchingStopFromJsonAgainstLocalStorage);
-
+                var sortedDepartures;
+                var singleLineDepartures;
+                var singleLineDeparturesReverseDirection;
+                var timeFromStartingStopToGivenInSeconds;
+                var sortedSingleLineDeparturesReverseDirection;
 
                 var timeOfJourneyBackFromLastStopToGivenStopInSeconds = singleLine.dTimes.slice(matchingStopArrayIndex).concat(0).reverse().reduce(sumPreviousAndCurrentElementForReduce, 0);
 
@@ -67,34 +71,35 @@ ns('app.yourStopInfo.timetable', function () {
                 var totalTimeFromTheBeginningToEndOfLineInSeconds = singleLine.dTimes.reduce(sumPreviousAndCurrentElementForReduce);
 
 
-                singleLine.departuresReverseDirection = singleLine.departures.map(function (singleDepartureTime) {
+                 singleLineDeparturesReverseDirection = singleLine.departures.map(function (singleDepartureTime) {
                     var departureTimesInSeconds = singleDepartureTime.hour * 3600 + singleDepartureTime.minutes * 60 + singleDepartureTime.seconds;
                     var timeOfArrivalToLastStopinSecondsModulo24h = (departureTimesInSeconds + totalTimeFromTheBeginningToEndOfLineInSeconds) % 86400; // 86400s = 24h
-                    //var
+                    var departureTimeOnCurrentStop = (timeOfArrivalToLastStopinSecondsModulo24h + timeOfJourneyBackFromLastStopToGivenStopInSeconds) % 86400; // 86400s = 24h
+                    var departureTimeOnCurrentStopHHMM = toHHMM(departureTimeOnCurrentStop);
+                    return departureTimeOnCurrentStopHHMM;
                 });
+                sortedSingleLineDeparturesReverseDirection = singleLineDeparturesReverseDirection.sort();
 
+                // get the timeFromStartingStopToGivenInSeconds in seconds from starting stop to given stop
+                 timeFromStartingStopToGivenInSeconds = singleLine.dTimes.slice(0, matchingStopArrayIndex + 1).reduce(sumPreviousAndCurrentElementForReduce, 0);
 
-                // get the time in second from starting stop to given stop
-                var time = singleLine.dTimes.slice(0, matchingStopArrayIndex + 1).reduce(sumPreviousAndCurrentElementForReduce, 0);
-
-                var depTimesInSeconds = 0;
-
-                var singleLineDepartures = singleLine.departures.map(function (singleDepartureTime) {
+                 singleLineDepartures = singleLine.departures.map(function (singleDepartureTime) {
                     var departureTimesInSeconds = singleDepartureTime.hour * 3600 + singleDepartureTime.minutes * 60 + singleDepartureTime.seconds;
-                    var departureTimeOnCurrentStop = (departureTimesInSeconds + time) % 86400; // 86400s = 24h
-                    var departureTimeOnCurrentStopHHMMSS = toHHMMSS(departureTimeOnCurrentStop);
-                    return departureTimeOnCurrentStopHHMMSS;
+                    var departureTimeOnCurrentStop = (departureTimesInSeconds + timeFromStartingStopToGivenInSeconds) % 86400; // 86400s = 24h
+                    var departureTimeOnCurrentStopHHMM = toHHMM(departureTimeOnCurrentStop);
+                    return departureTimeOnCurrentStopHHMM;
                 });
 
-                var sortedDepartures = singleLineDepartures.sort();
+                sortedDepartures = singleLineDepartures.sort();
+
 
                 // push object with data to timetables
                 timetables[singleStopNameFromLocalStorageArray].push({
                     lineNumber: lineNumber,
                     lineName: singleLine.name,
                     direction: singleLine.stops[singleLine.stops.length - 1].name,
-                    departures: sortedDepartures
-
+                    departures: sortedDepartures,
+                    departuresOnWayBack: sortedSingleLineDeparturesReverseDirection
                 });
             });
         });
