@@ -66,37 +66,41 @@
         </div>
 
         <div ng-controller="journeyPlannerCtrl">
-            <form>
-                <fieldset disabled>
+            <form class='wrapper col-sm-8 col-sm-offset-2'>
+                <div class="container">
+                    <div class="row">
+                        <div>
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <label for="disabledSelect2">Data i godzina</label>
+                                    <input type='text' class="form-control" />
 
-                    <div class="form-group">
-                        <label for="disabledSelect1">Disabled select menu</label>
-                        <select id="disabledSelect1" class="form-control">
-                            <option>Disabled select</option>
-                        </select>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#datetimepicker1').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+                            });
+                        </script>
                     </div>
+                </div>
 
                     <div class="form-group">
-                        <label for="disabledSelect2">Disabled select menu</label>
+                        <label for="disabledSelect2">Przystanek</label>
                         <select id="disabledSelect2" class="form-control">
                             <option>Disabled select</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="disabledSelect3">Disabled select menu</label>
+                        <label for="disabledSelect3">Linia</label>
                         <select id="disabledSelect3" class="form-control">
                             <option>Disabled select</option>
                         </select>
                     </div>
 
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Can't check this
-                        </label>
-                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                </fieldset>
             </form>
         </div>
 
