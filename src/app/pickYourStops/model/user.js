@@ -1,15 +1,17 @@
 ns('app.pickYourStops.model.user', function () {
-    var currentUser = '';
-
+    var currentUser = {username: ""};
+    var state;
     var updateStorage = function (busStop) {
-        var stopsArray = JSON.parse(localStorage.getItem(currentUser)) || [];
+        var stopsArray = state.stopsArray || [];
         stopsArray.push(busStop);
-        localStorage.setItem(currentUser, JSON.stringify(stopsArray));
-        app.logger.log(busStop);
+        state.stopsArray = stopsArray;
+        app.dataManager.save(currentUser, state);
+        app.logger.log({FavStop: busStop, UserName: currentUser.username}
+        );
     };
 
     var getStops = function () {
-        return JSON.parse(localStorage.getItem(currentUser)) || [];
+        return state.stopsArray || [];
     };
 
     var removeFromStorage = function (stopName) {
@@ -17,16 +19,19 @@ ns('app.pickYourStops.model.user', function () {
         var filteredStops = stopsFromStorage.filter(function (busstop) {
             return busstop !== stopName;
         });
-        localStorage.setItem(currentUser, JSON.stringify(filteredStops));
+        state.stopsArray = filteredStops;
+        app.dataManager.save(currentUser, state);
     };
 
     return {
 
         init: function (username) {
-            currentUser = username;
+            currentUser.username = username;
+            state = app.dataManager.load(username)
         },
         favouriteStops: getStops,
         addToFavouriteStops: updateStorage,
-        removeFromFavouriteStops: removeFromStorage
+        removeFromFavouriteStops: removeFromStorage,
+        currentUser: currentUser
     };
 });

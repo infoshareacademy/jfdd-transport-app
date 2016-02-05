@@ -1,4 +1,14 @@
 ns('app.dataManager', function () {
+
+
+    function save(user, state){
+        localStorage.setItem(user.username, JSON.stringify(state.stopsArray));
+    }
+
+    function load(user){
+        return JSON.parse(localStorage.getItem(user.username)) || {};
+    }
+
     return {
         fetch: function (url, callbacks) {
             $.ajax({
@@ -9,6 +19,8 @@ ns('app.dataManager', function () {
                     })
                 }
             });
-        }
+        },
+        save: save,
+        load: load
     };
 });
