@@ -78,6 +78,7 @@ ns('app.yourStopInfo.timetable', function () {
                 timetables[singleStopNameFromLocalStorageArray].push({
                     lineNumber: lineNumber,
                     lineName: singleLine.name,
+                    direction: singleLine.stops[singleLine.stops.length-1].name,
                     departures: sortedDepartures
 
                 });
