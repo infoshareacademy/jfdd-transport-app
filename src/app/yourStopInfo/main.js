@@ -38,7 +38,7 @@ ns('app.yourStopInfo.main', function () {
 
                 var $tbody = $('<tbody>');
 
-                var f = function (line) {
+                var prepareTimetableRowForLine = function (line) {
 
                     var $lineCell = $('<td class="col-xs-1">');
                     var $lineButton = $('<button class="btn btn-success">');
@@ -47,13 +47,13 @@ ns('app.yourStopInfo.main', function () {
 
                     $lineCell.append($lineButton).append($directionButton);
 
-                    var $directionCell = $('<td class="col-xs-2">');
-                    $directionButton.text(line.departures[0]);
+                    var $directionCell = $('<td class="col-xs-2">')
+                    $directionButton.text(line[this][0]);
                     $directionCell.append($directionButton);
 
 
                     var $departureCell = $('<td class="col-xs-8">');
-                    line.departures[1].forEach(function (departure) {
+                    line[this][1].forEach(function (departure) {
                         var $button = $('<button class="btn btn-primary">').text(departure);
                         $departureCell.append($button);
                     });
@@ -72,40 +72,10 @@ ns('app.yourStopInfo.main', function () {
                     $stopTimetableContainer.append($tableTimeTables);
 
                 };
-            var f2 = function (line) {
 
-                var $lineCell = $('<td class="col-xs-1">');
-                var $lineButton = $('<button class="btn btn-success">');
-                var $directionButton = $('<button class="btn btn-info">');
-                $lineButton.text(line.lineName);
-
-                $lineCell.append($lineButton).append($directionButton);
-
-                var $directionCell = $('<td class="col-xs-2">');
-                $directionButton.text(line.departuresOnWayBack[0]);
-                $directionCell.append($directionButton);
-
-
-                var $departureCell = $('<td class="col-xs-8">');
-                line.departuresOnWayBack[1].forEach(function (departure) {
-                    var $button = $('<button class="btn btn-primary">').text(departure);
-                    $departureCell.append($button);
-                });
-
-                var $linesRow = $('<tr>');
-
-                $linesRow.append($lineCell)
-                    .append($directionCell)
-                    .append($departureCell);
-
-                $tbody.append($linesRow);
-
-
-
-            };
                 if (currentStopLines !== undefined) {
-                    currentStopLines.forEach(f);
-                    currentStopLines.forEach(f2);
+                    currentStopLines.forEach(prepareTimetableRowForLine.bind('departures'));
+                    currentStopLines.forEach(prepareTimetableRowForLine.bind('departuresOnWayBack'));
                     $tableTimeTables.append($tbody);
 
                     $stopTimetableContainer.append($tableTimeTables);
