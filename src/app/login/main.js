@@ -37,7 +37,7 @@ ns('app.login.main', function () {
 
         window.renderButton = function () {
             gapi.signin2.render('my-signin2', {
-                'scope': '//www.googleapis.com/auth/plus.login',
+                'scope': 'https://www.googleapis.com/auth/plus.login',
                 'width': 250,
                 'height': 50,
                 'longtitle': true,
