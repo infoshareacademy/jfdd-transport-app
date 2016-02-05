@@ -22,8 +22,8 @@
 </head>
 
 <body ng-app="transport">
-<div class = "fluid-container" ng-controller="transportCtrl">
-    <header id="header" class="row hide">
+<div class="fluid-container" ng-controller="transportCtrl">
+    <header id="header" class="row <!--hide-->">
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-5 col-sm-offset-2">
             <div class="helloUser"></div>
             <img src="styles/images/logofinal1.png">
@@ -60,7 +60,7 @@
     </header>
 
 
-    <main class="hide">
+    <main class="<!--hide-->">
 
         <div ng-controller="transportCtrl">
 
@@ -99,6 +99,13 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            <div ng-controller="journeyPlannerCompletionCtrl" class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="journeyCompletion">
+                    <h2>Realizacja podróży</h2>
+                    <p>Zaznacz etapy, które zostały już zrealizowane.</p>
+
+                </div>
+            </div>
         </div>
 
         <div id="my-signin2" class="row">
@@ -116,13 +123,13 @@
         </div>
 
         <div id="filtersDiv" class="row">
-            <div  class="wrapper col-sm-8 col-sm-offset-2">
+            <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="filtersId">
-                <h3>Obserwowane przystanki</h3>
-                <p>SPRAWDŹ SYTUACJĘ NA SWOIM PRZYSTANKU</p>
+                    <h3>Obserwowane przystanki</h3>
+                    <p>SPRAWDŹ SYTUACJĘ NA SWOIM PRZYSTANKU</p>
+                </div>
             </div>
         </div>
-            </div>
 
         <div id="js-yourStopInfo" class="row">
             <div class="wrapper col-sm-8 col-sm-offset-2">
@@ -135,28 +142,28 @@
         <div id="js-lineStats" class="row ">
             <div class="wrapper col-sm-8 col-sm-offset-2 js-lineStatsContainer">
                 <div id="lineStats">
-                <h2>Aktualne opóźnienia na liniach</h2>
-                <p>WYBIERZ LINIE I SPRAWDŹ, NA KTÓRYCH WYSTĘPUJĄ W TEJ CHWILI NAJWIĘKSZE OPÓŹNIENIA</p>
-                <div class="form-inline js-lineInputContainer">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input class="form-control input-sm" list="lines">
-                            <datalist id="lines">
-                            </datalist>
+                    <h2>Aktualne opóźnienia na liniach</h2>
+                    <p>WYBIERZ LINIE I SPRAWDŹ, NA KTÓRYCH WYSTĘPUJĄ W TEJ CHWILI NAJWIĘKSZE OPÓŹNIENIA</p>
+                    <div class="form-inline js-lineInputContainer">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control input-sm" list="lines">
+                                <datalist id="lines">
+                                </datalist>
+                            </div>
                         </div>
+                        <button id="chooseLines" type="button" class="btn icon-btn btn-success btn-sm">
+                            <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+                        </button>
                     </div>
-                    <button id="chooseLines" type="button" class="btn icon-btn btn-success btn-sm">
-                        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
-                    </button>
+                    <ul class="list-inline offset" id="selectedLines"></ul>
                 </div>
-                <ul class="list-inline offset" id="selectedLines"></ul>
             </div>
-                </div>
         </div>
 
     </main>
 
-    <footer class="hide row">
+    <footer class="<!--hide--> row">
         <div class="col-sm-12 footer_style">
             <div class="footer_image"><img src="styles/images/logofinal1.png" alt="logo"/></div>
             <p><span>&copy;</span> 2015 by Fantastic 4 {{app}}</p>
@@ -176,6 +183,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 <script src="src/app/angularapp.js"></script>
 <script src="src/app/controllers/journeyPlannerCtrl.js"></script>
+<script src="src/app/controllers/journeyPlannerCompletionCtrl.js"></script>
 <script src="src/app/controllers/datepicker.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>
