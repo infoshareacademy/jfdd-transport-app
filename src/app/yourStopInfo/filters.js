@@ -1,7 +1,7 @@
 ns('app.yourStopInfo.filters', function () {
 
     var linesArray;
-    var filtersArray = ["Przystanki, na których jeżdżą więcej niż 3 linie", "Przystanki, na które wjedzie autobus w ciągu 15 minut"];
+    var filtersArray = ["Przystanki, na których jeżdżą przynajmniej 3 linie", "Przystanki, na które wjedzie autobus w ciągu 15 minut"];
     var filteredLines;
 
 
@@ -15,12 +15,11 @@ ns('app.yourStopInfo.filters', function () {
         var secs = actualTime.getSeconds();
 
         var seconds = hours + minutes + secs;
-
         var departureTimes = app.yourStopInfo.timetable.timetables;
         return departureTimes[stopName].reduce(function (prev, curr) {
             return prev || curr.departures.reduce(function (prev, curr) {
                     var toSeconds = curr.split(":");
-                    var pure = (+toSeconds[0]) * 60 * 60 + (+toSeconds[1]) * 60 + (+toSeconds[2]);
+                    var pure = (+toSeconds[0]) * 60 * 60 + (+toSeconds[1]) * 60;
 
                     var dTime = pure - seconds;
                     return prev || (dTime <= 900 && dTime >= 0);
@@ -65,7 +64,7 @@ ns('app.yourStopInfo.filters', function () {
                 filter: filterOne
             },
             {
-                label: "Przystanki, na których jeżdżą więcej niż 3 linie",
+                label: "Przystanki, na których jeżdżą przynajmniej 3 linie",
                 filter: filterTwo
             }
         ],

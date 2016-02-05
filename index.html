@@ -17,11 +17,12 @@
     <link rel="stylesheet" href="src/app/yourStopInfo/yourStop.css">
     <link rel="stylesheet" href="src/app/login/login-css.css">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link rel="shortcut icon" href="styles/images/favicon.ico" type="image/x-icon"/>
 </head>
 
-<body>
-<div class = "fluid-container">
+<body ng-app="transport">
+<div class = "fluid-container" ng-controller="transportCtrl">
     <header id="header" class="row hide">
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-5 col-sm-offset-2">
             <div class="helloUser"></div>
@@ -60,6 +61,45 @@
 
 
     <main class="hide">
+
+        <div ng-controller="transportCtrl">
+
+        </div>
+
+        <div ng-controller="journeyPlannerCtrl">
+            <form class='wrapper col-sm-8 col-sm-offset-2'>
+                <div ng-controller="AppCtrl" style='padding: 40px;' ng-cloak>
+                    <md-content>
+                        <h4>Standard date-picker</h4>
+                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                    </md-content>
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="disabledSelect2">Przystanek</label>
+                    <select id="disabledSelect2" class="form-control">
+                        <option>Disabled select</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="disabledSelect3">Linia</label>
+                    <select id="disabledSelect3" class="form-control">
+                        <option>Disabled select</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="disabledSelect4">Godzina</label>
+                    <select id="disabledSelect4" class="form-control">
+                        <option>Disabled select</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
 
         <div id="my-signin2" class="row">
             <div class="col-sm-10 col-sm-offset-2"></div>
@@ -119,7 +159,7 @@
     <footer class="hide row">
         <div class="col-sm-12 footer_style">
             <div class="footer_image"><img src="styles/images/logofinal1.png" alt="logo"/></div>
-            <p><span>&copy;</span> 2015 by Fantastic 4</p>
+            <p><span>&copy;</span> 2015 by Fantastic 4 {{app}}</p>
         </div>
 
     </footer>
@@ -127,7 +167,16 @@
 
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="lib/jquery-2.2.0.min.js"><\/script>')</script>
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+<script src="src/app/angularapp.js"></script>
+<script src="src/app/controllers/journeyPlannerCtrl.js"></script>
+<script src="src/app/controllers/datepicker.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>
 <script src="src/app/yourStopInfo/timetable.js"></script>
@@ -142,6 +191,8 @@
 <script src="src/app/lineStats/view.js"></script>
 <script src="src/main.js"></script>
 <!--Bootstrap JS-->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 </body>
 </html>
