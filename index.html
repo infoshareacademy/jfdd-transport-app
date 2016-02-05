@@ -99,11 +99,12 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            <div ng-controller="journeyPlannerCompletionCtrl" class="wrapper col-sm-8 col-sm-offset-2">
+            <div  class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="journeyCompletion">
                     <h2>Realizacja podróży</h2>
                     <p>Zaznacz etapy, które zostały już zrealizowane.</p>
-
+                    <journey-completion></journey-completion>
+                    <journey-completion-test></journey-completion-test>
                 </div>
             </div>
         </div>
@@ -185,6 +186,7 @@
 <script src="src/app/controllers/journeyPlannerCtrl.js"></script>
 <script src="src/app/controllers/journeyPlannerCompletionCtrl.js"></script>
 <script src="src/app/controllers/datepicker.js"></script>
+<script src="src/app/directives/journeyCompletion.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>
 <script src="src/app/yourStopInfo/timetable.js"></script>
