@@ -57,6 +57,8 @@ ns('app.yourStopInfo.timetable', function () {
 
             linesContainingStopFromLocalStorageArray.forEach(function (singleLine) {
                 var lineNumber = singleLine.id;
+                var direction = singleLine.stops[singleLine.stops.length - 1].name;
+                var directionOnWayBack = singleLine.stops[0].name;
                 var matchingStopFromJsonAgainstLocalStorage = singleLine.stops.find(isStopFromJsonEqualToStopFromLocalStorage);
                 var matchingStopArrayIndex = singleLine.stops.indexOf(matchingStopFromJsonAgainstLocalStorage);
                 var sortedDepartures;
@@ -97,9 +99,8 @@ ns('app.yourStopInfo.timetable', function () {
                 timetables[singleStopNameFromLocalStorageArray].push({
                     lineNumber: lineNumber,
                     lineName: singleLine.name,
-                    direction: singleLine.stops[singleLine.stops.length - 1].name,
-                    departures: sortedDepartures,
-                    departuresOnWayBack: sortedSingleLineDeparturesReverseDirection
+                    departures: [direction, sortedDepartures],
+                    departuresOnWayBack: [directionOnWayBack, sortedSingleLineDeparturesReverseDirection]
                 });
             });
         });
