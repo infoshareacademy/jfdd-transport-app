@@ -40,7 +40,7 @@ ns('app.lineStats.main', function () {
                         }) * 1000 * 2) + Math.floor(line.latencies[index] * 1000);
                     if (busReturnToDepot > now) {
                         lineData.isInService = true;
-                        lineData.delays = line.delays.push(Math.max(0, Math.floor(line.latencies[index])));
+                        lineData.delays.push(Math.max(0, Math.floor(line.latencies[index])));
                     }
                 }
 
