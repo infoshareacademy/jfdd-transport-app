@@ -5,7 +5,6 @@
                 restrict: 'E',
                 templateUrl: 'src/app/directives/journeyCompletion.html',
                 controller: function ($scope) {
-                    $scope.show = true;
                     $scope.plannedJourneys = [
                         {
                             date: new Date(),

@@ -176,18 +176,11 @@ form {
     margin: 10px 0 0 25px;
 }
 
-md-checkbox {
-    margin: 8px;
-    cursor: pointer;
-    padding-left: 18px;
-    padding-right: 0;
-    line-height: 26px;
-    min-width: 18px;
-    min-height: 18px;
-}
-
 @media (min-width: 768px){
     .col-sm-15 {
         width: 20%;
+    }
+    .journeyStageContainer {
+        text-align: center;
     }
 }

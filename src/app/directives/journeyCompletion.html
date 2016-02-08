@@ -1,11 +1,11 @@
-<div ng-repeat="journey in plannedJourneys" ng-show="show" class="panel panel-primary">
-    <div class="panel-body">
-        <div class="col-sm-2 col-sm-15 col-xs-12">{{journey.date | date:'MM-dd-yyyy'}}</div>
+<div ng-repeat="journey in plannedJourneys" ng-hide="hide" class="panel panel-primary">
+    <div class="panel-body journeyStageContainer">
+        <div class="col-sm-2 col-sm-15 col-xs-12 journeyStage">{{journey.date | date:'MM-dd-yyyy'}}</div>
         <div class="col-sm-2 col-sm-15 col-xs-12">{{journey.busStop}}</div>
         <div class="col-sm-2 col-sm-15 col-xs-4">{{journey.lineNo}}</div>
         <div class="col-sm-2 col-sm-15 col-xs-4">{{journey.departure | date:'HH:mm'}}</div>
         <div class="col-sm-2 col-sm-15 col-xs-4">
-            <md-checkbox ng-model="show"></md-checkbox>
+            <button ng-click="hide = true" type="button" class="btn btn-sm btn-danger">Usuń</button>
         </div>
     </div>
 </div>
