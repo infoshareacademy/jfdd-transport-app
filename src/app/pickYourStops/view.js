@@ -48,4 +48,5 @@ ns('app.pickYourStops.view', function () {
 
         }
     }
+    sortBusStops;
 });

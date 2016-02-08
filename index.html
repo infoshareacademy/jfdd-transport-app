@@ -66,7 +66,7 @@
 
         </div>
 
-        <div ng-controller="journeyPlannerCtrl">
+        <div>
             <form class='wrapper col-sm-8 col-sm-offset-2'>
                 <div ng-controller="AppCtrl" style='padding: 40px;' ng-cloak>
                     <md-content>
@@ -77,19 +77,9 @@
 
                 <br>
 
-                <div class="form-group">
-                    <label for="disabledSelect2">Przystanek</label>
-                    <select id="disabledSelect2" class="form-control">
-                        <option>Disabled select</option>
-                    </select>
-                </div>
+           <journey-planner-stops></journey-planner-stops>
 
-                <div class="form-group">
-                    <label for="disabledSelect3">Linia</label>
-                    <select id="disabledSelect3" class="form-control">
-                        <option>Disabled select</option>
-                    </select>
-                </div>
+                <journey-planner-lines></journey-planner-lines>
 
                 <div class="form-group">
                     <label for="disabledSelect4">Godzina</label>
@@ -186,6 +176,7 @@
 <script src="src/app/controllers/journeyPlannerCompletionCtrl.js"></script>
 <script src="src/app/controllers/datepicker.js"></script>
 <script src="src/app/directives/journeyCompletion.js"></script>
+<script src="src/app/directives/journeyPlanner.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>
 <script src="src/app/yourStopInfo/timetable.js"></script>
