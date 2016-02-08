@@ -1,33 +1,42 @@
 ns('app.pickYourStops.model.user', function () {
-    var currentUser = {username: ""};
+    var currentUser = {username: ''};
     var state;
     var updateStorage = function (busStop) {
-        var stopsArray = state.stopsArray || [];
-        stopsArray.push(busStop);
-        state.stopsArray = stopsArray;
-        app.dataManager.save(currentUser, state);
-        app.logger.log({FavStop: busStop, UserName: currentUser.username}
-        );
+
+        state.favStops = state.favStops || [];
+        state.favStops.push(busStop);
+
+        app.dataManager.save(currentUser.username, state);
+        app.logger.log({
+            FavStop: busStop,
+            UserName: currentUser.username
+        });
     };
 
     var getStops = function () {
-        return state.stopsArray || [];
+        state.favStops = state.favStops || [];
+
+        return state.favStops;
     };
 
     var removeFromStorage = function (stopName) {
-        var stopsFromStorage = getStops();
-        var filteredStops = stopsFromStorage.filter(function (busstop) {
+        state.favStops = state.favStops || [];
+
+        state.favStops = state.favStops.filter(function (busstop) {
             return busstop !== stopName;
         });
-        state.stopsArray = filteredStops;
-        app.dataManager.save(currentUser, state);
+        app.dataManager.save(currentUser.username, state);
+        app.logger.log({
+            DeletedStop: stopName,
+            UserName: currentUser.username
+        });
     };
 
     return {
 
         init: function (username) {
             currentUser.username = username;
-            state = app.dataManager.load(username)
+            state = app.dataManager.load(username);
         },
         favouriteStops: getStops,
         addToFavouriteStops: updateStorage,

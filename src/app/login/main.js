@@ -26,6 +26,7 @@ ns('app.login.main', function () {
             var name = googleUser.getBasicProfile().getName();
             prepareUI(name);
             app.pickYourStops.model.user.init(name);
+            app.logger.init();
             app.state.init();
             app.yourStopInfo.main.init();
             app.lineStats.main.init();

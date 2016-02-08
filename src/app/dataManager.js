@@ -1,12 +1,12 @@
 ns('app.dataManager', function () {
 
 
-    function save(user, state){
-        localStorage.setItem(user.username, JSON.stringify(state.stopsArray));
+    function save(username, state){
+        localStorage.setItem(username, JSON.stringify(state));
     }
 
-    function load(user){
-        return JSON.parse(localStorage.getItem(user.username)) || {};
+    function load(username){
+        return JSON.parse(localStorage.getItem(username)) || {};
     }
 
     return {

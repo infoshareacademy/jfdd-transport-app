@@ -157,6 +157,8 @@ ns('app.lineStats.main', function () {
                     $('.js-lineInputContainer').after($errorMessage);
                 }
                 lineList.val('');
+
+
             });
 
             $('#js-lineStats').on('click', '#showStats', function () {
