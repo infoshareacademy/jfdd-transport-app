@@ -25,7 +25,11 @@ ns('app.pickYourStops.model.user', function () {
         state.favStops = state.favStops.filter(function (busstop) {
             return busstop !== stopName;
         });
-        app.dataManager.save(currentUser, state);
+        app.dataManager.save(currentUser.username, state);
+        app.logger.log({
+            DeletedStop: stopName,
+            UserName: currentUser.username
+        });
     };
 
     return {
@@ -33,7 +37,6 @@ ns('app.pickYourStops.model.user', function () {
         init: function (username) {
             currentUser.username = username;
             state = app.dataManager.load(username);
-            console.log(state);
         },
         favouriteStops: getStops,
         addToFavouriteStops: updateStorage,
