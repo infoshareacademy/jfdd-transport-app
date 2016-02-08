@@ -52,6 +52,13 @@ ns('app.login.main', function () {
     return {
         init: function () {
             createPopup();
+
+            //var name = "John Doe";
+            //prepareUI(name);
+            //app.pickYourStops.model.user.init(name);
+            //app.state.init();
+            //app.yourStopInfo.main.init();
+            //app.lineStats.main.init();
         }
     };
 });

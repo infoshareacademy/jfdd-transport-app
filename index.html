@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="src/app/yourStopInfo/yourStop.css">
     <link rel="stylesheet" href="src/app/login/login-css.css">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link rel="shortcut icon" href="styles/images/favicon.ico" type="image/x-icon"/>
 </head>
 
@@ -66,37 +67,37 @@
         </div>
 
         <div ng-controller="journeyPlannerCtrl">
-            <form>
-                <fieldset disabled>
+            <form class='wrapper col-sm-8 col-sm-offset-2'>
+                <div ng-controller="AppCtrl" style='padding: 40px;' ng-cloak>
+                    <md-content>
+                        <h4>Standard date-picker</h4>
+                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                    </md-content>
+                </div>
 
-                    <div class="form-group">
-                        <label for="disabledSelect1">Disabled select menu</label>
-                        <select id="disabledSelect1" class="form-control">
-                            <option>Disabled select</option>
-                        </select>
-                    </div>
+                <br>
 
-                    <div class="form-group">
-                        <label for="disabledSelect2">Disabled select menu</label>
-                        <select id="disabledSelect2" class="form-control">
-                            <option>Disabled select</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="disabledSelect2">Przystanek</label>
+                    <select id="disabledSelect2" class="form-control">
+                        <option>Disabled select</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label for="disabledSelect3">Disabled select menu</label>
-                        <select id="disabledSelect3" class="form-control">
-                            <option>Disabled select</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="disabledSelect3">Linia</label>
+                    <select id="disabledSelect3" class="form-control">
+                        <option>Disabled select</option>
+                    </select>
+                </div>
 
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Can't check this
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </fieldset>
+                <div class="form-group">
+                    <label for="disabledSelect4">Godzina</label>
+                    <select id="disabledSelect4" class="form-control">
+                        <option>Disabled select</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
 
@@ -167,10 +168,18 @@
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="lib/jquery-2.2.0.min.js"><\/script>')</script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 <script src="src/app/angularapp.js"></script>
 <script src="src/app/controllers/journeyPlannerCtrl.js"></script>
 <script src="src/app/controllers/logController.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<script src="src/app/controllers/datepicker.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>
 <script src="src/app/yourStopInfo/timetable.js"></script>
@@ -186,6 +195,8 @@
 <script src="src/app/lineStats/view.js"></script>
 <script src="src/main.js"></script>
 <!--Bootstrap JS-->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 </body>
 </html>
