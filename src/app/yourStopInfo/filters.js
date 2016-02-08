@@ -86,6 +86,7 @@ ns('app.yourStopInfo.filters', function () {
         },
         setFilter: function (filter) {
             this.currentFilter = filter;
+            app.logger.log({filterId: filter.name});
             app.yourStopInfo.main.refresh();
         }
     }
