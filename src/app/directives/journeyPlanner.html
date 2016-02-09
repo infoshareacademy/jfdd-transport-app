@@ -6,9 +6,8 @@
             class="form-control">
         <option ng-repeat = "stop in stops">{{stop.name}}</option>
     </select>
-    Currently selected: {{ {selected_stop:myStop} }}
-
 </div>
+<!--add disabled="disabled" to selects-->
 
 <div class="form-group">
     <label for="disabledSelect3">Linia</label>
@@ -16,7 +15,6 @@
             ng-model="myLine"
             id="disabledSelect3"
             class="form-control">
-        <option  ng-repeat = "line in lines">{{line.name}}</option>
+        <option  ng-repeat = "line in accumulator track by $index">{{line.name}}</option>
     </select>
-    Currently selected: {{ {selected_line:myLine} }}
 </div>

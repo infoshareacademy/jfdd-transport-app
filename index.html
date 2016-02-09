@@ -81,14 +81,24 @@
 
                 <journey-planner-lines></journey-planner-lines>
 
+
                 <div class="form-group">
                     <label for="disabledSelect4">Godzina</label>
-                    <select id="disabledSelect4" class="form-control">
+                    <select  id="disabledSelect4" class="form-control">
                         <option>Disabled select</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Dodaj</button>
+                <button  ng-click="hideValue = true" type="submit" class="btn btn-primary">Dodaj</button>
             </form>
+
+            <div  ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="yourPlannedJourney">
+                    <h2>Zaplanowane podróże</h2>
+            <your-planned-journey></your-planned-journey>
+                    </div>
+                </div>
+
+
             <div  class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="journeyCompletion">
                     <h2>Realizacja podróży</h2>
