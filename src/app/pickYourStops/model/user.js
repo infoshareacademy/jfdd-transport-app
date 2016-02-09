@@ -1,31 +1,46 @@
 ns('app.pickYourStops.model.user', function () {
-    var currentUser = '';
-
+    var currentUser = {username: ''};
+    var state;
     var updateStorage = function (busStop) {
-        var stopsArray = JSON.parse(localStorage.getItem(currentUser)) || [];
-        stopsArray.push(busStop);
-        localStorage.setItem(currentUser, JSON.stringify(stopsArray));
+
+        state.favStops = state.favStops || [];
+        state.favStops.push(busStop);
+
+        app.dataManager.save(currentUser.username, state);
+        app.logger.log({
+            FavStop: busStop,
+            UserName: currentUser.username
+        });
     };
 
     var getStops = function () {
-        return JSON.parse(localStorage.getItem(currentUser)) || [];
+        state.favStops = state.favStops || [];
+
+        return state.favStops;
     };
 
     var removeFromStorage = function (stopName) {
-        var stopsFromStorage = getStops();
-        var filteredStops = stopsFromStorage.filter(function (busstop) {
+        state.favStops = state.favStops || [];
+
+        state.favStops = state.favStops.filter(function (busstop) {
             return busstop !== stopName;
         });
-        localStorage.setItem(currentUser, JSON.stringify(filteredStops));
+        app.dataManager.save(currentUser.username, state);
+        app.logger.log({
+            DeletedStop: stopName,
+            UserName: currentUser.username
+        });
     };
 
     return {
 
         init: function (username) {
-            currentUser = username;
+            currentUser.username = username;
+            state = app.dataManager.load(username);
         },
         favouriteStops: getStops,
         addToFavouriteStops: updateStorage,
-        removeFromFavouriteStops: removeFromStorage
+        removeFromFavouriteStops: removeFromStorage,
+        currentUser: currentUser
     };
 });
