@@ -176,6 +176,12 @@ form {
     margin: 10px 0 0 25px;
 }
 
+.row {
+    margin-right:0;
+}
+
+
+
 @media (min-width: 768px){
     .col-sm-15 {
         width: 20%;
@@ -184,3 +190,4 @@ form {
         text-align: center;
     }
 }
+
