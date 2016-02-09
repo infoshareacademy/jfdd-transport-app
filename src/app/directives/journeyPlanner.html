@@ -1,13 +1,19 @@
 <div class="form-group">
     <label for="disabledSelect2">Przystanek</label>
-    <select id="disabledSelect2" class="form-control">
+    <select ng-model="myStop" id="disabledSelect2" class="form-control">
         <option ng-repeat = "stop in stops">{{stop.name}}</option>
     </select>
+
+    <button ng-click="logStop(myStop)">add</button>
+    Currently selected: {{ {selected_stop:myStop} }}
+
 </div>
 
 <div class="form-group">
     <label for="disabledSelect3">Linia</label>
-    <select id="disabledSelect3" class="form-control">
-        <option ng-repeat = "line in lines">{{line.name}}</option>
+    <select ng-model="myLine" id="disabledSelect3" class="form-control">
+        <option  ng-repeat = "line in lines">{{line.name}}</option>
     </select>
+    <button ng-click="logLine(myLine)">add</button>
+    Currently selected: {{ {selected_line:myLine} }}
 </div>
