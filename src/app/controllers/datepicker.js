@@ -9,7 +9,7 @@
 
     app.controller('AppCtrl', function($scope) {
         $scope.myDate = new Date();
-        $scope.logDate = function(selected){
+        $scope.addDate = function(selected){
             $scope.travelObject['date']= selected;
             console.log( $scope.travelObject)
         }

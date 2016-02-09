@@ -17,7 +17,7 @@
                     console.log( $scope.myStop );
                     console.log( $scope.selected );
 
-                    $scope.logStop = function(selected){
+                    $scope.addStop = function(selected){
                         $scope.travelObject['busStop']= selected
                         console.log(selected)
                         console.log($scope.travelObject)
@@ -36,9 +36,12 @@
                    $http.get('https://isa-api.herokuapp.com/transport/lines.json').then(function(response){
                        $scope.lines = response.data;
                        $scope.myLine = $scope.lines[0].name;
-                       $scope.logLine = function(selected){
+                       $scope.addLine = function(selected){
                            $scope.travelObject['line']= selected;
                            console.log($scope.travelObject);
+                           console.log(app.yourStopInfo.timetable.timetables)
+
+
                            //console.log($scope.lines);
 
 
