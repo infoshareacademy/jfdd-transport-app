@@ -23,18 +23,21 @@
                 }
             });
 
+            counterObject;
+            counterObject;
+            counterObject;
+            var maxFav = 0;
+            var maxBus;
             for (busStopProperty in counterObject) {
-                var currCount = counterObject[busStopProperty];
+                if (counterObject[busStopProperty]>maxFav) {
+                    maxFav = counterObject[busStopProperty];
+                    maxBus = busStopProperty;
+                }
 
-                if (currCount > highestCount)
-                var highestCount = counterObject[busStopProperty];
 
-                var maxBus;
-                var maxCount;
-                var currBus = busStopProperty;
-                var currCount = counterObject[busStopProperty];
             }
 
+            return "Najczesicej wybierany przystanek to: " + busStopProperty + ". Wybrany: " + maxFav + " razy.";
         };
     });
 
