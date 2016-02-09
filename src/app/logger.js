@@ -1,11 +1,13 @@
 ns('app.logger', function () {
 
     var key = 'Logger';
+    var meta = {};
 
     var log = function(event){
-        var currentLogger = JSON.parse(localStorage.getItem(key)) || [];
-        currentLogger.push(event);
-        localStorage.setItem(key,JSON.stringify(currentLogger))
+        var currentLog = JSON.parse(localStorage.getItem(key)) || [];
+        currentLog.push(event);
+        localStorage.setItem(key,JSON.stringify(currentLog));
+        meta.currentLog = currentLog;
     };
 
     var getLog = function (){
@@ -17,6 +19,8 @@ ns('app.logger', function () {
         init: function () {
             getLog()
         },
-        log:log
+        log: log,
+        meta: meta
+
     }
 });

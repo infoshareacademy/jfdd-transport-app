@@ -4,6 +4,7 @@ ns('app.yourStopInfo.timetable', function () {
     var cachedJson;
     var prepareTimetables;
 
+
     toHHMM = function (seconds_parameter) {
         var sec_num = parseInt(seconds_parameter, 10);  // don't forget the radix in the second param
         var hours = Math.floor(sec_num / 3600);
@@ -21,7 +22,6 @@ ns('app.yourStopInfo.timetable', function () {
 
     cachedJson = null;
     prepareTimetables = function (jsonWithPublicTransportLines) {
-        var stopsFromLocalStorageArray;
 
         for (var i in timetables) {
             delete timetables[i];
@@ -110,5 +110,6 @@ ns('app.yourStopInfo.timetable', function () {
     return {
         prepareTimetables: prepareTimetables,
         timetables: timetables
+
     }
 });
