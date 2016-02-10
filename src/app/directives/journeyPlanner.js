@@ -9,6 +9,8 @@
                     $scope.myStop = $scope.stops[0].name;
                     $scope.selected=[{name: "bajki"}];
 
+
+
                     $scope.addStop = function(selected){
 
 
@@ -37,7 +39,7 @@
                         });
 
                         //$scope.form = {type : $scope.uniqueLines[0].value};
-                        $scope.lines = $scope.uniqueLines
+                        $scope.linesToDisplay = $scope.uniqueLines
 
                     }
                 })
@@ -77,5 +79,21 @@
                     };
                 }
             }
-        });
+        })
+    .directive('createPlan', function(){
+        return {
+            restrict: 'E',
+            templateUrl: 'src/app/directives/yourPlannedJourney.html',
+            controller: function ($scope) {
+
+                $scope.travelObject = {
+                    date: new Date(),
+                    busStop:"Nie wybrano przystanku",
+                    line: "Nie wybrano linii",
+                    time:(new Date).getTime()
+                };
+            }
+        }
+
+    })
 }());
