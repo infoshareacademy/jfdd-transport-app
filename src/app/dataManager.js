@@ -1,6 +1,5 @@
 ns('app.dataManager', function () {
 
-
     function save(username, state){
         localStorage.setItem(username, JSON.stringify(state));
     }
