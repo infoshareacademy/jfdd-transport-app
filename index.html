@@ -110,7 +110,14 @@
         <div ng-controller="loggerCtrl" id="js-pickYourStops" class="row">
             <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="pickYourStops">
-                    <p>Przystanek ulubiony to: {{getFavStop()}}</p>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Najczęściej wybierany przystanek</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{favStop}}
+                        </div>
+                    </div>
 
                     <h3 ng-click="$log.log(message)">Wybierz przystanki, które chcesz obserwować</h3>
                     <p>MOŻESZ W KAŻDEJ CHWILI MODYFIKOWAĆ SWOJĄ LISTĘ, DODAWAĆ I USUWAĆ PRZYSTANKI</p>

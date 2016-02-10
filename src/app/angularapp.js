@@ -1,43 +1,43 @@
 (function(){
     var app = angular.module('transport', ['ngMaterial', 'ngMessages']);
 
-    app.controller('transportCtrl', function ($scope) {
+    app.controller('transportCtrl', function ($scope, $interval) {
        $scope.app = 'Jupi angular';
         $scope.getFavStop = getFavStop;
+        $scope.favStop = "test";
+        $interval(function () {
+            $scope.favStop = getFavStop();
+        },10);
 
         function getFavStop(){
-            var array =  JSON.parse(localStorage.getItem("Logger")) || [];
-            var a = array.filter(function (o) {
+            var loggerDataArray =  JSON.parse(localStorage.getItem("Logger")) || [];
+            var favStopsArray = loggerDataArray.filter(function (o) {
                 if('FavStop' in o){
                     return true;
                 }
             } );
-            var counterObject = {};
-            var b = a.forEach(function (obj) {
+            var counterForFavedStopsObject = {};
+            favStopsArray.forEach(function (obj) {
                 var stopName = obj.FavStop;
-                if (counterObject[stopName] !== undefined)
+                if (counterForFavedStopsObject[stopName] !== undefined)
                 {
-                    counterObject[stopName]++;
+                    counterForFavedStopsObject[stopName]++;
                 } else {
-                    counterObject[stopName] = 1;
+                    counterForFavedStopsObject[stopName] = 1;
                 }
             });
 
-            counterObject;
-            counterObject;
-            counterObject;
-            var maxFav = 0;
-            var maxBus;
-            for (busStopProperty in counterObject) {
-                if (counterObject[busStopProperty]>maxFav) {
-                    maxFav = counterObject[busStopProperty];
-                    maxBus = busStopProperty;
+            var maximumFavedCount = 0;
+            var mostFavedStop;
+            for (var busStopProperty in counterForFavedStopsObject) {
+                if (counterForFavedStopsObject[busStopProperty]>maximumFavedCount) {
+                    maximumFavedCount = counterForFavedStopsObject[busStopProperty];
+                    mostFavedStop = busStopProperty;
                 }
 
 
             }
-
-            return "Najczesicej wybierany przystanek to: " + busStopProperty + ". Wybrany: " + maxFav + " razy.";
+            return 'Przystanek: ' + mostFavedStop + '. Wybrany: ' + maximumFavedCount + ' razy.';
         };
     });
 
