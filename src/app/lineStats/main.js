@@ -167,7 +167,6 @@ ns('app.lineStats.main', function () {
                 }
                 lineList.val('');
 
-
             });
 
             $('#js-lineStats').on('click', '#showStats', function () {
