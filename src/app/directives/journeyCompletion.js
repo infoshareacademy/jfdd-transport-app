@@ -3,11 +3,14 @@
         .directive('journeyCompletion', function () {
             return {
                 restrict: 'E',
+                scope: {
+                    journeyData: '=journeyData'
+                },
                 templateUrl: 'src/app/directives/journeyCompletion.html',
                 controller: function ($scope) {
                     $scope.markComplete = function (index) {
-                        $scope.plannedJourneys[index].hide = true;
-                        $scope.allStagesCompleted = $scope.plannedJourneys.every(checkIfHidden);
+                        $scope.journeyData[index].hide = true;
+                        $scope.allStagesCompleted = $scope.journeyData.every(checkIfHidden);
                     };
 
                     function checkIfHidden (value) {
