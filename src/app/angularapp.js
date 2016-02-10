@@ -5,7 +5,6 @@
 
     });
     app.controller('transportCtrl', function ($scope, $interval) {
-       $scope.app = 'Jupi angular';
         $scope.getFavStop = getFavStop;
         $scope.favStop = "test";
         $interval(function () {
