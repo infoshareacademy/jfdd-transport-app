@@ -9,11 +9,15 @@
                     $scope.myStop = $scope.stops[0].name;
                     $scope.selected=[{name: "bajki"}];
 
+
+
                     $scope.addStop = function(selected){
+
+
 
                         $('#disabledSelect3').attr('disabled',false);
                         $scope.travelObject['busStop']= selected;
-                        console.log(selected)
+
                         $scope.accumulator = [];
 
                         $scope.filteredLines = $scope.lines.map(function(line) {
@@ -28,14 +32,14 @@
                                 }
                             });
                         });
-console.log($scope.accumulator)
+                        console.log($scope.accumulator);
                         $scope.uniqueLines = [];
                         $.each($scope.accumulator, function(i, el){
                             if($.inArray(el, $scope.uniqueLines) === -1) $scope.uniqueLines.push(el);
                         });
 
                         //$scope.form = {type : $scope.uniqueLines[0].value};
-                        $scope.lines = $scope.uniqueLines
+                        $scope.linesToDisplay = $scope.uniqueLines
 
                     }
                 })
@@ -75,5 +79,21 @@ console.log($scope.accumulator)
                     };
                 }
             }
-        });
+        })
+    .directive('createPlan', function(){
+        return {
+            restrict: 'E',
+            templateUrl: 'src/app/directives/yourPlannedJourney.html',
+            controller: function ($scope) {
+
+                $scope.travelObject = {
+                    date: new Date(),
+                    busStop:"Nie wybrano przystanku",
+                    line: "Nie wybrano linii",
+                    time:(new Date).getTime()
+                };
+            }
+        }
+
+    })
 }());
