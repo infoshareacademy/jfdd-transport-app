@@ -1,51 +1,15 @@
 (function () {
-    angular.module('transport')
-
-        .directive('journeyPlannerStops', function () {
-        return {
-            controller:  function($scope, $http) {
-                $http.get('https://isa-api.herokuapp.com/transport/stops.json').then(function(response){
-                    $scope.stops = response.data;
-                    $scope.myStop = $scope.stops[0].name;
-                    $scope.selected=[{name: "bajki"}];
-
-
-
-                    $scope.addStop = function(selected){
-
-
-
-                        $('#disabledSelect3').attr('disabled',false);
-                        $scope.travelObject['busStop']= selected;
-
-                        $scope.accumulator = [];
-
-                        $scope.filteredLines = $scope.lines.map(function(line) {
-
-                            line.stops.forEach(function (stops) {
-
-                                for(name in stops){
-                                    if(stops.name== $scope.travelObject['busStop']) {
-                                        $scope.accumulator.push(line);
-
-                                    }
-                                }
-                            });
-                        });
-                        console.log($scope.accumulator);
-                        $scope.uniqueLines = [];
-                        $.each($scope.accumulator, function(i, el){
-                            if($.inArray(el, $scope.uniqueLines) === -1) $scope.uniqueLines.push(el);
-                        });
-
-                        //$scope.form = {type : $scope.uniqueLines[0].value};
-                        $scope.linesToDisplay = $scope.uniqueLines
-
-                    }
-                })
+    angular.module('transport').directive('journeyPlannerStops', function () {
+            return {
+                controller:  function($scope, $http) {
+                    $http.get('https://isa-api.herokuapp.com/transport/stops.json').then(function(response){
+                        $scope.stops = response.data;
+                        $scope.myStop = $scope.stops[0].name;
+                        $scope.selected=[{name: "bajki"}];
+                    })
+                }
             }
-        }
-    })
+        })
         .directive('journeyPlannerLines', function () {
             return {
                 restrict: 'E',
@@ -71,27 +35,22 @@
                 templateUrl: 'src/app/directives/yourPlannedJourney.html',
                 controller: function ($scope) {
 
-                    $scope.travelObject = {
-                        date: new Date(),
-                        busStop:"Nie wybrano przystanku",
-                        line: "Nie wybrano linii",
-                        time:(new Date).getTime()
-                    };
+                    //$scope.travelObject = {
+                    //    date: new Date(),
+                    //    busStop:"Nie wybrano przystanku",
+                    //    line: "Nie wybrano linii",
+                    //    time:(new Date).getTime()
+                    //};
                 }
             }
         })
     .directive('createPlan', function(){
         return {
             restrict: 'E',
-            templateUrl: 'src/app/directives/yourPlannedJourney.html',
+            templateUrl: 'src/app/directives/createPlan.html',
             controller: function ($scope) {
 
-                $scope.travelObject = {
-                    date: new Date(),
-                    busStop:"Nie wybrano przystanku",
-                    line: "Nie wybrano linii",
-                    time:(new Date).getTime()
-                };
+
             }
         }
 

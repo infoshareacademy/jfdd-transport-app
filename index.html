@@ -88,7 +88,7 @@
                         <option>Disabled select</option>
                     </select>
                 </div>
-                <button  ng-click="hideValue = true" type="submit" class="btn btn-primary">Dodaj</button>
+                <button   ng-click="Hello()" type="submit" class="btn btn-primary">Dodaj</button>
             </form>
 
             <div  ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">
@@ -97,6 +97,13 @@
             <your-planned-journey></your-planned-journey>
                     </div>
                 </div>
+
+            <div  ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="createPlan">
+                    <h2>Zaplanowane podróże</h2>
+                    <create-plan></create-plan>
+                </div>
+            </div>
 
 
             <div  class="wrapper col-sm-8 col-sm-offset-2">
@@ -184,11 +191,13 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 <script src="src/app/angularapp.js"></script>
 <script src="src/app/controllers/journeyPlannerCtrl.js"></script>
+<script src="src/app/controllers/transportCtrl.js"></script>
 <script src="src/app/controllers/journeyPlannerCompletionCtrl.js"></script>
 <script src="src/app/controllers/logController.js"></script>
 <script src="src/app/controllers/datepicker.js"></script>
 <script src="src/app/directives/journeyCompletion.js"></script>
 <script src="src/app/directives/journeyPlanner.js"></script>
+<script src="src/app/directives/createPlan.js"></script>
 <script src="lib/moment-with-locales.min.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>
