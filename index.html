@@ -106,10 +106,10 @@
         </div>
 
 
-        <div id="js-pickYourStops" class="row">
+        <div ng-controller="loggerCtrl" id="js-pickYourStops" class="row">
             <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="pickYourStops">
-                    <h3>Wybierz przystanki, które chcesz obserwować</h3>
+                    <h3 ng-click="$log.log(message)">Wybierz przystanki, które chcesz obserwować</h3>
                     <p>MOŻESZ W KAŻDEJ CHWILI MODYFIKOWAĆ SWOJĄ LISTĘ, DODAWAĆ I USUWAĆ PRZYSTANKI</p>
                 </div>
             </div>
@@ -167,6 +167,7 @@
 
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="lib/jquery-2.2.0.min.js"><\/script>')</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
@@ -176,6 +177,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 <script src="src/app/angularapp.js"></script>
 <script src="src/app/controllers/journeyPlannerCtrl.js"></script>
+<script src="src/app/controllers/logController.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="src/app/controllers/datepicker.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>
@@ -184,6 +187,7 @@
 <script src="src/app/pickYourStops/view.js"></script>
 <script src="src/app/dataManager.js"></script>
 <script src="src/app/state.js"></script>
+<script src="src/app/logger.js"></script>
 <script src="src/app/login/main.js"></script>
 <script src="src/app/yourStopInfo/filters.js"></script>
 <script src="src/app/yourStopInfo/filtersView.js"></script>
@@ -192,7 +196,6 @@
 <script src="src/main.js"></script>
 <!--Bootstrap JS-->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="//apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
 </body>
 </html>
