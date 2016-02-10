@@ -11,9 +11,11 @@
 
                     $scope.addStop = function(selected){
 
+
+
                         $('#disabledSelect3').attr('disabled',false);
                         $scope.travelObject['busStop']= selected;
-                        console.log(selected)
+
                         $scope.accumulator = [];
 
                         $scope.filteredLines = $scope.lines.map(function(line) {
@@ -28,7 +30,7 @@
                                 }
                             });
                         });
-console.log($scope.accumulator)
+                        console.log($scope.accumulator);
                         $scope.uniqueLines = [];
                         $.each($scope.accumulator, function(i, el){
                             if($.inArray(el, $scope.uniqueLines) === -1) $scope.uniqueLines.push(el);
