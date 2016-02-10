@@ -1,6 +1,9 @@
 (function(){
     var app = angular.module('transport', ['ngMaterial', 'ngMessages']);
 
+    app.controller('transportCtrl', function ($scope) {
+
+    });
     app.controller('transportCtrl', function ($scope, $interval) {
        $scope.app = 'Jupi angular';
         $scope.getFavStop = getFavStop;
