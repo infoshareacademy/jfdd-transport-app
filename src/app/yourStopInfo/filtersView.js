@@ -24,7 +24,6 @@ ns('app.yourStopInfo.filtersView', function () {
             if ($('#filtersDiv input').val() == filters[1].label) {
                 app.yourStopInfo.filters.setFilter(filters[1].filter);
                 inputList.val('');
-
             }
 
             else if ($('#filtersDiv input').val() == filters[0].label) {

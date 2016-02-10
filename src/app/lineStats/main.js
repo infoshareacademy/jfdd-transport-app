@@ -27,7 +27,8 @@ ns('app.lineStats.main', function () {
                 lineId: line.id,
                 lineName: line.name,
                 isInService: false,
-                delay: 0
+                delays: [],
+                averageDelay: 0
             };
 
             line.departures.forEach(function (departure, index) {
@@ -39,14 +40,22 @@ ns('app.lineStats.main', function () {
                         }) * 1000 * 2) + Math.floor(line.latencies[index] * 1000);
                     if (busReturnToDepot > now) {
                         lineData.isInService = true;
-                        lineData.delay = Math.max(lineData.delay, Math.floor(line.latencies[index]));
+                        lineData.delays.push(Math.max(0, Math.floor(line.latencies[index])));
                     }
                 }
 
             });
 
+            if(lineData.delays.length > 0) {
+                var totalDelays = lineData.delays.reduce(function (a, b) {
+                    return a + b;
+                });
+
+                lineData.averageDelay = Math.floor(totalDelays / lineData.delays.length);
+            }
+
             if (!lineData.isInService) {
-                lineData.delay = -1; //For easier sorting. Lines that aren't in service need to be last in sorted results.
+                lineData.averageDelay = -1; //For easier sorting. Lines that aren't in service need to be last in sorted results.
             }
 
             results.push(lineData);
@@ -60,18 +69,18 @@ ns('app.lineStats.main', function () {
 
     var sortLineDelays = function (data) {
         return data.sort(function (a, b) {
-            return b.delay - a.delay;
+            return b.averageDelay - a.averageDelay;
         });
     };
 
     var getHhMmSs = function (lineArray) {
         lineArray.map(function (line) {
-            if (line.delay === -1) {
+            if (line.averageDelay === -1) {
                 line.delayToDisplay = ' w tej chwili nie kursuje';
-            } else if (line.delay === 0) {
+            } else if (line.averageDelay === 0) {
                 line.delayToDisplay = ' odjeżdża o czasie';
             } else {
-                var totalSeconds = line.delay;
+                var totalSeconds = line.averageDelay;
                 var hours = Math.floor(totalSeconds / 3600);
                 totalSeconds %= 3600;
                 var minutes = Math.floor(totalSeconds / 60);
@@ -157,6 +166,7 @@ ns('app.lineStats.main', function () {
                     $('.js-lineInputContainer').after($errorMessage);
                 }
                 lineList.val('');
+
             });
 
             $('#js-lineStats').on('click', '#showStats', function () {

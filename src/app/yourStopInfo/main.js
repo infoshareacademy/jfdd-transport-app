@@ -29,37 +29,58 @@ ns('app.yourStopInfo.main', function () {
                 var currentStopLines = timetables[stopName];
                 var $tableTimeTables = $('<table class="table table-striped">');
                 var $tHeadCell = $('<th>').text("Linia");
-                var $tHeadCell2 = $('<th>').text("Rozkład jazdy");
+                var $tHeadCell2 = $('<th>').text("Kierunek");
+                var $tHeadCell3 = $('<th>').text("Rozkład jazdy");
                 var $tHeadRow = $('<tr>');
 
-                var $thead = $('<thead>').append($tHeadRow.append($tHeadCell).append($tHeadCell2));
+                var $thead = $('<thead>').append($tHeadRow.append($tHeadCell).append($tHeadCell2).append($tHeadCell3));
+                $tableTimeTables.append($thead);
+
                 var $tbody = $('<tbody>');
-                if (currentStopLines !== undefined) {
-                    currentStopLines.forEach(function (line) {
 
-                        var $lineCell = $('<td>');
-                        var $lineButton = $('<button class="btn btn-success">');
-                        $lineButton.text(line.lineName);
-                        $lineCell.append($lineButton);
+                var prepareTimetableRowForLine = function (line) {
 
-                        var $departureCell = $('<td>');
-                        line.departures.forEach(function (departure) {
-                            var $button = $('<button class="btn btn-primary">').text(departure);
-                            $departureCell.append($button);
-                        });
+                    var $lineCell = $('<td class="col-xs-1">');
+                    var $lineButton = $('<button class="btn btn-success">');
+                    var $directionButton = $('<button class="btn btn-info">');
+                    $lineButton.text(line.lineName);
 
-                        var $linesRow = $('<tr>');
+                    $lineCell.append($lineButton).append($directionButton);
 
-                        $linesRow.append($lineCell).append($departureCell);
-                        $tbody.append($linesRow);
+                    var $directionCell = $('<td class="col-xs-2">')
+                    $directionButton.text(line[this][0]);
+                    $directionCell.append($directionButton);
 
-                        $tableTimeTables.append($thead);
-                        $tableTimeTables.append($tbody);
 
-                        $stopTimetableContainer.append($tableTimeTables);
-
+                    var $departureCell = $('<td class="col-xs-8">');
+                    line[this][1].forEach(function (departure) {
+                        var $button = $('<button class="btn btn-primary">').text(departure);
+                        $departureCell.append($button);
                     });
+
+                    var $linesRow = $('<tr>');
+
+                    $linesRow.append($lineCell)
+                        .append($directionCell)
+                        .append($departureCell);
+
+                    $tbody.append($linesRow);
+
+
+                    $tableTimeTables.append($tbody);
+
+                    $stopTimetableContainer.append($tableTimeTables);
+
+                };
+
+                if (currentStopLines !== undefined) {
+                    currentStopLines.forEach(prepareTimetableRowForLine.bind('departures'));
+                    currentStopLines.forEach(prepareTimetableRowForLine.bind('departuresOnWayBack'));
+                    $tableTimeTables.append($tbody);
+
+                    $stopTimetableContainer.append($tableTimeTables);
                 }
+
             });
     }
 

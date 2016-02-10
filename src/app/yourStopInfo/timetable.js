@@ -1,8 +1,10 @@
 ns('app.yourStopInfo.timetable', function () {
-
     var timetables = {};
+    var toHHMM;
+    var cachedJson;
+    var prepareTimetables;
 
-    var toHHMMSS = function (seconds_parameter) {
+    toHHMM = function (seconds_parameter) {
         var sec_num = parseInt(seconds_parameter, 10);  // don't forget the radix in the second param
         var hours = Math.floor(sec_num / 3600);
         var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
@@ -16,8 +18,11 @@ ns('app.yourStopInfo.timetable', function () {
         var time = hours + ':' + minutes;
         return time;
     };
-    var cachedJson = null;
-    var prepareTimetables = function (jsonWithPublicTransportLines) {
+
+    cachedJson = null;
+    prepareTimetables = function (jsonWithPublicTransportLines) {
+        var stopsFromLocalStorageArray;
+
         for (var i in timetables) {
             delete timetables[i];
         }
@@ -26,60 +31,76 @@ ns('app.yourStopInfo.timetable', function () {
         } else {
             cachedJson = jsonWithPublicTransportLines;
         }
-        // get stop names from local storage for user
-        var stopsFromLocalStorageArray = app.pickYourStops.model.user.favouriteStops();
 
-        // for each of the stop name iterate
+        stopsFromLocalStorageArray = app.pickYourStops.model.user.favouriteStops();
         stopsFromLocalStorageArray.forEach(function (singleStopNameFromLocalStorageArray) {
+            var isStopFromJsonEqualToStopFromLocalStorage;
+            var getStopEqualToStopFromLocalStorage;
+            var sumPreviousAndCurrentElementForReduce;
+            var linesContainingStopFromLocalStorageArray;
 
             timetables[singleStopNameFromLocalStorageArray] = timetables[singleStopNameFromLocalStorageArray] || [];
 
-            // return true if stop name from json equals stop from local storage
-            var isStopFromJsonEqualToStopFromLocalStorage = function (publicTransportStop) {
+            isStopFromJsonEqualToStopFromLocalStorage = function (publicTransportStop) {
                 return publicTransportStop.name === singleStopNameFromLocalStorageArray;
             };
 
-            // return object that satisfies find condition
-            var getStopEqualToStopFromLocalStorage = function (singlePublicTransportLine) {
+            getStopEqualToStopFromLocalStorage = function (singlePublicTransportLine) {
                 return singlePublicTransportLine.stops.find(isStopFromJsonEqualToStopFromLocalStorage);
-            }
+            };
 
-            // from all the lines from json, get only those who stop at a stop saved in local storage
-            // return new array
-            var linesContainingStopFromLocalStorageArray = jsonWithPublicTransportLines.filter(getStopEqualToStopFromLocalStorage);
+            sumPreviousAndCurrentElementForReduce = function(a, b) {
+                return a + b;
+            };
 
-            // for each line that stops at a user stop
+            linesContainingStopFromLocalStorageArray = jsonWithPublicTransportLines.filter(getStopEqualToStopFromLocalStorage);
+
             linesContainingStopFromLocalStorageArray.forEach(function (singleLine) {
                 var lineNumber = singleLine.id;
-
-                // get single matching stop, name and id of the stop from json
+                var direction = singleLine.stops[singleLine.stops.length - 1].name;
+                var directionOnWayBack = singleLine.stops[0].name;
                 var matchingStopFromJsonAgainstLocalStorage = singleLine.stops.find(isStopFromJsonEqualToStopFromLocalStorage);
-
-                // get the index of the stop from json to know how long to add times of journey
                 var matchingStopArrayIndex = singleLine.stops.indexOf(matchingStopFromJsonAgainstLocalStorage);
+                var sortedDepartures;
+                var singleLineDepartures;
+                var singleLineDeparturesReverseDirection;
+                var timeFromStartingStopToGivenInSeconds;
+                var sortedSingleLineDeparturesReverseDirection;
+
+                var timeOfJourneyBackFromLastStopToGivenStopInSeconds = singleLine.dTimes.slice(matchingStopArrayIndex).concat(0).reverse().reduce(sumPreviousAndCurrentElementForReduce, 0);
 
 
-                // get the time in second from starting stop to given stop
-                var time = singleLine.dTimes.slice(0, matchingStopArrayIndex + 1).reduce(function (a, b) {
-                    return a + b;
-                }, 0);
+                var totalTimeFromTheBeginningToEndOfLineInSeconds = singleLine.dTimes.reduce(sumPreviousAndCurrentElementForReduce);
 
-                // return departures for single stop
-                var singleLineDepartures = singleLine.departures.map(function (sigleDepartureTime) {
-                    var depTimesInSeconds = sigleDepartureTime.hour * 3600 + sigleDepartureTime.minutes * 60 + sigleDepartureTime.seconds;
-                    var depTimeOnCurrentStop = (depTimesInSeconds + time) % 86400;
-                    var depTimeOnCurrentStopHHMMSS = toHHMMSS(depTimeOnCurrentStop);
-                    return depTimeOnCurrentStopHHMMSS;
+
+                 singleLineDeparturesReverseDirection = singleLine.departures.map(function (singleDepartureTime) {
+                    var departureTimesInSeconds = singleDepartureTime.hour * 3600 + singleDepartureTime.minutes * 60 + singleDepartureTime.seconds;
+                    var timeOfArrivalToLastStopinSecondsModulo24h = (departureTimesInSeconds + totalTimeFromTheBeginningToEndOfLineInSeconds) % 86400; // 86400s = 24h
+                    var departureTimeOnCurrentStop = (timeOfArrivalToLastStopinSecondsModulo24h + timeOfJourneyBackFromLastStopToGivenStopInSeconds) % 86400; // 86400s = 24h
+                    var departureTimeOnCurrentStopHHMM = toHHMM(departureTimeOnCurrentStop);
+                    return departureTimeOnCurrentStopHHMM;
+                });
+                sortedSingleLineDeparturesReverseDirection = singleLineDeparturesReverseDirection.sort();
+
+                // get the timeFromStartingStopToGivenInSeconds in seconds from starting stop to given stop
+                 timeFromStartingStopToGivenInSeconds = singleLine.dTimes.slice(0, matchingStopArrayIndex + 1).reduce(sumPreviousAndCurrentElementForReduce, 0);
+
+                 singleLineDepartures = singleLine.departures.map(function (singleDepartureTime) {
+                    var departureTimesInSeconds = singleDepartureTime.hour * 3600 + singleDepartureTime.minutes * 60 + singleDepartureTime.seconds;
+                    var departureTimeOnCurrentStop = (departureTimesInSeconds + timeFromStartingStopToGivenInSeconds) % 86400; // 86400s = 24h
+                    var departureTimeOnCurrentStopHHMM = toHHMM(departureTimeOnCurrentStop);
+                    return departureTimeOnCurrentStopHHMM;
                 });
 
-                var sortedDepartures = singleLineDepartures.sort();
+                sortedDepartures = singleLineDepartures.sort();
+
 
                 // push object with data to timetables
                 timetables[singleStopNameFromLocalStorageArray].push({
                     lineNumber: lineNumber,
                     lineName: singleLine.name,
-                    departures: sortedDepartures
-
+                    departures: [direction, sortedDepartures],
+                    departuresOnWayBack: [directionOnWayBack, sortedSingleLineDeparturesReverseDirection]
                 });
             });
         });
