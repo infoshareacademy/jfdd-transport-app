@@ -12,7 +12,6 @@
         $scope.addDate = function(selected){
             $scope.travelObject['date']= selected;
             $('#disabledSelect2').attr('disabled',false);
-            console.log( $scope.travelObject)
         }
 
     });
