@@ -68,9 +68,9 @@
 
         <div ng-controller="journeyPlannerCtrl">
             <form class='wrapper col-sm-8 col-sm-offset-2'>
-                <div ng-controller="AppCtrl" style='padding: 40px;' ng-cloak>
+                <div ng-controller="AppCtrl" ng-cloak>
+                    <label>Wybierz dzień</label>
                     <md-content>
-                        <h4>Standard date-picker</h4>
                         <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
                     </md-content>
                 </div>
@@ -97,7 +97,7 @@
                         <option>Disabled select</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Dodaj</button>
             </form>
         </div>
 
@@ -180,6 +180,7 @@
 <script src="src/app/controllers/logController.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="src/app/controllers/datepicker.js"></script>
+<script src="lib/moment-with-locales.min.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>
 <script src="src/app/yourStopInfo/timetable.js"></script>
