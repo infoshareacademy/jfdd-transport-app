@@ -23,7 +23,7 @@
                 console.log($scope.trips);
             };
 
-            $scope.addStageToCurrentTrip = function (date, stop, line, departureTime) {
+            $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
 
 
                 currentTrip.stages = currentTrip.stages || [];
