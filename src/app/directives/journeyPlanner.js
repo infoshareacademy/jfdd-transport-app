@@ -23,7 +23,6 @@
                        $scope.addLine = function(selected){
                            $('#disabledSelect4').attr('disabled',false);
                            $scope.travelObject['line']= selected;
-
                        }
                    })
                 }
@@ -33,26 +32,20 @@
             return {
                 restrict: 'E',
                 templateUrl: 'src/app/directives/yourPlannedJourney.html',
-                controller: function ($scope) {
+                controller: function ($scope, InstancedService) {
 
-                    //$scope.travelObject = {
-                    //    date: new Date(),
-                    //    busStop:"Nie wybrano przystanku",
-                    //    line: "Nie wybrano linii",
-                    //    time:(new Date).getTime()
-                    //};
                 }
             }
-        })
-    .directive('createPlan', function(){
-        return {
-            restrict: 'E',
-            templateUrl: 'src/app/directives/createPlan.html',
-            controller: function ($scope) {
-
-
-            }
-        }
-
-    })
+        });
+    //.directive('createPlan', function(){
+    //    return {
+    //        restrict: 'E',
+    //        templateUrl: 'src/app/directives/createPlan.html',
+    //        controller: function ($scope) {
+    //
+    //
+    //        }
+    //    }
+    //
+    //})
 }());

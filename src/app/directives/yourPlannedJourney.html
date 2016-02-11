@@ -1,11 +1,13 @@
-<!--<div  ng-show="hideValue" class="panel panel-primary">-->
-    <!--<div class="panel-body journeyStageContainer">-->
-        <!--<div class="col-sm-2 col-sm-15 col-xs-12 journeyStage">{{travelObject.date | date:'MM-dd-yyyy'}}</div>-->
-        <!--<div class="col-sm-2 col-sm-15 col-xs-12">{{travelObject.busStop}}</div>-->
-        <!--<div class="col-sm-2 col-sm-15 col-xs-4">{{travelObject.line}}</div>-->
-        <!--<div class="col-sm-2 col-sm-15 col-xs-4">{{travelObject.time | date:'HH:mm'}}</div>-->
-        <!--<div class="col-sm-2 col-sm-15 col-xs-4">-->
-            <!--<button type="button" class="btn btn-sm btn-info">Przejdź do realizacji</button>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
+<div   class="panel panel-primary">
+    <div ng-repeat="object in instancesArray " class="panel-body journeyStageContainer">
+        <div class="col-sm-2  col-xs-12 journeyStage">{{object.date | date:'MM-dd-yyyy'}}</div>
+        <div class="col-sm-2 col-xs-12">{{object.busStop}}</div>
+        <div class="col-sm-2 col-xs-4">{{object.line}}</div>
+        <div class="col-sm-2  col-xs-4">{{object.time | date:'HH:mm'}}</div>
+        <div class="col-sm-2  col-xs-4"><button type="button" class="btn btn-sm btn-info">Przejdź do realizacji</button></div>
+        <div class="col-sm-2  col-xs-4"><button ng-click="deleteJourney(object)" type="button" class="btn btn-sm btn-danger">Usuń</button>
+        </div>
+    </div>
+</div>
+
+

@@ -67,6 +67,7 @@
         </div>
 
         <div>
+
             <form class='wrapper col-sm-8 col-sm-offset-2'>
                 <div  ng-controller="AppCtrl" style='padding: 40px;' ng-cloak>
                     <md-content>
@@ -88,15 +89,15 @@
                         <option>Disabled select</option>
                     </select>
                 </div>
-                <button   ng-click="Hello()" type="submit" class="btn btn-primary">Dodaj</button>
+                <button   ng-click="Hello(myDate, myStop.name,  myLine.name)" type="submit" class="btn btn-primary">Dodaj</button>
             </form>
 
-            <!--<div  ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">-->
-                <!--<div id="yourPlannedJourney">-->
-                    <!--<h2>Zaplanowane podróże</h2>-->
-            <!--<your-planned-journey></your-planned-journey>-->
-                    <!--</div>-->
-                <!--</div>-->
+            <div  class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="yourPlannedJourney">
+                    <h2>Zaplanowane podróże</h2>
+            <your-planned-journey></your-planned-journey>
+                    </div>
+                </div>
 
             <div  ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="createPlan">

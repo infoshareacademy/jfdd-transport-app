@@ -1,28 +1,47 @@
-(function(){
+(function () {
     var app = angular.module('transport', ['ngMaterial', 'ngMessages']);
 
-    app.controller('transportCtrl', function ($scope) {
+    app.factory('InstancedService', function () {
+
+            function Instance(date, name, line) {
+                this.date = date || new Date();
+                this.busStop = name || "Nie wybrano przystanku";
+                this.line = line || "Nie wybrano linii";
+            }
+
+            return {
+                Instance: Instance
+            }
+        })
+
+        .controller('transportCtrl', function ($scope, InstancedService) {
+
+            $scope.myDate = new Date();
+            $scope.addDate = function (selected) {
+                $scope.travelObject['date'] = selected;
+            }
+
 
             $scope.travelObject = {
                 date: new Date(),
-                busStop:"Nie wybrano przystanku",
+                busStop: "Nie wybrano przystanku",
                 line: "Nie wybrano linii",
-                time:(new Date).getTime()
+                time: (new Date).getTime()
             };
 
-            $scope.Hello = function(busStop){
+            $scope.instancesArray = [];
 
-                $scope.newTravelObject = {
-                    date: $scope.travelObject['date'],
-                    busStop: $scope.travelObject['busStop'] || "Nie wybrano przystanku",
-                    line: $scope.travelObject['line'],
-                    time:(new Date).getTime()
-                };
+            $scope.Hello = function (param1, param2, param3) {
+                $scope.instanceA = new InstancedService.Instance(param1, param2, param3)
 
-                $scope.hideValue = true;
-                console.log('hello')}
+                $scope.instancesArray.push($scope.instanceA);
+            }
 
-            $scope.addStop = function(selected){
+            $scope.deleteJourney = function(param){
+
+            }
+
+            $scope.addStop = function (selected) {
 
                 $scope.travelObject['busStop'] = selected;
 
@@ -30,20 +49,21 @@
 
                 $scope.accumulator = [];
 
-                $scope.filteredLines = $scope.lines.map(function(line) {
+                $scope.filteredLines = $scope.lines.map(function (line) {
 
                     line.stops.forEach(function (stops) {
 
-                        for(name in stops){
-                            if(stops.name== selected) {
+                        for (name in stops) {
+                            if (stops.name == selected) {
+                                console.log(line)
                                 $scope.accumulator.push(line);
                             }
                         }
                     });
                 });
                 $scope.uniqueLines = [];
-                $.each($scope.accumulator, function(i, el){
-                    if($.inArray(el, $scope.uniqueLines) === -1) $scope.uniqueLines.push(el);
+                $.each($scope.accumulator, function (i, el) {
+                    if ($.inArray(el, $scope.uniqueLines) === -1) $scope.uniqueLines.push(el);
                 });
             }
         })

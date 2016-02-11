@@ -8,11 +8,12 @@
     });
 
     app.controller('AppCtrl', function($scope) {
-        $scope.myDate = new Date();
-        $scope.addDate = function(selected){
-            $scope.travelObject['date']= selected;
-            $('#disabledSelect2').attr('disabled',false);
-        }
+        //$scope.myDate = new Date();
+        //$scope.addDate = function(selected){
+        //    $scope.travelObject['date']= selected;
+            //console.log( $scope.travelObject['date'])
+            //$('#disabledSelect2').attr('disabled',false);
+        //}
 
     });
 })();
