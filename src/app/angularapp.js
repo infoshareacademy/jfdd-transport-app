@@ -4,7 +4,7 @@
     app.factory('InstancedService', function () {
 
             function Instance(date, name, line) {
-                this.date = date || new Date();
+                this.date = date ||new Date();
                 this.busStop = name || "Nie wybrano przystanku";
                 this.line = line || "Nie wybrano linii";
             }
@@ -16,12 +16,6 @@
 
         .controller('transportCtrl', function ($scope, InstancedService) {
 
-            $scope.myDate = new Date();
-            $scope.addDate = function (selected) {
-                $scope.travelObject['date'] = selected;
-            }
-
-
             $scope.travelObject = {
                 date: new Date(),
                 busStop: "Nie wybrano przystanku",
@@ -32,14 +26,25 @@
             $scope.instancesArray = [];
 
             $scope.Hello = function (param1, param2, param3) {
-                $scope.instanceA = new InstancedService.Instance(param1, param2, param3)
-
+                $scope.instanceA = new InstancedService.Instance(param1, param2, param3);
                 $scope.instancesArray.push($scope.instanceA);
-            }
+            };
 
-            $scope.deleteJourney = function(param){
+            $scope.deleteJourney = function(item){
+                console.log($scope.instancesArray)
+                console.log(item)
+                var index = $scope.instancesArray.indexOf(item);
+                $scope.instancesArray.splice(index, 1);
 
-            }
+            };
+
+            $scope.addDate = function(selected){
+               return $scope.myDate = selected;
+                //$('#disabledSelect2').attr('disabled',false);
+            };
+
+
+
 
             $scope.addStop = function (selected) {
 
@@ -50,12 +55,10 @@
                 $scope.accumulator = [];
 
                 $scope.filteredLines = $scope.lines.map(function (line) {
-
                     line.stops.forEach(function (stops) {
-
                         for (name in stops) {
                             if (stops.name == selected) {
-                                console.log(line)
+                                //console.log(line)
                                 $scope.accumulator.push(line);
                             }
                         }
