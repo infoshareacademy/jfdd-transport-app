@@ -24,6 +24,8 @@ ns('app.yourStopInfo.timetable', function () {
 
     var timeTableForGivenStopAndLine = function(stopName, singleLine) {
 
+
+
         var sumPreviousAndCurrentElementForReduce = function(a, b) {
             return a + b;
         };
@@ -55,7 +57,6 @@ ns('app.yourStopInfo.timetable', function () {
 
             // get the timeFromStartingStopToGivenInSeconds in seconds from starting stop to given stop
             timeFromStartingStopToGivenInSeconds = singleLine.dTimes.slice(0, stopArrayIndex + 1).reduce(sumPreviousAndCurrentElementForReduce, 0);
-
             singleLineDepartures = singleLine.departures.map(function (singleDepartureTime) {
                 var departureTimesInSeconds = singleDepartureTime.hour * 3600 + singleDepartureTime.minutes * 60 + singleDepartureTime.seconds;
                 var departureTimeOnCurrentStop = (departureTimesInSeconds + timeFromStartingStopToGivenInSeconds) % 86400; // 86400s = 24h
@@ -170,9 +171,12 @@ ns('app.yourStopInfo.timetable', function () {
     };
 
     return {
+
         prepareTimetables: prepareTimetables,
         timeTableForGivenStopAndLine: timeTableForGivenStopAndLine,
-        timetables: timetables
+        timetables: timetables,
+
+
 
     }
 });

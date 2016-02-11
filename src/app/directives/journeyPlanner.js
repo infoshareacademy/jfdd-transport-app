@@ -22,9 +22,6 @@
                        $scope.lines = response.data;
                        $scope.myLine = $scope.lines[0].name;
 
-                       //$scope.addLine = function(selected){
-                       //    $('#disabledSelect4').attr('disabled',false);
-                       //}
                    })
                 }
             }

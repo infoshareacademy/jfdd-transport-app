@@ -11,15 +11,13 @@
             $scope.startNewTrip = function (selectedDate) {
                 currentTrip = {};
                 currentTrip.date = selectedDate;
-
-                // put the trip in trips array
                 $scope.trips.push(currentTrip);
-                console.log($scope.trips);
+
             };
 
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
 
-
+                $scope.hideValue = true;
                 currentTrip.stages = currentTrip.stages || [];
                 currentTrip.stages.push({
                     stop: stop,
@@ -34,21 +32,21 @@
 
             $scope.addStop = function (selected) {
 
-                var accumulator = [];
+                $scope.accumulator = [];
 
                 $scope.filteredLines = $scope.lines.map(function (line) {
 
                     line.stops.forEach(function (stops) {
                         for (var name in stops) {
                             if (stops.name == selected) {
-                                accumulator.push(line);
+                                $scope.accumulator.push(line);
 
                             }
                         }
                     });
                 });
                 $scope.uniqueLines = [];
-                $.each(accumulator, function (i, el) {
+                $.each($scope.accumulator, function (i, el) {
                     if ($.inArray(el, $scope.uniqueLines) === -1) $scope.uniqueLines.push(el);
                 });
             }
