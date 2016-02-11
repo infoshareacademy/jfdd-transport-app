@@ -1,5 +1,5 @@
 ns('app.yourStopInfo.timetable', function () {
-    var timetables = {};
+    var timetables = [];
     var toHHMM;
     var cachedJson;
     var prepareTimetables;
@@ -20,6 +20,64 @@ ns('app.yourStopInfo.timetable', function () {
         return time;
     };
 
+
+
+    var timeTableForGivenStopAndLine = function(stopName, singleLine) {
+
+        var sumPreviousAndCurrentElementForReduce = function(a, b) {
+            return a + b;
+        };
+
+            var lineNumber = singleLine.id;
+            var direction = singleLine.stops[singleLine.stops.length - 1].name;
+            var directionOnWayBack = singleLine.stops[0].name;
+            var stopArrayIndex = singleLine.stops.indexOf(stopName);
+            var sortedDepartures;
+            var singleLineDepartures;
+            var singleLineDeparturesReverseDirection;
+            var timeFromStartingStopToGivenInSeconds;
+            var sortedSingleLineDeparturesReverseDirection;
+
+            var timeOfJourneyBackFromLastStopToGivenStopInSeconds = singleLine.dTimes.slice(stopArrayIndex).concat(0).reverse().reduce(sumPreviousAndCurrentElementForReduce, 0);
+
+
+            var totalTimeFromTheBeginningToEndOfLineInSeconds = singleLine.dTimes.reduce(sumPreviousAndCurrentElementForReduce);
+
+
+            singleLineDeparturesReverseDirection = singleLine.departures.map(function (singleDepartureTime) {
+                var departureTimesInSeconds = singleDepartureTime.hour * 3600 + singleDepartureTime.minutes * 60 + singleDepartureTime.seconds;
+                var timeOfArrivalToLastStopinSecondsModulo24h = (departureTimesInSeconds + totalTimeFromTheBeginningToEndOfLineInSeconds) % 86400; // 86400s = 24h
+                var departureTimeOnCurrentStop = (timeOfArrivalToLastStopinSecondsModulo24h + timeOfJourneyBackFromLastStopToGivenStopInSeconds) % 86400; // 86400s = 24h
+                var departureTimeOnCurrentStopHHMM = toHHMM(departureTimeOnCurrentStop);
+                return departureTimeOnCurrentStopHHMM;
+            });
+            sortedSingleLineDeparturesReverseDirection = singleLineDeparturesReverseDirection.sort();
+
+            // get the timeFromStartingStopToGivenInSeconds in seconds from starting stop to given stop
+            timeFromStartingStopToGivenInSeconds = singleLine.dTimes.slice(0, stopArrayIndex + 1).reduce(sumPreviousAndCurrentElementForReduce, 0);
+
+            singleLineDepartures = singleLine.departures.map(function (singleDepartureTime) {
+                var departureTimesInSeconds = singleDepartureTime.hour * 3600 + singleDepartureTime.minutes * 60 + singleDepartureTime.seconds;
+                var departureTimeOnCurrentStop = (departureTimesInSeconds + timeFromStartingStopToGivenInSeconds) % 86400; // 86400s = 24h
+                var departureTimeOnCurrentStopHHMM = toHHMM(departureTimeOnCurrentStop);
+                return departureTimeOnCurrentStopHHMM;
+            });
+
+            sortedDepartures = singleLineDepartures.sort();
+
+
+            // push object with data to timetables
+            timetables.push({
+                lineNumber: lineNumber,
+                lineName: singleLine.name,
+                departures: [direction, sortedDepartures],
+                departuresOnWayBack: [directionOnWayBack, sortedSingleLineDeparturesReverseDirection]
+            });
+
+            return timetables;
+        };
+
+
     cachedJson = null;
     prepareTimetables = function (jsonWithPublicTransportLines) {
 
@@ -33,6 +91,10 @@ ns('app.yourStopInfo.timetable', function () {
         }
 
         stopsFromLocalStorageArray = app.pickYourStops.model.user.favouriteStops();
+
+
+
+
         stopsFromLocalStorageArray.forEach(function (singleStopNameFromLocalStorageArray) {
             var isStopFromJsonEqualToStopFromLocalStorage;
             var getStopEqualToStopFromLocalStorage;
@@ -109,6 +171,7 @@ ns('app.yourStopInfo.timetable', function () {
 
     return {
         prepareTimetables: prepareTimetables,
+        timeTableForGivenStopAndLine: timeTableForGivenStopAndLine,
         timetables: timetables
 
     }
