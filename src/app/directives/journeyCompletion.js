@@ -4,7 +4,7 @@
             return {
                 restrict: 'E',
                 scope: {
-                    journeyData: '=journeyData'
+                    journeyData: '=trips'
                 },
                 templateUrl: 'src/app/directives/journeyCompletion.html',
                 controller: function ($scope) {

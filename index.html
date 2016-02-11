@@ -62,9 +62,9 @@
 
     <main class="<!--hide-->">
 
-        <div ng-controller="transportCtrl">
+        <!--<div ng-controller="transportCtrl">
 
-        </div>
+        </div>-->
 
         <div ng-controller="journeyPlannerCtrl">
             <form class='wrapper col-sm-8 col-sm-offset-2'>
@@ -110,12 +110,16 @@
                     <create-plan></create-plan>
                 </div>
             </div>
-
-
+            <div class="wrapper col-sm-8 col-sm-offset-2">
+                <button ng-click="changeState()"
+                        type="button"
+                        class="btn btn-primary">Zrealizuj podróż
+                </button>
+            </div>
             <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="journeyCompletion" ng-show="flag">
                     <h2>Realizacja podróży</h2>
-                    <journey-completion journey-data="plannedJourneys"></journey-completion>
+                    <journey-completion journey-data="trips"></journey-completion>
                 </div>
             </div>
         </div>

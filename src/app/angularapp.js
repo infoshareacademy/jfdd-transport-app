@@ -8,6 +8,12 @@
 
             $scope.trips = [];
 
+            $scope.flag = false;
+
+            $scope.changeState = function () {
+                $scope.flag = true;
+            };
+
             $scope.startNewTrip = function (selectedDate) {
                 currentTrip = {};
                 currentTrip.date = selectedDate;
@@ -26,6 +32,7 @@
                     line: line,
                     departureTime: departureTime
                 });
+                console.log(trips);
             };
 
             $scope.deleteJourney = function () {

@@ -6,7 +6,7 @@
         <div class="panel-body journeyStageContainer">
             <div class="col-sm-2 col-sm-15 col-xs-12">{{journeyInfo.stop}}</div>
             <div class="col-sm-2 col-sm-15 col-xs-4">{{journeyInfo.line}}</div>
-            <div class="col-sm-2 col-sm-15 col-xs-4">{{journeyInfo.departure | date:'HH:mm'}}</div>
+            <div class="col-sm-2 col-sm-15 col-xs-4">{{journeyInfo.departureTime | date:'HH:mm'}}</div>
             <div class="col-sm-2 col-sm-15 col-xs-4">
                 <button ng-click="markComplete($index)" type="button" class="btn btn-sm btn-danger">Usuń</button>
             </div>

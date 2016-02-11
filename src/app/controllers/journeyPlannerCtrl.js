@@ -3,11 +3,11 @@
 
     app.controller('journeyPlannerCtrl', function ($scope) {
 
-        $scope.flag = false;
-
-        $scope.changeState = function () {
-            $scope.flag = true;
-        };
+        //$scope.flag = false;
+        //
+        //$scope.changeState = function () {
+        //    $scope.flag = true;
+        //};
 
         $scope.plannedJourneys = [
             {
