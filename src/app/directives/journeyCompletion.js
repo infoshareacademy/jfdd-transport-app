@@ -10,8 +10,13 @@
                     $scope.journeyData = $scope.$parent.trips;
 
                     $scope.markComplete = function (index) {
-                        $scope.journeyData[index].hide = true;
-                        $scope.allStagesCompleted = $scope.journeyData.every(checkIfHidden);
+                        var activeJourney = $scope.journeyData.filter(function (element) {
+                            return element.active;
+                        });
+
+                        activeJourney[0].stages[index].hide = true;
+                        $scope.allStagesCompleted = activeJourney[0].stages.every(checkIfHidden);
+                        console.log('$scope.allStagesCompleted', $scope.allStagesCompleted)
                     };
 
                     function checkIfHidden (value) {

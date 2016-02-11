@@ -9,27 +9,27 @@
         //    $scope.flag = true;
         //};
 
-        $scope.plannedJourneys = [
-            {
-                date: '2016-02-27',
-                stages: [
-                    {
-                        stop: 'Migowo',
-                        line: 127,
-                        departure: (new Date).getTime()
-                    },
-                    {
-                        stop: 'Gdańsk Wrzeszcz',
-                        line: 127,
-                        departure: (new Date).getTime()
-                    },
-                    {
-                        stop: 'Hala Olivia',
-                        line: 127,
-                        departure: (new Date).getTime()
-                    }
-                ]
-            }
-        ];
+        //$scope.plannedJourneys = [
+        //    {
+        //        date: '2016-02-27',
+        //        stages: [
+        //            {
+        //                stop: 'Migowo',
+        //                line: 127,
+        //                departure: (new Date).getTime()
+        //            },
+        //            {
+        //                stop: 'Gdańsk Wrzeszcz',
+        //                line: 127,
+        //                departure: (new Date).getTime()
+        //            },
+        //            {
+        //                stop: 'Hala Olivia',
+        //                line: 127,
+        //                departure: (new Date).getTime()
+        //            }
+        //        ]
+        //    }
+        //];
     });
 })();
