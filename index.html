@@ -97,10 +97,10 @@
                         <option>Disabled select</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Dodaj</button>
+                <button type="submit" class="btn btn-primary" ng-click="changeState()">Dodaj</button>
             </form>
             <div  class="wrapper col-sm-8 col-sm-offset-2">
-                <div id="journeyCompletion">
+                <div id="journeyCompletion" ng-show="flag">
                     <h2>Realizacja podróży</h2>
                     <journey-completion journey-data="plannedJourneys"></journey-completion>
                 </div>

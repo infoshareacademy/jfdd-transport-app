@@ -1,12 +1,15 @@
 <p ng-hide="allStagesCompleted">Usuń etapy, które zostały już zrealizowane.</p>
-<p>{{journeyData[0].name + journeyData[0].date}}</p>
-<div ng-repeat="journey in journeyData[0].stages" ng-hide="journey.hide" class="panel panel-primary">
-    <div class="panel-body journeyStageContainer">
-        <div class="col-sm-2 col-sm-15 col-xs-12">{{journey.stop}}</div>
-        <div class="col-sm-2 col-sm-15 col-xs-4">{{journey.line}}</div>
-        <div class="col-sm-2 col-sm-15 col-xs-4">{{journey.departure | date:'HH:mm'}}</div>
-        <div class="col-sm-2 col-sm-15 col-xs-4">
-            <button ng-click="markComplete($index)" type="button" class="btn btn-sm btn-danger">Usuń</button>
+
+<div ng-repeat="journey in journeyData">
+    <p>{{journey.date}}</p>
+    <div ng-repeat="journeyInfo in journey.stages" ng-hide="journey.hide" class="panel panel-primary">
+        <div class="panel-body journeyStageContainer">
+            <div class="col-sm-2 col-sm-15 col-xs-12">{{journeyInfo.stop}}</div>
+            <div class="col-sm-2 col-sm-15 col-xs-4">{{journeyInfo.line}}</div>
+            <div class="col-sm-2 col-sm-15 col-xs-4">{{journeyInfo.departure | date:'HH:mm'}}</div>
+            <div class="col-sm-2 col-sm-15 col-xs-4">
+                <button ng-click="markComplete($index)" type="button" class="btn btn-sm btn-danger">Usuń</button>
+            </div>
         </div>
     </div>
 </div>

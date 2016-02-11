@@ -3,9 +3,14 @@
 
     app.controller('journeyPlannerCtrl', function ($scope) {
 
+        $scope.flag = false;
+
+        $scope.changeState = function () {
+            $scope.flag = true;
+        };
+
         $scope.plannedJourneys = [
             {
-                name: "Wycieczka 1",
                 date: '2016-02-27',
                 stages: [
                     {
