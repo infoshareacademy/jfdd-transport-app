@@ -3,12 +3,11 @@
         .directive('journeyCompletion', function () {
             return {
                 restrict: 'E',
-                scope: {
-                    journeyData: '=trips'
-                },
+                scope: true,
                 templateUrl: 'src/app/directives/journeyCompletion.html',
                 controller: function ($scope) {
 
+                    $scope.journeyData = $scope.$parent.trips;
 
                     $scope.markComplete = function (index) {
                         $scope.journeyData[index].hide = true;

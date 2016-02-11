@@ -20,8 +20,7 @@
 
                 // put the trip in trips array
                 $scope.trips.push(currentTrip);
-                console.log($scope.trips);
-            };
+                };
 
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
 
@@ -32,7 +31,6 @@
                     line: line,
                     departureTime: departureTime
                 });
-                console.log(trips);
             };
 
             $scope.deleteJourney = function () {

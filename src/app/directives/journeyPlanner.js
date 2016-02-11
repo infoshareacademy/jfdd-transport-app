@@ -5,9 +5,9 @@
             return {
                 controller:  function($scope, $http) {
                     $http.get('https://isa-api.herokuapp.com/transport/stops.json').then(function(response){
-                        $scope.stops = response.data;
-                        $scope.myStop = $scope.stops[0].name;
-                        $scope.selected=[{name: "bajki"}];
+                        $scope.$parent.stops = response.data;
+                        $scope.$parent.myStop = $scope.stops[0].name;
+                        $scope.$parent.selected=[{name: "bajki"}];
                     })
                 }
             }
@@ -16,11 +16,12 @@
             return {
                 restrict: 'E',
                 templateUrl: 'src/app/directives/journeyPlanner.html',
+                scope: true,
 
                 controller: function($scope, $http) {
                    $http.get('https://isa-api.herokuapp.com/transport/lines.json').then(function(response){
-                       $scope.lines = response.data;
-                       $scope.myLine = $scope.lines[0].name;
+                       $scope.$parent.lines = response.data;
+                       $scope.$parent.myLine = $scope.$parent.lines[0].name;
 
                        //$scope.addLine = function(selected){
                        //    $('#disabledSelect4').attr('disabled',false);
