@@ -68,28 +68,21 @@
 
         <div ng-controller="journeyPlannerCtrl">
             <form class='wrapper col-sm-8 col-sm-offset-2'>
-                <div ng-controller="AppCtrl" ng-cloak>
-                    <label>Wybierz dzień</label>
+                <div ng-controller="AppCtrl" style='padding: 40px;' ng-cloak>
                     <md-content>
-                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                        <h4>Wybierz dzień</h4>
+                        <md-datepicker ng-change="startNewTrip(myDate)"
+                                       ng-model="myDate"
+                                       md-placeholder="Enter date"></md-datepicker>
                     </md-content>
                 </div>
 
                 <br>
 
-                <div class="form-group">
-                    <label for="disabledSelect2">Przystanek</label>
-                    <select id="disabledSelect2" class="form-control">
-                        <option>Disabled select</option>
-                    </select>
-                </div>
+                <journey-planner-stops></journey-planner-stops>
 
-                <div class="form-group">
-                    <label for="disabledSelect3">Linia</label>
-                    <select id="disabledSelect3" class="form-control">
-                        <option>Disabled select</option>
-                    </select>
-                </div>
+                <journey-planner-lines></journey-planner-lines>
+
 
                 <div class="form-group">
                     <label for="disabledSelect4">Godzina</label>
@@ -97,9 +90,29 @@
                         <option>Disabled select</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" ng-click="changeState()">Dodaj</button>
+                <button ng-click="addStageToCurrentTrip(myStop.name, myLine.name, myTime)"
+                        type="submit"
+                        class="btn btn-primary">
+                    Dodaj
+                </button>
             </form>
-            <div  class="wrapper col-sm-8 col-sm-offset-2">
+
+            <div class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="yourPlannedJourney">
+                    <h2>Zaplanowane podróże</h2>
+                    <your-planned-journey></your-planned-journey>
+                </div>
+            </div>
+
+            <div ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="createPlan">
+                    <h2>Zaplanowane podróże</h2>
+                    <create-plan></create-plan>
+                </div>
+            </div>
+
+
+            <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="journeyCompletion" ng-show="flag">
                     <h2>Realizacja podróży</h2>
                     <journey-completion journey-data="plannedJourneys"></journey-completion>
@@ -186,6 +199,7 @@
 <script src="src/app/controllers/logController.js"></script>
 <script src="src/app/controllers/datepicker.js"></script>
 <script src="src/app/directives/journeyCompletion.js"></script>
+<script src="src/app/directives/journeyPlanner.js"></script>
 <script src="lib/moment-with-locales.min.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>

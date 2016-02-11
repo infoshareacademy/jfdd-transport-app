@@ -1,0 +1,20 @@
+<div class="form-group">
+    <label for="disabledSelect2">Przystanek</label>
+    <select ng-model="myStop"
+            ng-options="stop.name for stop in stops"
+            ng-change="addStop(myStop.name)"
+            id="disabledSelect2"
+            class="form-control">
+    </select>
+</div>
+<!--add disabled="disabled" to selects-->
+
+<div class="form-group">
+    <label for="disabledSelect3">Linia</label>
+    <select ng-change="addLine(myLine.name)"
+            ng-options="line.name for line in uniqueLines"
+            ng-model="myLine"
+            id="disabledSelect3"
+            class="form-control">
+    </select>
+</div>
