@@ -22,7 +22,7 @@
 </head>
 
 <body ng-app="transport">
-<div class = "fluid-container" ng-controller="transportCtrl">
+<div class="fluid-container" ng-controller="transportCtrl">
     <header id="header" class="row hide">
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-5 col-sm-offset-2">
             <div class="helloUser"></div>
@@ -67,39 +67,44 @@
         </div>
 
         <div>
-
             <form class='wrapper col-sm-8 col-sm-offset-2'>
-                <div  ng-controller="AppCtrl" style='padding: 40px;' ng-cloak>
+                <div ng-controller="AppCtrl" style='padding: 40px;' ng-cloak>
                     <md-content>
                         <h4>Wybierz dzień</h4>
-                        <md-datepicker ng-change="addDate(myDate)" ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                        <md-datepicker ng-change="startNewTrip(myDate)"
+                                       ng-model="myDate"
+                                       md-placeholder="Enter date"></md-datepicker>
                     </md-content>
                 </div>
 
                 <br>
 
-           <journey-planner-stops></journey-planner-stops>
+                <journey-planner-stops></journey-planner-stops>
 
                 <journey-planner-lines></journey-planner-lines>
 
 
                 <div class="form-group">
                     <label for="disabledSelect4">Godzina</label>
-                    <select  id="disabledSelect4" class="form-control">
+                    <select id="disabledSelect4" class="form-control">
                         <option>Disabled select</option>
                     </select>
                 </div>
-                <button   ng-click="Hello(myDate, myStop.name,  myLine.name)" type="submit" class="btn btn-primary">Dodaj</button>
+                <button ng-click="addStageToCurrentTrip(myStop.name, myLine.name, myTime)"
+                        type="submit"
+                        class="btn btn-primary">
+                    Dodaj
+                </button>
             </form>
 
-            <div  class="wrapper col-sm-8 col-sm-offset-2">
+            <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="yourPlannedJourney">
                     <h2>Zaplanowane podróże</h2>
-            <your-planned-journey></your-planned-journey>
-                    </div>
+                    <your-planned-journey></your-planned-journey>
                 </div>
+            </div>
 
-            <div  ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">
+            <div ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="createPlan">
                     <h2>Zaplanowane podróże</h2>
                     <create-plan></create-plan>
@@ -107,9 +112,10 @@
             </div>
 
 
-            <div  class="wrapper col-sm-8 col-sm-offset-2">
+            <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="journeyCompletion">
                     <h2>Realizacja podróży</h2>
+
                     <p>Zaznacz etapy, które zostały już zrealizowane.</p>
                     <journey-completion></journey-completion>
                 </div>
@@ -125,6 +131,7 @@
             <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="pickYourStops">
                     <h3 ng-click="$log.log(message)">Wybierz przystanki, które chcesz obserwować</h3>
+
                     <p>MOŻESZ W KAŻDEJ CHWILI MODYFIKOWAĆ SWOJĄ LISTĘ, DODAWAĆ I USUWAĆ PRZYSTANKI</p>
                 </div>
             </div>
@@ -134,6 +141,7 @@
             <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="filtersId">
                     <h3>Obserwowane przystanki</h3>
+
                     <p>SPRAWDŹ SYTUACJĘ NA SWOIM PRZYSTANKU</p>
                 </div>
             </div>
@@ -151,7 +159,9 @@
             <div class="wrapper col-sm-8 col-sm-offset-2 js-lineStatsContainer">
                 <div id="lineStats">
                     <h2>Aktualne opóźnienia na liniach</h2>
+
                     <p>WYBIERZ LINIE I SPRAWDŹ, NA KTÓRYCH WYSTĘPUJĄ W TEJ CHWILI NAJWIĘKSZE OPÓŹNIENIA</p>
+
                     <div class="form-inline js-lineInputContainer">
                         <div class="form-group">
                             <div class="input-group">

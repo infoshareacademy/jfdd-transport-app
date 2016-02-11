@@ -1,9 +1,10 @@
-<div  ng-repeat="object in instancesArray "  class="panel panel-primary">
-    <div class="panel-body journeyStageContainer">
-        <div class="col-sm-2  col-xs-12 journeyStage">{{object.date | date:'MM-dd-yyyy'}}</div>
-        <div class="col-sm-2 col-xs-12">{{object.busStop}}</div>
-        <div class="col-sm-2 col-xs-4">{{object.line}}</div>
-        <div class="col-sm-2  col-xs-4">{{object.time | date:'HH:mm'}}</div>
+<div  ng-repeat="trip in trips"  class="panel panel-primary">
+    {{ trip.date }}
+    <div ng-repeat="stage in trip.stages" class="panel-body journeyStageContainer">
+        <div class="col-sm-2  col-xs-12 journeyStage">{{trip.date | date:'dd-MM-yyyy'}}</div>
+        <div class="col-sm-2 col-xs-12">{{stage.stop}}</div>
+        <div class="col-sm-2 col-xs-4">{{stage.line}}</div>
+        <div class="col-sm-2  col-xs-4">{{stage.departureTime | date:'HH:mm'}}</div>
         <div class="col-sm-2  col-xs-4"><button type="button" class="btn btn-sm btn-info">Przejdź do realizacji</button></div>
         <div class="col-sm-2  col-xs-4"><button ng-click="deleteJourney(instanceA)" type="button" class="btn btn-sm btn-danger">Usuń</button>
         </div>

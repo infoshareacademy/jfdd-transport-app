@@ -1,71 +1,54 @@
 (function () {
     var app = angular.module('transport', ['ngMaterial', 'ngMessages']);
 
-    app.factory('InstancedService', function () {
+    app
+        .controller('transportCtrl', function ($scope) {
 
-            function Instance(date, name, line) {
-                this.date = date ||new Date();
-                this.busStop = name || "Nie wybrano przystanku";
-                this.line = line || "Nie wybrano linii";
-            }
+            var currentTrip;
 
-            return {
-                Instance: Instance
-            }
-        })
+            $scope.trips = [];
 
-        .controller('transportCtrl', function ($scope, InstancedService) {
+            $scope.startNewTrip = function (selectedDate) {
+                currentTrip = {};
+                currentTrip.date = selectedDate;
 
-            $scope.travelObject = {
-                date: new Date(),
-                busStop: "Nie wybrano przystanku",
-                line: "Nie wybrano linii",
-                time: (new Date).getTime()
+                // put the trip in trips array
+                $scope.trips.push(currentTrip);
+                console.log($scope.trips);
             };
 
-            $scope.instancesArray = [];
+            $scope.addStageToCurrentTrip = function (date, stop, line, departureTime) {
 
-            $scope.Hello = function (param1, param2, param3) {
-                $scope.instanceA = new InstancedService.Instance(param1, param2, param3);
-                $scope.instancesArray.push($scope.instanceA);
+
+                currentTrip.stages = currentTrip.stages || [];
+                currentTrip.stages.push({
+                    stop: stop,
+                    line: line,
+                    departureTime: departureTime
+                });
             };
 
-            $scope.deleteJourney = function(item){
-                console.log($scope.instancesArray)
-                console.log(item)
-                var index = $scope.instancesArray.indexOf(item);
-                $scope.instancesArray.splice(index, 1);
-
+            $scope.deleteJourney = function () {
+                console.log('Not implemented yet');
             };
-
-            $scope.addDate = function(selected){
-               return $scope.myDate = selected;
-                //$('#disabledSelect2').attr('disabled',false);
-            };
-
-
-
 
             $scope.addStop = function (selected) {
 
-                $scope.travelObject['busStop'] = selected;
-
-                //$('#disabledSelect3').attr('disabled',false);
-
-                $scope.accumulator = [];
+                var accumulator = [];
 
                 $scope.filteredLines = $scope.lines.map(function (line) {
+
                     line.stops.forEach(function (stops) {
-                        for (name in stops) {
+                        for (var name in stops) {
                             if (stops.name == selected) {
-                                //console.log(line)
-                                $scope.accumulator.push(line);
+                                accumulator.push(line);
+
                             }
                         }
                     });
                 });
                 $scope.uniqueLines = [];
-                $.each($scope.accumulator, function (i, el) {
+                $.each(accumulator, function (i, el) {
                     if ($.inArray(el, $scope.uniqueLines) === -1) $scope.uniqueLines.push(el);
                 });
             }

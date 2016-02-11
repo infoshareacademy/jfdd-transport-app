@@ -1,5 +1,7 @@
 (function () {
-    angular.module('transport').directive('journeyPlannerStops', function () {
+    angular
+        .module('transport')
+        .directive('journeyPlannerStops', function () {
             return {
                 controller:  function($scope, $http) {
                     $http.get('https://isa-api.herokuapp.com/transport/stops.json').then(function(response){
@@ -32,20 +34,9 @@
             return {
                 restrict: 'E',
                 templateUrl: 'src/app/directives/yourPlannedJourney.html',
-                controller: function ($scope, InstancedService) {
+                controller: function ($scope) {
 
                 }
             }
         });
-    //.directive('createPlan', function(){
-    //    return {
-    //        restrict: 'E',
-    //        templateUrl: 'src/app/directives/createPlan.html',
-    //        controller: function ($scope) {
-    //
-    //
-    //        }
-    //    }
-    //
-    //})
 }());
