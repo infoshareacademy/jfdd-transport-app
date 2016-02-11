@@ -16,7 +16,6 @@
 
                         activeJourney[0].stages[index].hide = true;
                         $scope.allStagesCompleted = activeJourney[0].stages.every(checkIfHidden);
-                        console.log('$scope.allStagesCompleted', $scope.allStagesCompleted)
                     };
 
                     function checkIfHidden (value) {
