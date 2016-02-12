@@ -86,7 +86,7 @@
                     var departureTimeOnCurrentStopHHMM = toHHMM(departureTimeOnCurrentStop);
                     return departureTimeOnCurrentStopHHMM;
                 });
-
+                console.log(singleLineDepartures);
                 return singleLineDepartures;
             }
         })
