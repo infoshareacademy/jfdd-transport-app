@@ -77,7 +77,9 @@
                             ng-change="addHour(times)"
                             id="disabledSelect4"
                             class="form-control">
+                        <option value="">Wybierz godzinę</option>
                     </select>
+                    
                 </div>
                 <button ng-click="addStageToCurrentTrip(myStop.name, myLine.name, mySelectedTime)"
                         type="submit"
