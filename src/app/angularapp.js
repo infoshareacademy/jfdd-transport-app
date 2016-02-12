@@ -15,6 +15,12 @@
 
             };
 
+            $scope.flag = false;
+
+            $scope.changeState = function () {
+                $scope.flag = true;
+            };
+
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
 
                 $scope.hideValue = true;
