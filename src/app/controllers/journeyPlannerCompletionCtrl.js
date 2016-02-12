@@ -3,5 +3,6 @@
 //
 //    app.controller('journeyPlannerCompletionCtrl', function ($scope) {
 //
-//    });
+//    })
+//
 //})();

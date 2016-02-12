@@ -23,9 +23,6 @@
                        $scope.$parent.lines = response.data;
                        $scope.$parent.myLine = $scope.$parent.lines[0].name;
 
-                       //$scope.addLine = function(selected){
-                       //    $('#disabledSelect4').attr('disabled',false);
-                       //}
                    })
                 }
             }

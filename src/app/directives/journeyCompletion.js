@@ -3,11 +3,11 @@
         .directive('journeyCompletion', function () {
             return {
                 restrict: 'E',
-                scope: true,
+                //scope: true,//TODO: Aga - brak
                 templateUrl: 'src/app/directives/journeyCompletion.html',
                 controller: function ($scope) {
 
-                    $scope.journeyData = $scope.$parent.trips;
+                    $scope.journeyData = $scope.trips;
 
                     $scope.markComplete = function (index) {
                         var activeJourney = $scope.journeyData.filter(function (element) {
