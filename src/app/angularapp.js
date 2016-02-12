@@ -24,7 +24,7 @@
 
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
 
-
+                $scope.hideValue = true;
                 currentTrip.stages = currentTrip.stages || [];
                 currentTrip.stages.push({
                     stop: stop,

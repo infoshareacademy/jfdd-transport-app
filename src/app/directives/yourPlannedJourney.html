@@ -1,14 +1,16 @@
-<div  ng-repeat="trip in trips"  class="panel panel-primary">
-    {{ trip.date }}
-    <div ng-repeat="stage in trip.stages" class="panel-body journeyStageContainer">
-        <div class="col-sm-2  col-xs-12 journeyStage">{{trip.date | date:'dd-MM-yyyy'}}</div>
-        <div class="col-sm-2 col-xs-12">{{stage.stop}}</div>
-        <div class="col-sm-2 col-xs-4">{{stage.line}}</div>
-        <div class="col-sm-2  col-xs-4">{{stage.departureTime | date:'HH:mm'}}</div>
-        <div class="col-sm-2  col-xs-4"><button ng-click="deleteJourney(instanceA)" type="button" class="btn btn-sm btn-danger">Usuń</button>
-        </div>
-    </div>
-    <div class="col-sm-2  col-xs-4"><button type="button" ng-click="trip.active = true; changeState()" class="btn btn-sm btn-info">Przejdź do realizacji</button></div>
-</div>
+<div ng-repeat="trip in trips"  class=" panel panel-primary">
 
+    <div class="tripDate col-xs-12"> Data planowanej podróży: {{trip.date | date:'dd-MM-yyyy' }}
+        <button ng-click="trip.active = true; changeState()" type="button" class="btn btn-sm btn-info">Przejdź do realizacji</button><hr>
+    </div>
+    <div ng-repeat="stage in trip.stages" class="panel-body journeyStageContainer">
+        <div class="col-sm-4 col-xs-4">{{stage.stop}}</div>
+        <div class="col-sm-4 col-xs-4">{{stage.line}}</div>
+        <div class="col-sm-4  col-xs-4">{{stage.departureTime | date:'HH:mm'}}</div>
+        <div class="col-sm-4  col-xs-4"><button ng-click="deleteJourney(instanceA)" type="button" class="btn btn-sm btn-danger">Usuń</button>
+        </div>
+
+    </div>
+</div>
+</div>
 
