@@ -56,5 +56,15 @@
                     if ($.inArray(el, $scope.uniqueLines) === -1) $scope.uniqueLines.push(el);
                 });
             }
+
+
+
+            $scope.addLine = function(selected) {
+
+                console.log(selected);
+
+                //app.yourStopInfo.timetable.timeTableForGivenStopAndLine(param1, param2);
+                //debugger;
+            }
         })
 })();
