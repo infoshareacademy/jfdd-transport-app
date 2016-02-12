@@ -3,7 +3,6 @@
         .directive('journeyCompletion', function () {
             return {
                 restrict: 'E',
-                //scope: true,//TODO: Aga - brak
                 templateUrl: 'src/app/directives/journeyCompletion.html',
                 controller: function ($scope) {
 
