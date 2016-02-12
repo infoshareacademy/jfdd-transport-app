@@ -122,6 +122,17 @@ h3.wrapper, .stopTimetable.wrapper {
     padding-top:0;
 }
 
+.tripDate {
+    padding: 20px 20px 0 20px;
+    font-size: larger;
+    text-align: center;
+}
+
+.buttonTrip {
+    margin-left: 20%;
+}
+
+
 #js-lineStats{
     padding:20px;
     padding-top:0;

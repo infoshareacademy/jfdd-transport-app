@@ -24,13 +24,18 @@
 
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
 
-                $scope.hideValue = true;
+
+$scope.myStop = stop
+
                 currentTrip.stages = currentTrip.stages || [];
                 currentTrip.stages.push({
                     stop: stop,
                     line: line,
                     departureTime: departureTime
                 });
+
+
+                $scope.hideValue = true;
             };
 
             $scope.deleteJourney = function () {
