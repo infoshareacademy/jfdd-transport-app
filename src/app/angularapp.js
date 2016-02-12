@@ -88,6 +88,17 @@
                 });
                 console.log(singleLineDepartures);
                 $scope.myTime = singleLineDepartures;
+                $scope.times = $scope.myTime[0]
+            }
+
+            $scope.addHour = function(selected){
+
+                console.log('wartosc ' + selected)
+
+                $scope.mySelectedTime = selected
+
             }
         })
+
+
 })();
