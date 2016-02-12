@@ -68,27 +68,29 @@
 
         <div ng-controller="journeyPlannerCtrl" class="row">
             <form class='wrapper col-sm-8 col-sm-offset-2'>
-                <div ng-controller="AppCtrl" ng-cloak>
-                    <label>Wybierz dzień</label>
-                    <md-content>
-                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-                    </md-content>
+                <div id="journeyPlannerForm">
+                    <div ng-controller="AppCtrl" ng-cloak>
+                        <label>Wybierz dzień</label>
+                        <md-content>
+                            <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                        </md-content>
+                    </div>
+
+                    <br>
+
+                    <journey-planner-stops></journey-planner-stops>
+
+                    <journey-planner-lines></journey-planner-lines>
+
+
+                    <div class="form-group">
+                        <label for="disabledSelect4">Godzina</label>
+                        <select id="disabledSelect4" class="form-control">
+                            <option>Disabled select</option>
+                        </select>
+                    </div>
+                    <button ng-click="hideValue = true" type="submit" class="btn btn-primary">Dodaj</button>
                 </div>
-
-                <br>
-
-           <journey-planner-stops></journey-planner-stops>
-
-                <journey-planner-lines></journey-planner-lines>
-
-
-                <div class="form-group">
-                    <label for="disabledSelect4">Godzina</label>
-                    <select  id="disabledSelect4" class="form-control">
-                        <option>Disabled select</option>
-                    </select>
-                </div>
-                <button  ng-click="hideValue = true" type="submit" class="btn btn-primary">Dodaj</button>
             </form>
 
             <div  ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">

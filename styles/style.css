@@ -55,7 +55,7 @@ th{
     font-size: 20px;
 }
 
-#pickYourStops,#filtersId,#yourStop,#lineStats, #journeyCompletion, #yourPlannedJourney {
+#pickYourStops,#filtersId,#yourStop,#lineStats, #journeyCompletion, #yourPlannedJourney, #journeyPlannerForm {
     padding: 10px;
     border: 1px solid lightgray;
     margin-top: 5px;
