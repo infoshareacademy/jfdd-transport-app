@@ -71,8 +71,11 @@
                 <journey-planner-lines></journey-planner-lines>
                 <div class="form-group">
                     <label for="disabledSelect4">Godzina</label>
-                    <select id="disabledSelect4" class="form-control">
-                        <option>Disabled select</option>
+                    <select ng-options="time for time in myTime"
+                            ng-model="myTime"
+                            ng-change="addHour()"
+                            id="disabledSelect4"
+                            class="form-control">
                     </select>
                 </div>
                 <button ng-click="addStageToCurrentTrip(myStop.name, myLine.name, myTime)"
