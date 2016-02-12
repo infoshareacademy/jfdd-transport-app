@@ -32,9 +32,9 @@
                 });
             };
 
-            $scope.deleteJourney = function () {
-                console.log('Not implemented yet');
-            };
+            //$scope.deleteJourney = function () {
+            //    console.log('Not implemented yet');
+            //};
 
             $scope.addStop = function (selected) {
 
@@ -88,6 +88,15 @@
                 });
                 console.log(singleLineDepartures);
                 $scope.myTime = singleLineDepartures;
+
+                $scope.times = $scope.myTime[0]
+            }
+
+            $scope.addHour = function(selected){
+
+                console.log('wartosc ' + selected)
+
+                $scope.mySelectedTime = selected
             }
         })
 })();

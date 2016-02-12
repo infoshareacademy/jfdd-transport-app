@@ -73,13 +73,13 @@
                 <div class="form-group">
                     <label for="disabledSelect4">Godzina</label>
                     <select ng-options="time for time in myTime"
-                            ng-model="myTime"
-                            ng-change="addHour()"
+                            ng-model="times"
+                            ng-change="addHour(times)"
                             id="disabledSelect4"
                             class="form-control">
                     </select>
                 </div>
-                <button ng-click="addStageToCurrentTrip(myStop.name, myLine.name, myTime)"
+                <button ng-click="addStageToCurrentTrip(myStop.name, myLine.name, mySelectedTime)"
                         type="submit"
                         class="btn btn-primary">
                     Dodaj
