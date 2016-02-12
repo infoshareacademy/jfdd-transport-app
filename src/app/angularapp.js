@@ -87,7 +87,7 @@
                     return departureTimeOnCurrentStopHHMM;
                 });
                 console.log(singleLineDepartures);
-                return singleLineDepartures;
+                $scope.myTime = singleLineDepartures;
             }
         })
 })();
