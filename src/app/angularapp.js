@@ -44,27 +44,21 @@
                 var tripDateDivToBeRemoved = angular.element(document.querySelector('#tripDateId' + journeyIndex ));
                 var journeyDivToBeRemoved = angular.element(document.querySelector('#journeyId' + journeyIndex ));
 
-
                 goToCompletionButtonToBeRemoved.remove();
                 elementToBeRemoved.remove();
                 tripDateDivToBeRemoved.remove();
                 journeyDivToBeRemoved.html('<p class="infoTripDeleted">Podróż została usunięta</p>');
 
-
                 delete $scope.trips[journeyIndex];
         };
 
-
-
             $scope.deleteJourney = function (stageIndex, journeyIndex) {
 
-                var journeyDeleteButtonToBeRemoved = angular.element(document.querySelector( '#stageButtonId' + stageIndex));
-                var divCompletedToBeChanged = angular.element(document.querySelector('#divCompleted' + stageIndex ));
-                //var stageDivToBeRemoved = angular.element(document.querySelector('#stageId' + stageIndex ));
+                var stageDeleteButtonToBeRemoved = angular.element(document.querySelector( '#stageButtonId' + stageIndex).ownerDocument.activeElement);
+                var stageDivToBeChanged = angular.element(document.querySelector('#stageId' + stageIndex).ownerDocument.activeElement);
 
-                journeyDeleteButtonToBeRemoved.remove();
-                divCompletedToBeChanged.html('<p class="infoTripDeleted">Ten etap podróży został usunięty z planowanych</p>');
-                //stageDivToBeRemoved.html('<p class="infoTripDeleted">Ten etap podróży został usunięty</p>');
+                stageDeleteButtonToBeRemoved.remove();
+                stageDivToBeChanged.html('<p class="infoTripDeleted">Ten etap podróży został usunięty</p>');
 
                 delete journeyIndex.stages[stageIndex];
             };
