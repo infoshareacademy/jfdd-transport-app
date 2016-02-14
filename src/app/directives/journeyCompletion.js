@@ -8,38 +8,23 @@
 
                     $scope.journeyData = $scope.trips;
 
-                    $scope.markComplete = function (index) {
-
-                        console.log(index)
-                        //var activeJourney = $scope.journeyData.filter(function (element) {
-                        //    return element.active;
-                        //});
-                        //
-                        //activeJourney[0].stages[index].hide = true;
-                        //
-                        $scope.journeyData
+                    $scope.markComplete = function (index, id) {
+                        var currentJourney = $scope.journeyData
                             .filter(function (element) {
-                            return element.active;
-                        })[0].stages[index].hide = true;
+                                return element.id === id;
+                            })[0];
 
-                        $scope.allStagesCompleted = $scope.journeyData.filter(function (element) {
-                                return element.active;
-                            })[0].stages.every(checkIfHidden);
+                        currentJourney.stages[index].hide = true;
 
-
-
-                        if($scope.allStagesCompleted) {
-
-                            //$scope.journeyData.active = false;
-
-                            $scope.journeyData.forEach(function (journey) {
-                                journey.active = false;
-                            });
-                            console.log('$scope.journeyData', $scope.journeyData);
+                        var allStagesCompleted = currentJourney.stages.every(checkIfHidden);
+                        console.log(allStagesCompleted);
+                        if (allStagesCompleted) {
+                            currentJourney.journeyCompleted = true;
                         }
+                        console.log(currentJourney)
                     };
 
-                    function checkIfHidden (value) {
+                    function checkIfHidden(value) {
                         return value.hide;
                     }
                 }

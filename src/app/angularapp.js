@@ -18,6 +18,12 @@
 
             $scope.changeState = function () {
                 $scope.flag = true;
+                //$scope.allStagesCompleted = false;
+            };
+
+            $scope.generateId = function () {
+                var date = new Date();
+                return date.getTime();
             };
 
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
