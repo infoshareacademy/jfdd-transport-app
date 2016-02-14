@@ -124,7 +124,14 @@
             <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="filtersId">
                     <h3>Obserwowane przystanki</h3>
-                    <h5>{{getFavStop()}}</h5>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Najczęściej wybierane przystanki wśród użytkowników</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{favStop}}
+                        </div>
+                    </div>
 
                     <p>SPRAWDŹ SYTUACJĘ NA SWOIM PRZYSTANKU</p>
                 </div>
