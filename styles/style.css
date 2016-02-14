@@ -129,13 +129,15 @@ h3.wrapper, .stopTimetable.wrapper {
 }
 
 .tripDate{
-    padding: 20px 20px 0px 20px;
+    padding: 0;
     font-size: larger;
-    text-align: center;
+    /*text-align: center;*/
 }
-
+.buttonTripGo {
+    /*margin-left: 45%;*/
+}
 .buttonTrip {
-    margin-left: 20%;
+    /*margin-left: 10%;*/
 }
 
 .infoTripDeleted {

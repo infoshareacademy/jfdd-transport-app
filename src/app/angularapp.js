@@ -42,10 +42,13 @@
                 var elementToBeRemoved = angular.element(document.querySelector( '#journeyButtonId' + journeyIndex));
                 var goToCompletionButtonToBeRemoved = angular.element(document.querySelector('#goToCompletionButtonId' + journeyIndex ));
                 var tripDateDivToBeRemoved = angular.element(document.querySelector('#tripDateId' + journeyIndex ));
+                var journeyDivToBeRemoved = angular.element(document.querySelector('#journeyId' + journeyIndex ));
 
                 goToCompletionButtonToBeRemoved.remove();
                 elementToBeRemoved.remove();
                 tripDateDivToBeRemoved.remove();
+                journeyDivToBeRemoved.html('<p class="infoTripDeleted">Podróż została usunięta</p>');
+
 
                 delete $scope.trips[journeyIndex];
         };
