@@ -7,7 +7,6 @@
                     $http.get('https://isa-api.herokuapp.com/transport/stops.json').then(function(response){
                         $scope.stops = response.data;
                         $scope.myStop = $scope.stops[0].name;
-                        $scope.selected=[{name: "bajki"}];
                     })
                 }
             }

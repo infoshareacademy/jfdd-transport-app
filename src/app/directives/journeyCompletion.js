@@ -9,6 +9,8 @@
                     $scope.journeyData = $scope.trips;
 
                     $scope.markComplete = function (index) {
+
+                        console.log(index)
                         //var activeJourney = $scope.journeyData.filter(function (element) {
                         //    return element.active;
                         //});

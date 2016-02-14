@@ -9,9 +9,11 @@
             $scope.trips = [];
 
             $scope.startNewTrip = function (selectedDate) {
-                currentTrip = {};
-                currentTrip.date = selectedDate;
-                $scope.trips.push(currentTrip);
+                $scope.selectedDate = selectedDate;
+                $scope.hideValue = false;
+                $scope.currentTrip = {};
+                $scope.currentTrip.date = selectedDate;
+                $scope.trips.push($scope.currentTrip);
 
             };
 
@@ -23,18 +25,69 @@
 
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
 
-                $scope.hideValue = true;
-                currentTrip.stages = currentTrip.stages || [];
-                currentTrip.stages.push({
-                    stop: stop,
-                    line: line,
-                    departureTime: departureTime
-                });
+
+                if($scope.trips.length === 0){  $scope.hideValue = true; $scope.hidden = true; return}
+                else {
+                    $scope.hideValue = true;
+                    $scope.hidden = false;
+                    $scope.currentTrip.stages =  $scope.currentTrip.stages || [];
+                    $scope.currentTrip.stages.push({
+                        stop: stop,
+                        line: line,
+                        departureTime: departureTime,
+                        date: $scope.selectedDate
+                    });
+                }
+
+                console.log($scope.trips)
             };
 
-            //$scope.deleteJourney = function () {
-            //    console.log('Not implemented yet');
-            //};
+            $scope.removeItem = function(item) {
+                console.log(item)
+                var index = $scope.trip.stages.indexOf(item);
+                if (index != -1) {
+                    $scope.trip.stages.splice(index, 1);
+                    console.log($scope.trip.stages)
+                }
+            };
+            $scope.saveIndex = function (index){
+                console.log($scope.trips)
+                $scope.deleteButtonShow = true
+                $scope.tripToBeModified = index
+            }
+            $scope.deleteJourney = function (index, stage) {
+                //var zmienna = stage[0]
+                //stage.forEach(function(object){console.log(object)})
+                //console.log(zmienna)
+                console.log($scope.currentTrip.date)
+                console.log($scope.currentTrip.stages[index].date)
+                //if($scope.currentTrip.date == $scope.currentTrip.stages[index].date){
+                delete  $scope.currentTrip.stages[index]
+                console.log( $scope.currentTrip)
+                //console.log(stage)
+                //console.log($scope.currentTrip)
+                //console.log($scope.currentTrip.stages[index])
+                //console.log($scope.currentTrip.date)
+                //console.log($scope.currentTrip.stages[index].date)
+                //var obiekt = $scope.currentTrip
+                //var podobiekt = $scope.currentTrip.stages[index]
+                //delete obiekt[podobiekt];
+                //console.log(obiekt)
+
+                //if($scope.currentTrip.date == $scope.currentTrip.stages[index].date){
+                //    console.log($scope.currentTrip)
+                //    var obiekt = $scope.currentTrip
+                //    var podobiekt = $scope.currentTrip.stages[index]
+                //    delete obiekt[podobiekt];
+                //    console.log(obiekt)
+                //}
+                //console.log(index)
+                //$scope.trips.forEach(function(date){ console.log($scope.currentTrip.date)})
+                //console.log($scope.trips)
+                //delete $scope.trips[index].stages
+                //console.log($scope.trips[index])
+
+            };
 
             $scope.addStop = function (selected) {
 
@@ -46,7 +99,6 @@
                         for (var name in stops) {
                             if (stops.name == selected) {
                                 $scope.accumulator.push(line);
-
                             }
                         }
                     });
@@ -55,7 +107,7 @@
                 $.each($scope.accumulator, function (i, el) {
                     if ($.inArray(el, $scope.uniqueLines) === -1) $scope.uniqueLines.push(el);
                 });
-            }
+            };
 
             $scope.addLine = function(selected) {
 
@@ -86,16 +138,12 @@
                     var departureTimeOnCurrentStopHHMM = toHHMM(departureTimeOnCurrentStop);
                     return departureTimeOnCurrentStopHHMM;
                 });
-                console.log(singleLineDepartures);
-                $scope.myTime = singleLineDepartures;
 
-                $scope.times = $scope.myTime[0]
-            }
+                $scope.myTime = singleLineDepartures;
+                $scope.times = $scope.myTime[0].name
+            };
 
             $scope.addHour = function(selected){
-
-                console.log('wartosc ' + selected)
-
                 $scope.mySelectedTime = selected
             }
         })
