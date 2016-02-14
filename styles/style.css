@@ -190,14 +190,10 @@ form {
     margin-right:0;
 }
 
-@media (min-width: 768px){
-    .col-sm-15 {
-        width: 20%;
-    }
-    .journeyStageContainer {
-        text-align: center;
-    }
+.journeyStageContainer {
+    text-align: center;
 }
+
 #journeyPlannerSection {
     padding-left: 20px;
     padding-right: 20px;
