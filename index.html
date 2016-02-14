@@ -22,9 +22,7 @@
 </head>
 
 <body ng-app="transport">
-
-
-<div class = "fluid-container" ng-controller="transportCtrl">
+<div class="fluid-container" ng-controller="transportCtrl">
     <header id="header" class="row hide">
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-5 col-sm-offset-2">
             <div class="helloUser"></div>
@@ -32,7 +30,6 @@
         </div>
         <div id="socialMedia" class="col-xs-7 col-sm-3 col-md-3 col-lg-2 col-xs-offset-1 col-sm-offset-1">
             <div class="icones col-xs-4">
-
                 <a class="social-button social-button-facebook"
                    href="https://www.facebook.com/infoshareacademy/" title="Facebook"
                    target="_blank">
@@ -41,21 +38,17 @@
             </div>
 
             <div class="icones col-xs-4">
-
                 <a class="social-button social-button-twitter"
                    href="https://twitter.com/infosharepl" title="Twitter" target="_blank">
                     <img src="styles/images/1454277003_Twitter.png">
                 </a>
-
             </div>
-
             <div class="icones col-xs-4">
 
                 <a class="social-button social-button-googleplus"
                    href="https://plus.google.com/+infoshare" title="Google+" target="_blank">
                     <img src="styles/images/1454277011_Google_.png">
                 </a>
-
             </div>
         </div>
     </header>
@@ -63,43 +56,53 @@
 
     <main class="hide">
 
-        <div ng-controller="transportCtrl">
-
-        </div>
-
-        <div ng-controller="journeyPlannerCtrl">
+        <div id="journeyPlannerSection" class="row">
             <form class='wrapper col-sm-8 col-sm-offset-2'>
+                <div id="journeyPlannerForm">
                 <div ng-controller="AppCtrl" ng-cloak>
                     <label>Wybierz dzień</label>
                     <md-content>
-                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                        <md-datepicker ng-change="startNewTrip(myDate)"
+                                       ng-model="myDate"
+                                       md-placeholder="Enter date"></md-datepicker>
                     </md-content>
                 </div>
-
                 <br>
-
-                <div class="form-group">
-                    <label for="disabledSelect2">Przystanek</label>
-                    <select id="disabledSelect2" class="form-control">
-                        <option>Disabled select</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="disabledSelect3">Linia</label>
-                    <select id="disabledSelect3" class="form-control">
-                        <option>Disabled select</option>
-                    </select>
-                </div>
-
+                <journey-planner-stops></journey-planner-stops>
+                <journey-planner-lines></journey-planner-lines>
                 <div class="form-group">
                     <label for="disabledSelect4">Godzina</label>
-                    <select id="disabledSelect4" class="form-control">
-                        <option>Disabled select</option>
+                    <select ng-options="time for time in myTime"
+                            ng-model="times"
+                            ng-change="addHour(times)"
+                            id="disabledSelect4"
+                            class="form-control">
+                        <option value="">Wybierz godzinę</option>
                     </select>
+
                 </div>
-                <button type="submit" class="btn btn-primary">Dodaj</button>
+                <button ng-click="addStageToCurrentTrip(myStop.name, myLine.name, mySelectedTime)"
+                        type="submit"
+                        class="btn btn-primary">
+                    Dodaj
+                </button>
+                </div>
             </form>
+
+            <div ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="yourPlannedJourney">
+                    <h2>Zaplanowane podróże</h2>
+                    <your-planned-journey></your-planned-journey>
+                </div>
+            </div>
+
+
+            <div class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="journeyCompletion" ng-show="flag">
+                    <h2>Realizacja podróży</h2>
+                    <journey-completion></journey-completion>
+                </div>
+            </div>
         </div>
 
         <div id="my-signin2" class="row">
@@ -110,33 +113,27 @@
         <div ng-controller="loggerCtrl" id="js-pickYourStops" class="row">
             <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="pickYourStops">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Najczęściej wybierany przystanek</h3>
-                        </div>
-                        <div class="panel-body">
-                            {{favStop}}
-                        </div>
-                    </div>
-
                     <h3 ng-click="$log.log(message)">Wybierz przystanki, które chcesz obserwować</h3>
+
                     <p>MOŻESZ W KAŻDEJ CHWILI MODYFIKOWAĆ SWOJĄ LISTĘ, DODAWAĆ I USUWAĆ PRZYSTANKI</p>
                 </div>
             </div>
         </div>
 
         <div id="filtersDiv" class="row">
-            <div  class="wrapper col-sm-8 col-sm-offset-2">
+            <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="filtersId">
-                <h3>Obserwowane przystanki</h3>
-                <p>SPRAWDŹ SYTUACJĘ NA SWOIM PRZYSTANKU</p>
+                    <h3>Obserwowane przystanki</h3>
+
+                    <p>SPRAWDŹ SYTUACJĘ NA SWOIM PRZYSTANKU</p>
+                </div>
             </div>
         </div>
-            </div>
 
         <div id="js-yourStopInfo" class="row">
             <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="yourStop">
+
                 </div>
             </div>
         </div>
@@ -144,23 +141,25 @@
         <div id="js-lineStats" class="row ">
             <div class="wrapper col-sm-8 col-sm-offset-2 js-lineStatsContainer">
                 <div id="lineStats">
-                <h2>Aktualne opóźnienia na liniach</h2>
-                <p>WYBIERZ LINIE I SPRAWDŹ, NA KTÓRYCH WYSTĘPUJĄ W TEJ CHWILI NAJWIĘKSZE OPÓŹNIENIA</p>
-                <div class="form-inline js-lineInputContainer">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input class="form-control input-sm" list="lines">
-                            <datalist id="lines">
-                            </datalist>
+                    <h2>Aktualne opóźnienia na liniach</h2>
+
+                    <p>WYBIERZ LINIE I SPRAWDŹ, NA KTÓRYCH WYSTĘPUJĄ W TEJ CHWILI NAJWIĘKSZE OPÓŹNIENIA</p>
+
+                    <div class="form-inline js-lineInputContainer">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control input-sm" list="lines">
+                                <datalist id="lines">
+                                </datalist>
+                            </div>
                         </div>
+                        <button id="chooseLines" type="button" class="btn icon-btn btn-success btn-sm">
+                            <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+                        </button>
                     </div>
-                    <button id="chooseLines" type="button" class="btn icon-btn btn-success btn-sm">
-                        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
-                    </button>
+                    <ul class="list-inline offset" id="selectedLines"></ul>
                 </div>
-                <ul class="list-inline offset" id="selectedLines"></ul>
             </div>
-                </div>
         </div>
 
     </main>
@@ -176,7 +175,6 @@
 
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="lib/jquery-2.2.0.min.js"><\/script>')</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
@@ -185,10 +183,10 @@
 <!-- Angular Material Library -->
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 <script src="src/app/angularapp.js"></script>
-<script src="src/app/controllers/journeyPlannerCtrl.js"></script>
 <script src="src/app/controllers/logController.js"></script>
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="src/app/controllers/datepicker.js"></script>
+<script src="src/app/directives/journeyCompletion.js"></script>
+<script src="src/app/directives/journeyPlanner.js"></script>
 <script src="lib/moment-with-locales.min.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/app/yourStopInfo/main.js"></script>
@@ -206,6 +204,7 @@
 <script src="src/main.js"></script>
 <!--Bootstrap JS-->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
 </body>
 </html>

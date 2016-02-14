@@ -55,13 +55,14 @@ th{
     font-size: 20px;
 }
 
-#pickYourStops,#filtersId,#yourStop,#lineStats {
+#pickYourStops,#filtersId,#yourStop,#lineStats, #journeyCompletion, #yourPlannedJourney, #journeyPlannerForm {
     padding: 10px;
     border: 1px solid lightgray;
     margin-top: 5px;
     margin-bottom: 5px;
     background-color: rgba(250,250,250, 0.8);
 }
+
 
 #js-pickYourStops{
     padding:20px;
@@ -127,6 +128,16 @@ h3.wrapper, .stopTimetable.wrapper {
     padding-top:0;
 }
 
+.tripDate{
+    padding: 20px 20px 0px 20px;
+    font-size: larger;
+    text-align: center;
+}
+
+.buttonTrip {
+    margin-left: 20%;
+}
+
 .footer_style {
     padding-top: 10px;
     background-color: #282828;
@@ -177,4 +188,17 @@ form {
 }
 .row {
     margin-right:0;
+}
+
+@media (min-width: 768px){
+    .col-sm-15 {
+        width: 20%;
+    }
+    .journeyStageContainer {
+        text-align: center;
+    }
+}
+#journeyPlannerSection {
+    padding-left: 20px;
+    padding-right: 20px;
 }

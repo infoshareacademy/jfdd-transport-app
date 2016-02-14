@@ -1,0 +1,19 @@
+<p ng-hide="allStagesCompleted">Kliknij etapy, które zostały już zrealizowane.</p>
+
+<div ng-repeat="journey in journeyData">
+    <div ng-if="journey.active">
+        <p>{{journey.date | date:'dd-MM-yyyy'}}</p>
+        <div ng-repeat="journey in journey.stages" ng-hide="journey.hide" class="panel panel-primary">
+            <div class="panel-body journeyStageContainer">
+                <div class="col-sm-2 col-sm-15 col-xs-12">{{journey.stop}}</div>
+                <div class="col-sm-2 col-sm-15 col-xs-4">{{journey.line}}</div>
+                <div class="col-sm-2 col-sm-15 col-xs-4">{{journey.departureTime | date:'HH:mm'}}</div>
+                <div class="col-sm-2 col-sm-15 col-xs-4">
+                    <button ng-click="markComplete($index)" type="button" class="btn btn-sm btn-primary">Zrobione</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div ng-show="allStagesCompleted" class="alert alert-success">Wszystkie etapy tej podróży zostały zrealizowane.</div>
