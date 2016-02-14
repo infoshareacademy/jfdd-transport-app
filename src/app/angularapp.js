@@ -28,8 +28,6 @@
 
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
 
-                if($scope.trips.length === 0){  $scope.hideValue = true; $scope.hidden = true; return}
-                else {
                     $scope.hideValue = true;
                     $scope.hidden = false;
                     $scope.currentTrip.stages =  $scope.currentTrip.stages || [];
@@ -39,12 +37,7 @@
                         departureTime: departureTime,
                         date: $scope.selectedDate
                     });
-
-                    console.log($scope.trips)
-
-                }
             };
-
 
             $scope.deleteEntireJourney = function (journeyIndex) {
 
@@ -62,8 +55,9 @@
         };
 
             $scope.deleteJourney = function (stageIndex, journeyIndex) {
+                $scope.stageIndex = stageIndex
 
-                var stageDeleteButtonToBeRemoved = angular.element(document.querySelector( '#stageButtonId' + stageIndex).ownerDocument.activeElement);
+            var stageDeleteButtonToBeRemoved = angular.element(document.querySelector( '#stageButtonId' + stageIndex).ownerDocument.activeElement);
                 stageDeleteButtonToBeRemoved.remove();
 
                 delete journeyIndex.stages[stageIndex];

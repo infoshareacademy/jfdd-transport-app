@@ -6,7 +6,7 @@
     <div id={{'tripDateId'+$index}} ng-show="hideValue" class="tripDate col-sm-3 col-xs-3">{{trip.date | date:'dd-MM-yyyy'}} </div>
 
     <div class="col-sm-3 col-xs-3 col-sm-offset-3">
-    <button id={{'goToCompletionButtonId'+$index}} ng-hide="deleteJourneyHide" ng-click="trip.active = true; changeState()" type="button"
+    <button id={{'goToCompletionButtonId'+$index}}  ng-click="trip.active = true; trip.sentToCompletion = true; trip.id = generateId(); changeState()" ng-hide="trip.sentToCompletion" type="button"
             class="buttonTripGo btn btn-sm btn-info">Przejdź do realizacji
     </button></div>
     <div class="col-sm-3 col-xs-3"><button id={{'journeyButtonId'+$index}} ng-hide="deleteJourneyHide" ng-click="deleteEntireJourney($index)"

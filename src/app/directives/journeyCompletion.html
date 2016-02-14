@@ -3,7 +3,7 @@
 <div ng-repeat="journey in journeyData track by $index">
     <div ng-if="journey.active">
         <p>{{journey.date | date:'dd-MM-yyyy'}}</p>
-        <div id={{'divCompleted'+$index}} ng-repeat="stage in journey.stages" ng-hide="stage.hide" class="panel panel-primary">
+        <div id={{'divCompleted'+$index}} ng-repeat="stage in journey.stages track by $index" ng-hide="stage.hide" class="panel panel-primary">
             <div class="panel-body journeyStageContainer">
                 <div class="col-sm-3">{{stage.stop}}</div>
                 <div class="col-sm-3">{{stage.line}}</div>
