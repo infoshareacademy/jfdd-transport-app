@@ -30,8 +30,7 @@
                 restrict: 'E',
                 templateUrl: 'src/app/directives/yourPlannedJourney.html',
                 controller: function ($scope) {
-
                 }
-            }
+                };
         })
 }());

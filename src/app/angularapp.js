@@ -4,8 +4,6 @@
     app
         .controller('transportCtrl', function ($scope) {
 
-            var currentTrip;
-
             $scope.trips = [];
 
             $scope.startNewTrip = function (selectedDate) {
@@ -14,7 +12,6 @@
                 $scope.currentTrip = {};
                 $scope.currentTrip.date = selectedDate;
                 $scope.trips.push($scope.currentTrip);
-
             };
 
             $scope.flag = false;
@@ -24,7 +21,6 @@
             };
 
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
-
 
                 if($scope.trips.length === 0){  $scope.hideValue = true; $scope.hidden = true; return}
                 else {
@@ -38,55 +34,34 @@
                         date: $scope.selectedDate
                     });
                 }
-
-                console.log($scope.trips)
             };
 
-            $scope.removeItem = function(item) {
-                console.log(item)
-                var index = $scope.trip.stages.indexOf(item);
-                if (index != -1) {
-                    $scope.trip.stages.splice(index, 1);
-                    console.log($scope.trip.stages)
-                }
-            };
-            $scope.saveIndex = function (index){
-                console.log($scope.trips)
-                $scope.deleteButtonShow = true
-                $scope.tripToBeModified = index
-            }
-            $scope.deleteJourney = function (index, stage) {
-                //var zmienna = stage[0]
-                //stage.forEach(function(object){console.log(object)})
-                //console.log(zmienna)
-                console.log($scope.currentTrip.date)
-                console.log($scope.currentTrip.stages[index].date)
-                //if($scope.currentTrip.date == $scope.currentTrip.stages[index].date){
-                delete  $scope.currentTrip.stages[index]
-                console.log( $scope.currentTrip)
-                //console.log(stage)
-                //console.log($scope.currentTrip)
-                //console.log($scope.currentTrip.stages[index])
-                //console.log($scope.currentTrip.date)
-                //console.log($scope.currentTrip.stages[index].date)
-                //var obiekt = $scope.currentTrip
-                //var podobiekt = $scope.currentTrip.stages[index]
-                //delete obiekt[podobiekt];
-                //console.log(obiekt)
 
-                //if($scope.currentTrip.date == $scope.currentTrip.stages[index].date){
-                //    console.log($scope.currentTrip)
-                //    var obiekt = $scope.currentTrip
-                //    var podobiekt = $scope.currentTrip.stages[index]
-                //    delete obiekt[podobiekt];
-                //    console.log(obiekt)
-                //}
-                //console.log(index)
-                //$scope.trips.forEach(function(date){ console.log($scope.currentTrip.date)})
-                //console.log($scope.trips)
-                //delete $scope.trips[index].stages
-                //console.log($scope.trips[index])
+            $scope.deleteEntireJourney = function (journeyIndex) {
 
+                var elementToBeRemoved = angular.element(document.querySelector( '#journeyButtonId' + journeyIndex));
+                var goToCompletionButtonToBeRemoved = angular.element(document.querySelector('#goToCompletionButtonId' + journeyIndex ));
+                var tripDateDivToBeRemoved = angular.element(document.querySelector('#tripDateId' + journeyIndex ));
+
+                goToCompletionButtonToBeRemoved.remove();
+                elementToBeRemoved.remove();
+                tripDateDivToBeRemoved.remove();
+
+                delete $scope.trips[journeyIndex];
+        };
+
+
+
+            $scope.deleteJourney = function (stageIndex, journeyIndex) {
+
+                var journeyDeleteButtonToBeRemoved = angular.element(document.querySelector( '#stageButtonId' + stageIndex));
+                var buttonCompletedToBeRemoved = angular.element(document.querySelector('#buttonCompleted' + stageIndex ));
+                var divCompletedToBeChanged = angular.element(document.querySelector('#divCompleted' + stageIndex ));
+
+                journeyDeleteButtonToBeRemoved.remove();
+                divCompletedToBeChanged.html('<p class="infoTripDeleted">Ten etap podróży został usunięty z planowanych</p>');
+
+                delete journeyIndex.stages[stageIndex];
             };
 
             $scope.addStop = function (selected) {

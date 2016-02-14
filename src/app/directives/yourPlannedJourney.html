@@ -1,17 +1,18 @@
 <div ng-show="hidden">{{'Podaj datę planowanej podróży'}}</div>
 
-<div ng-repeat="trip in trips track by $index"  class=" panel panel-primary">
-
-   <div ng-show="hideValue" class="tripDate col-xs-12"> Data planowanej podróży: {{trip.date | date:'dd-MM-yyyy' }}
-       <button ng-click="trip.active = true; changeState()"type="button" class="buttonTrip btn btn-sm btn-info">Przejdź do realizacji</button>
-       <button ng-click="saveIndex(index)"type="button" class="buttonTrip btn btn-sm btn-info">Modyfikuj etapy</button><hr>
-   </div>
+<div id={{'goToCompletionButtonId'+$index}}  ng-repeat="trip in trips track by $index"  class="panel panel-primary">
+<div>
+   <p id={{'tripDateId'+$index}} ng-show="hideValue" class="tripDate col-xs-12">{{trip.date | date:'dd-MM-yyyy' }}<p>
+       <button  ng-hide="deleteJourneyHide" ng-click="trip.active = true; changeState()" type="button" class="buttonTrip btn btn-sm btn-info">Przejdź do realizacji</button>
+       <button  id= {{'journeyButtonId'+$index}} ng-hide="deleteJourneyHide" ng-click="deleteEntireJourney($index)" type="button" class="buttonTrip btn btn-sm btn-info">Usuń</button><hr>
+   </p>
 
     <div ng-repeat="stage in trip.stages track by $index" class="panel-body journeyStageContainer">
         <div class="col-sm-3 col-xs-3">{{stage.stop}}</div>
         <div class="col-sm-3 col-xs-3">{{stage.line}}</div>
         <div class="col-sm-3  col-xs-3">{{stage.departureTime | date:'HH:mm'}}</div>
-        <div class="col-sm-3  col-xs-3"><button ng-show="deleteButtonShow" ng-click="deleteJourney($index, trip.stages)" type="button" class="btn btn-sm btn-danger">Usuń</button>
+        <div class="col-sm-3  col-xs-3"><button id={{'stageButtonId'+$index}}  ng-click="deleteJourney($index, trip)" type="button" class="btn btn-sm btn-danger">Usuń</button>
+    </div>
     </div>
     </div>
 </div>

@@ -138,6 +138,11 @@ h3.wrapper, .stopTimetable.wrapper {
     margin-left: 20%;
 }
 
+.infoTripDeleted {
+    padding:10px;
+    text-align: center;
+}
+
 .footer_style {
     padding-top: 10px;
     background-color: #282828;
