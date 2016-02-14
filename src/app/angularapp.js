@@ -19,6 +19,7 @@
 
             $scope.changeState = function () {
                 $scope.flag = true;
+                $scope.allStagesCompleted = false;
             };
 
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {

@@ -1,7 +1,7 @@
 <div ng-repeat="trip in trips"  class=" panel panel-primary">
 
    <div class="tripDate col-xs-12"> Data planowanej podróży: {{trip.date | date:'dd-MM-yyyy' }}
-       <button ng-click="trip.active = true; changeState()"type="button" class="buttonTrip btn btn-sm btn-info">Przejdź do realizacji</button><hr>
+       <button ng-click="trip.active = true; changeState()" type="button" class="buttonTrip btn btn-sm btn-info">Przejdź do realizacji</button><hr>
    </div>
     <div ng-repeat="stage in trip.stages" class="panel-body journeyStageContainer">
         <div class="col-sm-3 col-xs-3">{{stage.stop}}</div>
