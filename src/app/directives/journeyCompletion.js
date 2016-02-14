@@ -12,17 +12,14 @@
                         var currentJourney = $scope.journeyData
                             .filter(function (element) {
                                 return element.id === id;
-                            })[0].stages;
+                            })[0];
 
-                        currentJourney[index].hide = true;
+                        currentJourney.stages[index].hide = true;
 
-                        var allStagesCompleted = currentJourney.every(checkIfHidden);
+                        var allStagesCompleted = currentJourney.stages.every(checkIfHidden);
                         console.log(allStagesCompleted);
                         if (allStagesCompleted) {
-                            $scope.journeyData
-                                .filter(function (element) {
-                                    return element.id === id;
-                                })[0].journeyCompleted = true;
+                            currentJourney.journeyCompleted = true;
                         }
                         console.log(currentJourney)
                     };
