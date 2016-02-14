@@ -3,6 +3,7 @@ ns('app.pickYourStops.model.user', function () {
     var state;
     var updateStorage = function (busStop) {
 
+
         state.favStops = state.favStops || [];
         state.favStops.push(busStop);
 
@@ -15,7 +16,6 @@ ns('app.pickYourStops.model.user', function () {
 
     var getStops = function () {
         state.favStops = state.favStops || [];
-
         return state.favStops;
     };
 

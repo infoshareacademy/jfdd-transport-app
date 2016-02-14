@@ -33,6 +33,9 @@
                         departureTime: departureTime,
                         date: $scope.selectedDate
                     });
+
+                    console.log($scope.trips)
+
                 }
             };
 
