@@ -55,10 +55,7 @@
             $scope.deleteJourney = function (stageIndex, journeyIndex) {
 
                 var stageDeleteButtonToBeRemoved = angular.element(document.querySelector( '#stageButtonId' + stageIndex).ownerDocument.activeElement);
-                var stageDivToBeChanged = angular.element(document.querySelector('#stageId' + stageIndex).ownerDocument.activeElement);
-
                 stageDeleteButtonToBeRemoved.remove();
-                stageDivToBeChanged.html('<p class="infoTripDeleted">Ten etap podróży został usunięty</p>');
 
                 delete journeyIndex.stages[stageIndex];
             };
