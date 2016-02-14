@@ -1,19 +1,22 @@
-<p ng-hide="allStagesCompleted">Kliknij etapy, które zostały już zrealizowane.</p>
+<p ng-hide="journey.journeyCompleted">Kliknij etapy, które zostały już zrealizowane.</p>
 
 <div ng-repeat="journey in journeyData">
     <div ng-if="journey.active">
         <p>{{journey.date | date:'dd-MM-yyyy'}}</p>
-        <div ng-repeat="journey in journey.stages" ng-hide="journey.hide" class="panel panel-primary">
+        <div ng-repeat="stage in journey.stages" ng-hide="stage.hide" class="panel panel-primary">
             <div class="panel-body journeyStageContainer">
-                <div class="col-sm-3">{{journey.stop}}</div>
-                <div class="col-sm-3">{{journey.line}}</div>
-                <div class="col-sm-3">{{journey.departureTime | date:'HH:mm'}}</div>
+                <div class="col-sm-3">{{stage.stop}}</div>
+                <div class="col-sm-3">{{stage.line}}</div>
+                <div class="col-sm-3">{{stage.departureTime | date:'HH:mm'}}</div>
                 <div class="col-sm-3">
-                    <button ng-click="markComplete($index)" type="button" class="btn btn-sm btn-primary">Zrobione</button>
+                    <button ng-click="markComplete($index, journey.id)" type="button" class="btn btn-sm btn-primary">
+                        Zrobione
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
+    <div ng-show="journey.journeyCompleted" class="alert alert-success">Wszystkie etapy tej podróży zostały
+        zrealizowane.
+    </div>
 </div>
-<div ng-show="allStagesCompleted" class="alert alert-success">Wszystkie etapy tej podróży zostały zrealizowane.</div>

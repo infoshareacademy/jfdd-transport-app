@@ -8,26 +8,26 @@
 
                     $scope.journeyData = $scope.trips;
 
-                    $scope.markComplete = function (index) {
-                        $scope.journeyData
+                    $scope.markComplete = function (index, id) {
+                        var currentJourney = $scope.journeyData
                             .filter(function (element) {
-                            return element.active;
-                        })[0].stages[index].hide = true;
+                                return element.id === id;
+                            })[0].stages;
 
-                        $scope.allStagesCompleted = $scope.journeyData.filter(function (element) {
-                                return element.active;
-                            })[0].stages.every(checkIfHidden);
+                        currentJourney[index].hide = true;
 
-
-
-                        if($scope.allStagesCompleted) {
-                            $scope.journeyData.forEach(function (journey) {
-                                journey.active = false;
-                            });
+                        var allStagesCompleted = currentJourney.every(checkIfHidden);
+                        console.log(allStagesCompleted);
+                        if (allStagesCompleted) {
+                            $scope.journeyData
+                                .filter(function (element) {
+                                    return element.id === id;
+                                })[0].journeyCompleted = true;
                         }
+                        console.log(currentJourney)
                     };
 
-                    function checkIfHidden (value) {
+                    function checkIfHidden(value) {
                         return value.hide;
                     }
                 }
