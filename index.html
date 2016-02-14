@@ -14,7 +14,6 @@
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="src/app/lineStats/lineStats-css.css">
-    <link rel="stylesheet" href="src/app/yourStopInfo/yourStop.css">
     <link rel="stylesheet" href="src/app/login/login-css.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
@@ -116,6 +115,14 @@
                     <h3 ng-click="$log.log(message)">Wybierz przystanki, które chcesz obserwować</h3>
 
                     <p>MOŻESZ W KAŻDEJ CHWILI MODYFIKOWAĆ SWOJĄ LISTĘ, DODAWAĆ I USUWAĆ PRZYSTANKI</p>
+                    <button ng-click="toggle = !toggle" type="button" class="btn btn-default">Najczęściej wybierane przystanki wśród użytkowników</button>
+
+                            <ul ng-show="toggle" id="commonFavStops">
+                                <li ng-repeat="stop in favStop | orderBy: '-count'">
+                                    {{stop.name}} <span class="badge">{{stop.count}}</span>
+                                </li>
+                            </ul>
+
                 </div>
             </div>
         </div>
@@ -124,15 +131,6 @@
             <div class="wrapper col-sm-8 col-sm-offset-2">
                 <div id="filtersId">
                     <h3>Obserwowane przystanki</h3>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Najczęściej wybierane przystanki wśród użytkowników</h3>
-                        </div>
-                        <div class="panel-body">
-                            {{favStop}}
-                        </div>
-                    </div>
-
                     <p>SPRAWDŹ SYTUACJĘ NA SWOIM PRZYSTANKU</p>
                 </div>
             </div>

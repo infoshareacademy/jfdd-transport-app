@@ -5,6 +5,7 @@
 
         $scope.getFavStop = getFavStop;
         $scope.favStop = "";
+        $scope.showFavedStops = false;
         $interval(function () {
             $scope.favStop = getFavStop();
         }, 10);
@@ -26,17 +27,17 @@
                 }
             });
 
-            var maximumFavedCount = 0;
-            var mostFavedStop = "Brak danych";
-            for (var busStopProperty in counterForFavedStopsObject) {
-                if (counterForFavedStopsObject[busStopProperty] > maximumFavedCount) {
-                    maximumFavedCount = counterForFavedStopsObject[busStopProperty];
-                    mostFavedStop = busStopProperty;
-                }
+            var data = [];
+            var keys = Object.keys(counterForFavedStopsObject);
+            keys.forEach(function(key) {
+                data.push(
+                    {"name" : key,
+                     "count" : counterForFavedStopsObject[key]
+                    }
+                );
+            });
 
-
-            }
-            return 'Przystanek: ' + mostFavedStop + '. Wybrany: ' + maximumFavedCount + ' razy.';
+            return data;
         }
 
         var currentTrip;
@@ -66,10 +67,6 @@
                 departureTime: departureTime
             });
         };
-
-        //$scope.deleteJourney = function () {
-        //    console.log('Not implemented yet');
-        //};
 
         $scope.addStop = function (selected) {
 
