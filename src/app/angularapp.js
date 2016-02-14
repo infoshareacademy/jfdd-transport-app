@@ -2,10 +2,9 @@
     var app = angular.module('transport', ['ngMaterial', 'ngMessages']);
 
     app.controller('transportCtrl', function ($scope, $interval) {
-////
 
         $scope.getFavStop = getFavStop;
-        $scope.favStop = "test";
+        $scope.favStop = "";
         $interval(function () {
             $scope.favStop = getFavStop();
         }, 10);
