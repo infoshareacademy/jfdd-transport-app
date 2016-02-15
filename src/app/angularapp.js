@@ -7,6 +7,7 @@
             $scope.trips = [];
 
             $scope.startNewTrip = function (selectedDate) {
+
                 $scope.selectedDate = selectedDate;
                 $scope.hideValue = false;
                 $scope.currentTrip = {};
@@ -18,7 +19,6 @@
 
             $scope.changeState = function () {
                 $scope.flag = true;
-                //$scope.allStagesCompleted = false;
             };
 
             $scope.generateId = function () {
@@ -28,15 +28,22 @@
 
             $scope.addStageToCurrentTrip = function (stop, line, departureTime) {
 
+                if($scope.trips.length == 0){
+                    $scope.hiddenInfo=true;
                     $scope.hideValue = true;
-                    $scope.hidden = false;
-                    $scope.currentTrip.stages =  $scope.currentTrip.stages || [];
+                    return;
+                }else {
+
+                    $scope.hideValue = true;
+                    $scope.hiddenInfo = false;
+                    $scope.currentTrip.stages = $scope.currentTrip.stages || [];
                     $scope.currentTrip.stages.push({
-                        stop: stop,
-                        line: line,
-                        departureTime: departureTime,
+                        stop: stop || 'Nie wybrano przystanku',
+                        line: line || 'Nie wybrano linii',
+                        departureTime: departureTime || 'Nie wybrano godziny',
                         date: $scope.selectedDate
                     });
+                }
             };
 
             $scope.deleteEntireJourney = function (journeyIndex) {
@@ -54,14 +61,6 @@
                 delete $scope.trips[journeyIndex];
         };
 
-            //$scope.deleteJourney = function (stageIndex, journeyIndex) {
-            //    $scope.stageIndex = stageIndex
-            //
-            //var stageDeleteButtonToBeRemoved = angular.element(document.querySelector( '#stageButtonId' + stageIndex).ownerDocument.activeElement);
-            //    stageDeleteButtonToBeRemoved.remove();
-            //
-            //    delete journeyIndex.stages[stageIndex];
-            //};
 
             $scope.addStop = function (selected) {
 
