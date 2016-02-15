@@ -1,8 +1,44 @@
 (function () {
     var app = angular.module('transport', ['ngMaterial', 'ngMessages']);
 
-    app
-        .controller('transportCtrl', function ($scope) {
+    app.controller('transportCtrl', function ($scope, $interval) {
+
+        $scope.getFavStop = getFavStop;
+        $scope.favStop = "";
+        $scope.showFavedStops = false;
+        $interval(function () {
+            $scope.favStop = getFavStop();
+        }, 10);
+
+        function getFavStop() {
+            var loggerDataArray = JSON.parse(localStorage.getItem("Logger")) || [];
+            var favStopsArray = loggerDataArray.filter(function (o) {
+                if ('FavStop' in o) {
+                    return true;
+                }
+            });
+            var counterForFavedStopsObject = {};
+            favStopsArray.forEach(function (obj) {
+                var stopName = obj.FavStop;
+                if (counterForFavedStopsObject[stopName] !== undefined) {
+                    counterForFavedStopsObject[stopName]++;
+                } else {
+                    counterForFavedStopsObject[stopName] = 1;
+                }
+            });
+
+            var data = [];
+            var keys = Object.keys(counterForFavedStopsObject);
+            keys.forEach(function(key) {
+                data.push(
+                    {"name" : key,
+                     "count" : counterForFavedStopsObject[key]
+                    }
+                );
+            });
+
+            return data;
+        }
 
             $scope.trips = [];
 
