@@ -55,54 +55,6 @@
 
     <main class="hide">
 
-        <div id="journeyPlannerSection" class="row">
-            <form class='wrapper col-sm-8 col-sm-offset-2'>
-                <div id="journeyPlannerForm">
-                <div ng-controller="AppCtrl" ng-cloak>
-                    <label>Wybierz dzień</label>
-                    <md-content>
-                        <md-datepicker ng-change="startNewTrip(myDate)"
-                                       ng-model="myDate"
-                                       md-placeholder="Enter date"></md-datepicker>
-                    </md-content>
-                </div>
-                <br>
-                <journey-planner-stops></journey-planner-stops>
-                <journey-planner-lines></journey-planner-lines>
-                <div class="form-group">
-                    <label for="disabledSelect4">Godzina</label>
-                    <select ng-options="time for time in myTime"
-                            ng-model="times"
-                            ng-change="addHour(times)"
-                            id="disabledSelect4"
-                            class="form-control">
-                        <option value="">Wybierz godzinę</option>
-                    </select>
-
-                </div>
-                <button ng-click="addStageToCurrentTrip(myStop.name, myLine.name, mySelectedTime, myDate)"
-                        type="submit"
-                        class="btn btn-primary">
-                    Dodaj
-                </button>
-                </div>
-            </form>
-
-            <div ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">
-                <div id="yourPlannedJourney">
-                    <h2>Zaplanowane podróże</h2>
-                    <your-planned-journey></your-planned-journey>
-                </div>
-            </div>
-
-
-            <div class="wrapper col-sm-8 col-sm-offset-2">
-                <div id="journeyCompletion" ng-show="flag">
-                    <h2>Realizacja podróży</h2>
-                    <journey-completion></journey-completion>
-                </div>
-            </div>
-        </div>
 
         <div id="my-signin2" class="row">
             <div class="col-sm-10 col-sm-offset-2"></div>
@@ -168,12 +120,63 @@
             </div>
         </div>
 
+        <div id="journeyPlannerSection" class="row">
+            <form class='wrapper col-sm-8 col-sm-offset-2'>
+                <div id="journeyPlannerForm">
+                    <h2>Zaplanuj podróże</h2>
+                    <div ng-controller="AppCtrl" ng-cloak>
+                        <label>Wybierz dzień</label>
+                        <md-content>
+                            <md-datepicker ng-change="startNewTrip(myDate)"
+                                           ng-model="myDate"
+                                           md-placeholder="Enter date"></md-datepicker>
+                        </md-content>
+                    </div>
+                    <br>
+                    <journey-planner-stops></journey-planner-stops>
+                    <journey-planner-lines></journey-planner-lines>
+                    <div class="form-group">
+                        <label for="disabledSelect4">Godzina</label>
+                        <select ng-options="time for time in myTime"
+                                ng-model="times"
+                                ng-change="addHour(times)"
+                                id="disabledSelect4"
+                                class="form-control">
+                            <option value="">Wybierz godzinę</option>
+                        </select>
+
+                    </div>
+                    <button ng-click="addStageToCurrentTrip(myStop.name, myLine.name, mySelectedTime, myDate)"
+                            type="submit"
+                            class="btn btn-primary">
+                        Dodaj
+                    </button>
+                </div>
+            </form>
+
+            <div ng-show="hideValue" class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="yourPlannedJourney">
+                    <h2>Zaplanowane podróże</h2>
+                    <your-planned-journey></your-planned-journey>
+                </div>
+            </div>
+
+
+            <div class="wrapper col-sm-8 col-sm-offset-2">
+                <div id="journeyCompletion" ng-show="flag">
+                    <h2>Realizacja podróży</h2>
+                    <journey-completion></journey-completion>
+                </div>
+            </div>
+        </div>
+
+
     </main>
 
     <footer class="hide row">
         <div class="col-sm-12 footer_style">
             <div class="footer_image"><img src="styles/images/logofinal1.png" alt="logo"/></div>
-            <p><span>&copy;</span> 2015 by Fantastic 4 {{app}}</p>
+            <p><span>&copy;</span> 2015 by Fantastic 4</p>
         </div>
 
     </footer>
