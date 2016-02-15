@@ -14,9 +14,10 @@
                                 return element.id === id;
                             })[0];
 
-                      delete currentJourney.stages[index];
-                        var buttonToBeRemoved = angular.element(document.querySelector( '#buttonCompleted' + index).ownerDocument.activeElement);
-                        buttonToBeRemoved.remove();
+                        currentJourney.stages[index].hide = true;
+                      //delete currentJourney.stages[index];
+                      //  var buttonToBeRemoved = angular.element(document.querySelector( '#buttonCompleted' + index).ownerDocument.activeElement);
+                      //  buttonToBeRemoved.remove();
 
                         var allStagesCompleted = currentJourney.stages.every(checkIfHidden);
                         if (allStagesCompleted) {

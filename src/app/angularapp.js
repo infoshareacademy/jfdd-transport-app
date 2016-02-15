@@ -54,14 +54,14 @@
                 delete $scope.trips[journeyIndex];
         };
 
-            $scope.deleteJourney = function (stageIndex, journeyIndex) {
-                $scope.stageIndex = stageIndex
-
-            var stageDeleteButtonToBeRemoved = angular.element(document.querySelector( '#stageButtonId' + stageIndex).ownerDocument.activeElement);
-                stageDeleteButtonToBeRemoved.remove();
-
-                delete journeyIndex.stages[stageIndex];
-            };
+            //$scope.deleteJourney = function (stageIndex, journeyIndex) {
+            //    $scope.stageIndex = stageIndex
+            //
+            //var stageDeleteButtonToBeRemoved = angular.element(document.querySelector( '#stageButtonId' + stageIndex).ownerDocument.activeElement);
+            //    stageDeleteButtonToBeRemoved.remove();
+            //
+            //    delete journeyIndex.stages[stageIndex];
+            //};
 
             $scope.addStop = function (selected) {
 

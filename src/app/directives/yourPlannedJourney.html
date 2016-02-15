@@ -9,7 +9,7 @@
     <button id={{'goToCompletionButtonId'+$index}}  ng-click="trip.active = true; trip.sentToCompletion = true; trip.id = generateId(); changeState()" ng-hide="trip.sentToCompletion" type="button"
             class="buttonTripGo btn btn-sm btn-info">Przejdź do realizacji
     </button></div>
-    <div class="col-sm-3 col-xs-3"><button id={{'journeyButtonId'+$index}} ng-hide="deleteJourneyHide" ng-click="deleteEntireJourney($index)"
+    <div class="col-sm-3"><button id={{'journeyButtonId'+$index}} ng-hide="deleteJourneyHide" ng-click="deleteEntireJourney($index)"
             type="button" class="buttonTrip btn btn-sm btn-danger">Usuń plan podróży
     </button></div>
 
@@ -19,14 +19,14 @@
 
     <div class="raw panel panel-primary">
     <div id ="{{'stageId'+$index}}" ng-repeat="stage in trip.stages track by $index" class="panel-body journeyStageContainer">
-        <div class="col-sm-3 col-xs-3">{{stage.stop}}</div>
-        <div class="col-sm-3 col-xs-3">{{stage.line}}</div>
-        <div class="col-sm-3  col-xs-3">{{stage.departureTime | date:'HH:mm'}}</div>
-        <div class="col-sm-3  col-xs-3">
-            <button id={{'stageButtonId'+$index}} ng-click="deleteJourney($index, trip)" type="button"
-                    class="btn btn-sm btn-danger">x
-            </button>
-        </div>
+        <div class="col-sm-4">{{stage.stop}}</div>
+        <div class="col-sm-4">{{stage.line}}</div>
+        <div class="col-sm-4">{{stage.departureTime | date:'HH:mm'}}</div>
+        <!--<div class="col-sm-3  col-xs-3">-->
+            <!--<button id={{'stageButtonId'+$index}} ng-click="deleteJourney($index, trip)" type="button"-->
+                    <!--class="btn btn-sm btn-danger">x-->
+            <!--</button>-->
+        <!--</div>-->
     </div>
     </div>
 </div>
